@@ -1,5 +1,6 @@
 # Install JDK on Travis CI and other places
 
+## Master Copy 
 https://github.com/sormuras/bach/blob/master/install-jdk.sh
 
 ```
@@ -24,3 +25,10 @@ cd -
 
 java --version
 ```
+
+## Usages
+
+* junit5 https://github.com/junit-team/junit5/tree/master/src/install
+* pro https://github.com/forax/pro/tree/master/.travis
+* bytebuddy https://github.com/raphw/byte-buddy/tree/master/.travis
+* google-java-format https://github.com/google/google-java-format/blob/master/scripts
