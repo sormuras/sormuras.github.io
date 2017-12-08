@@ -1,3 +1,0 @@
-# sormuras.github.io
-
-`indey`
