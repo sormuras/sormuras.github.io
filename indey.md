@@ -1,3 +1,3 @@
 # sormuras.github.io
 
-`index`
+`indey`
