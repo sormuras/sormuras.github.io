@@ -1,5 +1,7 @@
 # sormuras.github.io
 
+[<img src="feed-icon-14x14.png">](https://github.com/sormuras/sormuras.github.io/commits/master.atom)
+
 ## blog
 
 - [2017-12-13](blog/2017-12-13-module-info-properties.md) `module-info.properties`
