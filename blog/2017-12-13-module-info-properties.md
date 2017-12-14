@@ -40,12 +40,12 @@ required modules it is almost possible to retrieve the artifacts needed for
 the project. Only a mapping from the name of a module to a `GroupID` and
 `ArtifactID` is missing.
 
-Stephen Colebourne started collecting such a mapping here: https://github.com/jodastephen/jpms-module-names
+Stephen Colebourne started collecting such a mapping here: [jodastephen/jpms-module-names](https://github.com/jodastephen/jpms-module-names)
 
 Modules names will be as unique as GroupID nowadays. So it would be cool
 if Maven supported a "modular view" on a repository.
 Meaning, when I request "module: org.junit.jupiter.api" with "version: 5.0.2"
 it automatically knows the correct group and artifact ID.
 
-That idea is discussed here: https://github.com/jodastephen/jpms-module-names/issues/7
+That idea is discussed here: [jpms-module-names/issues/7](https://github.com/jodastephen/jpms-module-names/issues/7)
 
