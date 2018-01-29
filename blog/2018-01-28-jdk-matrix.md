@@ -1,6 +1,6 @@
 # JDK Matrix on Travis CI
 
-![2018-01-28-jdk-matrix-screenshot.png](2018-01-28-jdk-matrix-screenshot.png)
+[<img src="2018-01-28-jdk-matrix-screenshot.png">](https://travis-ci.org/sormuras/bach/builds/334340465)
 
 ## Configuration
 
