@@ -34,6 +34,11 @@ https://github.com/sormuras/bach/blob/master/install-jdk.sh
 #
 #   JAVA_HOME is set to the extracted JDK directory
 #   PATH is prepended with ${JAVA_HOME}/bin
+#
+# (C) 2018 Christian Stein
+#
+# https://github.com/sormuras/bach/blob/master/install-jdk.sh
+#
 set -e
 
 JDK_FEATURE='10'
