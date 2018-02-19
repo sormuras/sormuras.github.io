@@ -1,6 +1,6 @@
 # Install JDK on Travis CI and other places
 
-Updated: 2018-01-28
+Updated: 2018-02-19
 
 ## Master Copy 
 https://github.com/sormuras/bach/blob/master/install-jdk.sh
@@ -117,7 +117,9 @@ java --version
 
 ## Used by
 
-* junit5 https://github.com/junit-team/junit5/tree/master/src/install
-* pro https://github.com/forax/pro/tree/master/.travis
-* bytebuddy https://github.com/raphw/byte-buddy/tree/master/.travis
-* google-java-format https://github.com/google/google-java-format/blob/master/scripts
+* [junit5](https://github.com/junit-team/junit5/tree/master/src/install)
+* [pro](https://github.com/forax/pro/tree/master/.travis)
+* [beautiful_logger])(https://github.com/forax/beautiful_logger)
+* [bytebuddy](https://github.com/raphw/byte-buddy/tree/master/.travis)
+* [google-java-format](https://github.com/google/google-java-format/blob/master/scripts)
+* [javapoet](https://github.com/square/javapoet/tree/master/.buildscript)
