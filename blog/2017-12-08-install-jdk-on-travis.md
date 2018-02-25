@@ -22,8 +22,8 @@ https://github.com/sormuras/bach/blob/master/install-jdk.sh
 #   install-jdk.sh -F 9            | install most recent OpenJDK 9
 #   install-jdk.sh -F 10           | install most recent OpenJDK 10
 #   install-jdk.sh -F 10 -L BCL    | install most recent OracleJDK 10
-#   install-jdk.sh -F 11           | install most recent OpenJDK 10
-#   install-jdk.sh -F 11 -L BCL    | install most recent OracleJDK 10
+#   install-jdk.sh -F 11           | install most recent OpenJDK 11
+#   install-jdk.sh -F 11 -L BCL    | install most recent OracleJDK 11
 #
 # Options
 #
