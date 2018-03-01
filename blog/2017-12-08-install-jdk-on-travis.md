@@ -1,9 +1,13 @@
 # Install JDK on Travis CI and other places
 
-Updated: 2018-02-25 "JDK 11"
+Updated: 2018-03-01 "JDK 11"
 
 ## Master Copy 
 https://github.com/sormuras/bach/blob/master/install-jdk.sh
+
+Download script and execute it:
+
+`wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL`
 
 ```
 #!/usr/bin/env bash
@@ -138,7 +142,7 @@ java --version
 
 * [junit5](https://github.com/junit-team/junit5/tree/master/src/install)
 * [pro](https://github.com/forax/pro/tree/master/.travis)
-* [beautiful_logger])(https://github.com/forax/beautiful_logger)
+* [beautiful_logger](https://github.com/forax/beautiful_logger)
 * [bytebuddy](https://github.com/raphw/byte-buddy/tree/master/.travis)
 * [google-java-format](https://github.com/google/google-java-format/blob/master/scripts)
 * [javapoet](https://github.com/square/javapoet/tree/master/.buildscript)
