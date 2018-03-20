@@ -2,7 +2,7 @@
 
 Day of JDK 10 General-Availability update. Supports JDK releases ranging from version [8 up to 11](https://travis-ci.org/sormuras/sormuras.github.io).
 
-Caveat: Travis CI doesn't support Oracle JDK 10, yet.
+Caveat: Travis CI doesn't support Oracle JDK 10, yet. See [travis-ci #9368](https://github.com/travis-ci/travis-ci/issues/9368) for details.
 
 [<img src="2018-03-20-jdk-matrix-screenshot.png">](https://travis-ci.org/sormuras/sormuras.github.io)
 
