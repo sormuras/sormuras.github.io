@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2018-03-20](blog/2018-03-20-jdk-matrix.md) JDK matrix on Travis CI (8-11) JDK 10 General-Availability Release
 - [2018-03-11](blog/2018-03-11-jdk-matrix.md) JDK matrix on Travis CI (8-11)
 - [2018-01-28](blog/2018-01-28-jdk-matrix.md) JDK matrix on Travis CI (8-10)
 - [2018-01-19](blog/2018-01-19-mod2mav.md) Use JPMS module names as (Gradle) dependencies
