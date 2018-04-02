@@ -7,7 +7,7 @@ https://github.com/sormuras/bach/blob/master/install-jdk.sh
 
 Download script and execute it:
 
-`wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL`
+`wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -F 11 -L GPL`
 
 ```
 #!/usr/bin/env bash
