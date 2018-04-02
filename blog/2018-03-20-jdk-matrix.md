@@ -19,7 +19,7 @@ dist: trusty
 language: java
 
 before_install:
-  - wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 
 matrix:
   include:
