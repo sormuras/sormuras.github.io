@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2018-05-14](blog/2018-05-14-junit5-scatter-assertions.md) Scatter Assertions with JUnit 5
 - [2018-04-04](blog/2018-04-04-jdk-matrix.md) JDK matrix on Staging Travis CI (8-11)
 - [2018-03-20](blog/2018-03-20-jdk-matrix.md) JDK matrix on Travis CI (8-11) JDK 10 General-Availability Release
 - [2018-03-11](blog/2018-03-11-jdk-matrix.md) JDK matrix on Travis CI (8-11)
