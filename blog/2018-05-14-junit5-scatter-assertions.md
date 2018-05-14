@@ -1,10 +1,14 @@
 # Scatter Assertions
 
-Find source at [demo/test/scatter](demo/test/scatter)
+[Is it OK to have multiple asserts in a single unit test?](https://softwareengineering.stackexchange.com/questions/7823/is-it-ok-to-have-multiple-asserts-in-a-single-unit-test)
+
+What are the tools JUnit 5 (read Jupiter) offers to scatter assertions? 
+
+Find the source to this blog entry at [demo/test/scatter](https://github.com/sormuras/sormuras.github.io/tree/master/demo/test/scatter).
 
 ![Scatter Assertions](2018-05-14-junit5-scatter-assertions-screenshot.png)
 
-## 1. Single method with three assertions
+## A. Single method with three assertions
 
 Sequential assertions in a single method.
 
@@ -18,7 +22,7 @@ void test() {
 }
 ```
 
-## 2. Three methods with single assertion each
+## B. Three methods with single assertion each
 
 Each assertion resides in its own test method.
 
@@ -41,7 +45,7 @@ void waitWithoutMonitorFails() {
 }
 ```
 
-## 3. Single method with grouped assertion
+## C. Single method with grouped assertion
 
 In a grouped assertion all assertions are executed, and any failures will be reported together.
 
@@ -58,7 +62,7 @@ void test() {
 
 <https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions>
 
-## 4. Single test factory method with three dynamic tests
+## D. Single test factory method with three dynamic tests
 
 A `DynamicTest` is a test case generated at runtime. It is composed of a display name and an `Executable`.
 `Executable` is a functional interface which means that the implementations of dynamic tests can be
@@ -77,7 +81,7 @@ Stream<DynamicTest> test() {
 
 <https://junit.org/junit5/docs/current/user-guide/#writing-tests-dynamic-tests>
 
-## 5. Single parameterized method
+## E. Single parameterized method
 
 ```java
 @ParameterizedTest
