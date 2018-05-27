@@ -30,8 +30,9 @@ matrix:
 # 11 mac osx
     - env: JDK='OpenJDK 11-ea'
       os: osx
-      before_install: unset -f cd
-      install: . ./install-jdk.sh --verbose
+      install:
+        - unset -f cd
+        - . ./install-jdk.sh --verbose
 
 script:
   - echo PATH = ${PATH}
