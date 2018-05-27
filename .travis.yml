@@ -3,7 +3,7 @@ dist: trusty
 language: java
 
 before_install:
-  - wget https://raw.githubusercontent.com/sormuras/bach/master/install-jdk.sh
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 
 matrix:
   include:
@@ -23,10 +23,15 @@ matrix:
     - env: JDK='OpenJDK 10'
       install: . ./install-jdk.sh -F 10 -L GPL
 # 11
-    - env: JDK='Oracle JDK 11'
-      install: . ./install-jdk.sh -F 11 -L BCL
-    - env: JDK='OpenJDK 11'
-      install: . ./install-jdk.sh -F 11 -L GPL
+    - env: JDK='Oracle JDK 11-ea'
+      install: . ./install-jdk.sh -L BCL
+    - env: JDK='OpenJDK 11-ea'
+      install: . ./install-jdk.sh --verbose
+# 11 mac osx
+    - env: JDK='OpenJDK 11-ea'
+      os: osx
+      before_install: unset -f cd
+      install: . ./install-jdk.sh --verbose
 
 script:
   - echo PATH = ${PATH}
