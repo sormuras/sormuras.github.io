@@ -2,38 +2,19 @@ sudo: false
 dist: trusty
 language: java
 
-before_install:
-- unset -f cd
-- wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+os:
+- linux
+- osx
 
-matrix:
-  include:
-# 8
-    - env: JDK='Oracle JDK 8'
-      jdk: oraclejdk8
-    - env: JDK='OpenJDK 8'
-      jdk: openjdk8
-# 9
-    - env: JDK='Oracle JDK 9'
-      jdk: oraclejdk9
-    - env: JDK='OpenJDK 9'
-      install: . ./install-jdk.sh -F 9
-# 10
-    - env: JDK='Oracle JDK 10'
-      install: . ./install-jdk.sh -F 10 -L BCL
-    - env: JDK='OpenJDK 10'
-      install: . ./install-jdk.sh -F 10 -L GPL
-# 11
-    - env: JDK='Oracle JDK 11-ea'
-      install: . ./install-jdk.sh -L BCL
-    - env: JDK='OpenJDK 11-ea'
-      install: . ./install-jdk.sh --verbose
-# 11 mac osx
-    - os: osx
-      env: JDK='OpenJDK 11-ea'
-      install: . ./install-jdk.sh --verbose
+jdk:
+- openjdk8
+- openjdk9
+- openjdk10
+- openjdk11
+- openjdk-ea
+- oraclejdk-ea
 
 script:
-  - echo PATH = ${PATH}
-  - echo JAVA_HOME = ${JAVA_HOME}
-  - java -version
+- echo PATH = ${PATH}
+- echo JAVA_HOME = ${JAVA_HOME}
+- java -version
