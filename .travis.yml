@@ -7,7 +7,6 @@ os:
 - osx
 
 jdk:
-- openjdk8
 - openjdk9
 - openjdk10
 - openjdk11
@@ -15,11 +14,9 @@ jdk:
 - oraclejdk-ea
 
 matrix:
-  allow_failures:
+  exclude:
   - os: osx
-    jdk: openjdk8
-  - os: osx
-    jdk: oraclejdk-ea
+    jdk: oraclejdk-ea # Distributed as a "dmg"
 
 script:
 - echo PATH = ${PATH}
