@@ -14,6 +14,13 @@ jdk:
 - openjdk-ea
 - oraclejdk-ea
 
+matrix:
+  allow_failures:
+  - os: osx
+    jdk: openjdk8
+  - os: osx
+    jdk: oraclejdk-ea
+
 script:
 - echo PATH = ${PATH}
 - echo JAVA_HOME = ${JAVA_HOME}
