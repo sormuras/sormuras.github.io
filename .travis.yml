@@ -1,6 +1,7 @@
+language: java
+
 sudo: false
 dist: trusty
-language: java
 
 os:
 - linux
@@ -14,9 +15,12 @@ jdk:
 - oraclejdk-ea
 
 matrix:
-  exclude:
+  include:
+  - os: linux
+    jdk: openjdk8
+  allow_failures:
   - os: osx
-    jdk: oraclejdk-ea # Distributed as a "dmg"
+    jdk: oraclejdk-ea # TODO Download, install and use "dmg" on Travis CI
 
 script:
 - echo PATH = ${PATH}
