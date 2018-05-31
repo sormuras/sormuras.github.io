@@ -13,7 +13,7 @@ Oracle JDK builds are supported, too: replace `open` with `oracle` in the consta
 
 ## Screenshot or it didn't happen!
 
-https://travis-ci.org/sormuras/sormuras.github.io/builds/386025224
+[Build #111](https://travis-ci.org/sormuras/sormuras.github.io/builds/386025224)
 
 ![2018-05-31-jdk-matrix-screenshot.png](2018-05-31-jdk-matrix-screenshot.png)
 
