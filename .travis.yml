@@ -22,9 +22,13 @@ matrix:
   - os: osx
     jdk: oraclejdk-ea # TODO Download, install and use "dmg" on Travis CI
 
-script:
-- echo PATH = ${PATH}
+before_script:
 - echo JAVA_HOME = ${JAVA_HOME}
-- ls ${JAVA_HOME}
-- [[ ! -f "${JAVA_HOME}/release" ]] || (cat "${JAVA_HOME}/release")
+- echo PATH = ${PATH}
+
+script:
 - java -version
+
+after_script:
+- ls ${JAVA_HOME}
+- cat "${JAVA_HOME}/release"
