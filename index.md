@@ -4,7 +4,8 @@
 
 ## blog
 
-- [2018-05-29](blog/2018-05-29-jdk-matrix.md) JDK matrix on Travis CI (8-11) Mac OS X support :apple:
+- [2018-05-31](blog/2018-05-31-jdk-matrix.md) ✨ JDK matrix on Travis CI (8-11) `jdk: openjdk-ea` ✨
+- [2018-05-29](blog/2018-05-29-jdk-matrix.md) JDK matrix on Travis CI (8-11) Mac OS X support 🍏
 - [2018-05-14](blog/2018-05-14-junit5-scatter-assertions.md) Scatter Assertions with JUnit 5
 - [2018-04-04](blog/2018-04-04-jdk-matrix.md) JDK matrix on Staging Travis CI (8-11)
 - [2018-03-20](blog/2018-03-20-jdk-matrix.md) JDK matrix on Travis CI (8-11) JDK 10 General-Availability Release
