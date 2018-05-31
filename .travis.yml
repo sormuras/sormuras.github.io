@@ -25,4 +25,6 @@ matrix:
 script:
 - echo PATH = ${PATH}
 - echo JAVA_HOME = ${JAVA_HOME}
+- ls ${JAVA_HOME}
+- [[ ! -f "${JAVA_HOME}/release" ]] || (cat "${JAVA_HOME}/release")
 - java -version
