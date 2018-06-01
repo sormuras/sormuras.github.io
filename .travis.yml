@@ -8,6 +8,7 @@ os:
 - osx
 
 jdk:
+- openjdk8
 - openjdk9
 - openjdk10
 - openjdk11
@@ -15,10 +16,9 @@ jdk:
 - oraclejdk-ea
 
 matrix:
-  include:
-  - os: linux
+  exclude:
+  - os: osx
     jdk: openjdk8
-  allow_failures:
   - os: osx
     jdk: oraclejdk-ea # TODO Download, install and use "dmg" on Travis CI
 
