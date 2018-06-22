@@ -8,30 +8,41 @@ before_script:
 
 jobs:
   include:
+
+## jdk.java.net - OpenJDK
   - stage: OpenJDK
     env: JDK=OpenJDK 9
-    script: source ./install-jdk.sh -F 9
+    script: source install-jdk.sh -F 9
   - stage: OpenJDK
     env: JDK=OpenJDK 10
-    script: source ./install-jdk.sh -F 10
+    script: source install-jdk.sh -F 10
   - stage: OpenJDK
     env: JDK=OpenJDK 11
-    script: source ./install-jdk.sh -F 11
+    script: source install-jdk.sh -F 11
+
+## jdk.java.net - Oracle JDK
   - stage: Oracle
     env: JDK=Oracle JDK 10
-    script: source ./install-jdk.sh -F 10 -L BCL
+    script: source install-jdk.sh -F 10 -L BCL
   - stage: Oracle
     env: JDK=Oracle JDK 11
-    script: source ./install-jdk.sh -F 11 -L BCL
-#  - stage: adoptopenjdk.net/hotspot
-#    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
-#    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
-#  - stage: adoptopenjdk.net/eclipse-openj9
-#    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
-#    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
+    script: source install-jdk.sh -F 11 -L BCL
 
-#install:
-#- echo "The default Travis install script is being skipped!"
+## AdoptOpenJDK - Hotspot
+  - stage: AdoptOpenJDK-HotSpot
+    env: JDK=JDK 9 (Hotspot)
+    script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
+  - stage: AdoptOpenJDK-HotSpot
+    env: JDK=OpenJDK 10 (Hotspot)
+    script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
+
+## AdoptOpenJDK - Eclipse OpenJ9
+  - stage: Eclipse-OpenJ9
+    env: JDK=JDK 9 (Hotspot)
+    script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
+  - stage: Eclipse-OpenJ9
+    env: JDK=OpenJDK 10 (Hotspot)
+    script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
 after_script:
 - echo JAVA_HOME = ${JAVA_HOME}
