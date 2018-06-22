@@ -3,7 +3,7 @@ sudo: false
 dist: trusty
 
 before_script:
-- unset -f cd
+- unset -v _JAVA_OPTIONS
 - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 
 jobs:
@@ -28,11 +28,6 @@ jobs:
     env: JDK=Oracle JDK 11
     script: source install-jdk.sh -F 11 -L BCL
 
-## Graal VM
-  - stage: Graal
-    env: JDK=graalvm-ce-1.0.0-rc2
-    script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-1.0.0-rc2/graalvm-ce-1.0.0-rc2-linux-amd64.tar.gz
-
 ## AdoptOpenJDK - Hotspot
   - stage: AdoptOpenJDK-HotSpot
     env: JDK=9 + Hotspot
@@ -48,6 +43,14 @@ jobs:
   - stage: AdoptOpenJDK-OpenJ9
     env: JDK=10 + OpenJ9
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
+
+## Others (Graal, Zulu, ...)
+  - stage: Others
+    env: JDK=graalvm-ce-1.0.0-rc2
+    script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-1.0.0-rc2/graalvm-ce-1.0.0-rc2-linux-amd64.tar.gz
+  - stage: Others
+    env: JDK=zulu10.2+3-jdk10.0.1
+    script: source install-jdk.sh --url https://cdn.azul.com/zulu/bin/zulu10.2+3-jdk10.0.1-linux_x64.tar.gz
 
 after_script:
 - echo JAVA_HOME = ${JAVA_HOME}
