@@ -30,18 +30,18 @@ jobs:
 
 ## AdoptOpenJDK - Hotspot
   - stage: AdoptOpenJDK-HotSpot
-    env: JDK=JDK 9 (Hotspot)
+    env: JDK=9 + Hotspot
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
   - stage: AdoptOpenJDK-HotSpot
-    env: JDK=OpenJDK 10 (Hotspot)
+    env: JDK=10 + Hotspot
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
 ## AdoptOpenJDK - Eclipse OpenJ9
-  - stage: Eclipse-OpenJ9
-    env: JDK=JDK 9 (Hotspot)
+  - stage: AdoptOpenJDK-OpenJ9
+    env: JDK=9 + OpenJ9
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
-  - stage: Eclipse-OpenJ9
-    env: JDK=OpenJDK 10 (Hotspot)
+  - stage: AdoptOpenJDK-OpenJ9
+    env: JDK=10 + OpenJ9
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
 after_script:
