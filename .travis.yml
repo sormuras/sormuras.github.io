@@ -8,12 +8,14 @@ before_script:
 
 jobs:
   include:
-  - stage: java.net/GPL
-    - script: source ./install-jdk.sh -F 9
-    - script: source ./install-jdk.sh -F 10
-  - stage: java.net/BCL
-    - script: source ./install-jdk.sh -F 9  -L BCL
-    - script: source ./install-jdk.sh -F 10 -L BCL
+  - stage: OpenJDK GPL
+    script: source ./install-jdk.sh -F 9
+  - stage: OpenJDK GPL
+    script: source ./install-jdk.sh -F 10
+  - stage: Oracle BCL
+    script: source ./install-jdk.sh -F 9  -L BCL
+  - stage: Oracle BCL
+    script: source ./install-jdk.sh -F 10 -L BCL
 #  - stage: adoptopenjdk.net/hotspot
 #    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 #    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
@@ -21,8 +23,8 @@ jobs:
 #    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 #    - script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
-install:
-- echo "The default Travis install script is being skipped!"
+#install:
+#- echo "The default Travis install script is being skipped!"
 
 after_script:
 - echo JAVA_HOME = ${JAVA_HOME}
