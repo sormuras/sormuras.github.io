@@ -21,6 +21,17 @@ matrix:
     jdk: openjdk8
   - os: osx
     jdk: oraclejdk-ea # TODO Download, install and use "dmg" on Travis CI
+  include:
+  - os: linux
+    env: ADOPT=HotSpot
+    install:
+    - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+    - source ./install-jdk.sh --verbose --url $(curl --silent https://api.adoptopenjdk.net/openjdk10/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
+  - os: linux
+    env: ADOPT=OpenJ9
+    install:
+    - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+    - source ./install-jdk.sh --verbose --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
 before_install:
 - unset _JAVA_OPTIONS
