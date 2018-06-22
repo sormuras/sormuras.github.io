@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2018-06-22](blog/2018-06-22-jdk-matrix.md) Install JDK via `--url`: AdoptOpenJDK, Eclipse OpenJ9, Graal VM, Zulu
 - [2018-05-31](blog/2018-05-31-jdk-matrix.md) ✨ JDK matrix on Travis CI (8-11) `jdk: openjdk-ea` ✨
 - [2018-05-29](blog/2018-05-29-jdk-matrix.md) JDK matrix on Travis CI (8-11) Mac OS X support 🍏
 - [2018-05-14](blog/2018-05-14-junit5-scatter-assertions.md) Scatter Assertions with JUnit 5
