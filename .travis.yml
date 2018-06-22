@@ -9,38 +9,34 @@ before_script:
 jobs:
   include:
 
-## jdk.java.net - OpenJDK
-  - stage: OpenJDK
-    env: JDK=OpenJDK 9
+  - stage: OpenJDK | jdk.java.net
+    env: JDK=9
     script: source install-jdk.sh -F 9
-  - stage: OpenJDK
-    env: JDK=OpenJDK 10
+  - # stage: ...
+    env: JDK=10
     script: source install-jdk.sh -F 10
-  - stage: OpenJDK
-    env: JDK=OpenJDK 11
+  - # stage: ...
+    env: JDK=11
     script: source install-jdk.sh -F 11
 
-## jdk.java.net - Oracle JDK
-  - stage: Oracle
-    env: JDK=Oracle JDK 10
+  - stage: Oracle JDK | jdk.java.net/orcale.com
+    env: JDK=10
     script: source install-jdk.sh -F 10 -L BCL
-  - stage: Oracle
-    env: JDK=Oracle JDK 11
+  - # stage: ...
+    env: JDK=11
     script: source install-jdk.sh -F 11 -L BCL
 
-## AdoptOpenJDK - Hotspot
-  - stage: AdoptOpenJDK-HotSpot
+  - stage: AdoptOpenJDK | HotSpot
     env: JDK=9 + Hotspot
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
-  - stage: AdoptOpenJDK-HotSpot
+  - # stage: ...
     env: JDK=10 + Hotspot
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
-## AdoptOpenJDK - Eclipse OpenJ9
-  - stage: AdoptOpenJDK-OpenJ9
+  - stage: AdoptOpenJDK | Eclipse OpenJ9
     env: JDK=9 + OpenJ9
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk9-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
-  - stage: AdoptOpenJDK-OpenJ9
+  - # stage: ...
     env: JDK=10 + OpenJ9
     script: source install-jdk.sh --url $(curl --silent https://api.adoptopenjdk.net/openjdk10-openj9/nightly/x64_linux/ | grep 'binary_link' | grep -Eo '(http|https)://[^"]+' | head -1)
 
@@ -48,7 +44,7 @@ jobs:
   - stage: Others
     env: JDK=graalvm-ce-1.0.0-rc2
     script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-1.0.0-rc2/graalvm-ce-1.0.0-rc2-linux-amd64.tar.gz
-  - stage: Others
+  - # stage: ...
     env: JDK=zulu10.2+3-jdk10.0.1
     script: source install-jdk.sh --url https://cdn.azul.com/zulu/bin/zulu10.2+3-jdk10.0.1-linux_x64.tar.gz
 
