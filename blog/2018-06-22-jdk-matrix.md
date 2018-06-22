@@ -4,9 +4,9 @@ The raw [`bach/install-jdk.sh`](https://github.com/sormuras/bach#install-jdksh) 
 supports loading and extracting arbitrary JDK distributions via its `--url <path to .tar.gz file>`
 option. The following configuration shows how install JDK builds provided by:
 
-- AdoptOpenJDK from [https://adoptopenjdk.net] including **Eclipse OpenJ9**
-- Graal VM from [https://www.graalvm.org]
-- Zulu from [https://www.azul.com/downloads/zulu]
+- AdoptOpenJDK from [adoptopenjdk.net](https://adoptopenjdk.net) including **Eclipse OpenJ9**
+- Graal VM from [graalvm.org](https://www.graalvm.org)
+- Zulu from [azul.com](https://www.azul.com/downloads/zulu)
 
 [Build #146](https://travis-ci.org/sormuras/sormuras.github.io/builds/395375242)
 
