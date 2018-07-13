@@ -18,6 +18,9 @@ jobs:
   - # stage: ...
     env: JDK=11
     script: source install-jdk.sh -F 11
+  - # stage: ...
+    env: JDK=12
+    script: source install-jdk.sh -F 12
 
   - stage: 🍰 jdk.java.net/orcale.com - Oracle JDK - BCL
     env: JDK=10
