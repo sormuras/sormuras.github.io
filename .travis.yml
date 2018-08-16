@@ -15,19 +15,19 @@ jobs:
   - # stage: ...
     env: JDK=10
     script: source install-jdk.sh -F 10
-#  - # stage: ...
-#    env: JDK=11
-#    script: source install-jdk.sh -F 11
-#  - # stage: ...
-#    env: JDK=12
-#    script: source install-jdk.sh -F 12
+  - # stage: ...
+    env: JDK=11
+    script: source install-jdk.sh -F 11
+  - # stage: ...
+    env: JDK=12
+    script: source install-jdk.sh -F 12
 
   - stage: 🍰 jdk.java.net/oracle.com - Oracle JDK - BCL
     env: JDK=10
     script: source install-jdk.sh -F 10 -L BCL
-#  - # stage: ...
-#    env: JDK=11
-#    script: source install-jdk.sh -F 11 -L BCL
+  - # stage: ...
+    env: JDK=11
+    script: source install-jdk.sh -F 11 -L BCL
 
   - stage: 🍺 adoptopenjdk.net - HotSpot - Eclipse OpenJ9
     env: JDK=10 + Hotspot
