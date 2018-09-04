@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class ScatterC_AssertAll
-{
+class ScatterC_AssertAll {
 
   @Test
   void test() {
@@ -13,6 +12,6 @@ class ScatterC_AssertAll
     assertAll(
         () -> assertNotNull(object),
         () -> assertNotEquals(new Object(), object),
-        () -> assertThrows(IllegalMonitorStateException.class, object::wait));
+        () -> assertThrows(IllegalMonitorStateException.class, object::notify));
   }
 }

@@ -7,8 +7,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
-class ScatterD_DynamicTestFactory
-{
+class ScatterD_DynamicTestFactory {
 
   @TestFactory
   Stream<DynamicTest> test() {
@@ -16,6 +15,6 @@ class ScatterD_DynamicTestFactory
     return Stream.of(
         dynamicTest("constructor", () -> assertNotNull(object)),
         dynamicTest("equality", () -> assertNotEquals(new Object(), object)),
-        dynamicTest("waitWithoutMonitorFails", () -> assertThrows(Exception.class, object::wait)));
+        dynamicTest("notify", () -> assertThrows(Exception.class, object::notify)));
   }
 }
