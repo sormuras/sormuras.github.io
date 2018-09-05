@@ -30,7 +30,7 @@ main/                      test/
          📜 SomeClass.java          🔨 SomeClassTests.java
 ```
 
-This approach allow the tests to access to all the `public` and package visible members of the classes under test.
+This approach allows the tests to access to all the `public` and package visible members of the classes under test.
 
 Based on https://junit.org/junit4/faq.html#organize_1
 
@@ -46,10 +46,10 @@ main/                         test/                            test/
             📜 OtherClass.java            🔨 OtherClassTests.java           🔲 BlackBoxTests.java
          xyz/                          xyz/                          ☕ module-info.java
             📜 SomeClass.java             🔨 SomeClassTests.java
-      ☕ module-info.java            💣 module-info.[java|test]
+      ☕ module-info.java            🔥 module-info.[java|test]
 ```
 
-You already noticed that the white-box source set contains may contain a cloak-and-dagger 💣 `module-info.[java|test]` file.
+You already noticed that the white-box source set contains a cloak-and-dagger 🔥 `module-info.[java|test]` file.
 Before diving into this topic, let's examine the other two plain and simple module descriptors.
 
 ### ☕ `module com.xyz`
@@ -170,3 +170,8 @@ https://github.com/sormuras/sandbox/blob/master/sors-modular-testing-blueprint
     │               └── module-info.java
     └── settings.xml
 ```
+
+# Resources
+
+- http://openjdk.java.net/projects/jigsaw/ **Key documents, presentations, & other resources**
+- https://blog.codefx.org/tag/jpms/
