@@ -1,13 +1,15 @@
-# JUnit 5.3 Dynamic Tests with URI `TestSource`
+package jump;
 
-Supplying a test source URI to a dynamic test enables IDEs to jump right to the underlying file the dynamic test was created for
-(And not to the TestFactory-annotated method as before.
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-![2018-09-05-junit-5.3-dynamic-test-source.gif](2018-09-05-junit-5.3-dynamic-test-source.gif)
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
 
-`JumpToSource.java`
-
-```java
 class JumpToSource {
 
   @TestFactory
@@ -27,4 +29,3 @@ class JumpToSource {
     assertEquals(expected, actual, "Second line is not the reversed first!");
   }
 }
-```
