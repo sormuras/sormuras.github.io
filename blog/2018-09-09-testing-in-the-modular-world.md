@@ -103,16 +103,43 @@ open module black.box {
 }
 ```
 
+# Modular White-Box Testing
+
+## Visibility table
+
+Based on the [Visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table.
+
+- **B** Same module, same package, different class: `package foo; class B {}`
+- **C** Same module, other package, subclass: `package bar; class C extends foo.A {}`
+- **D** Same module, unrelated class: `package bar; class D {}`
+- **E** Other module, package `foo` is exported: `package bar; class E {}`
+- **F** Other module, package `foo` _not_ exported `package bar; class F {}`
+
+```text
+                       B   C   D   E   F
+package foo;
+public class A {       o   o   o   o   -
+  private int a;       -   -   -   -   -
+  int b;               o   -   -   -   -
+  protected int c;     o   o   -   -   -
+  public int d;        o   o   o   o   -
+}
+
+```
 
 ## 💣 `module-info.[java|test]` or white-box testing modules
 
-At least two ways exist that lift the strict module boundaries for testing.
+At least three ways exist that lift the strict module boundaries for testing.
 
-### White-box testing with `module-info.java`
+### Resort to the classpath
+
+// TODO Why? Why not?
+
+### White-box modular testing with `module-info.java`
 
 - `javac` version 9+ and `maven-compiler-plugin` version 3.8.0+ support compiling `module-info.java` residing in test source sets.
 
-### White-box testing with `java` command line options
+### White-box modular testing with `java` command line options
 
 - `java` version 9+ provides command line options configure the Java module system "on-the-fly" at start up time.
 - various test launcher tools allow additional command line options to be passed to the test runtime
