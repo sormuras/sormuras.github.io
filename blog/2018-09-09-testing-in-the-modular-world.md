@@ -1,11 +1,11 @@
 # Testing In The Modular World
 
-This is a blog about how to organize and execute tests.
+This is a blog about how to organize, find and execute tests.
 This is not an introduction to the Java module system.
 
 ## Good ol' times
 
-Flash-back to the early days of unit testing in Java and to the question _"Where should I put my test files?"_
+Flash-back to the early days of unit testing in Java and to the question: [_"Where should I put my test files?"_](https://junit.org/junit4/faq.html#organize_1)
 
 - You can place your tests in the same package and directory as the classes under test.
 
@@ -19,37 +19,56 @@ src/
          🔨 SomeClassTests.java
 ```
 
-While adequate for small projects, many developers feel that this approach clutters the source directory, and makes it hard to package up client binaries without also including unwanted test code, or writing unnecessarily complex packaging tasks.
+While adequate for small projects, many developers felt that this approach clutters the source directory, and makes it hard to package up client binaries without also including unwanted test code, or writing unnecessarily complex packaging tasks.
 
 - An arguably better way is to place the tests in a separate parallel directory structure with package alignment.
 
 ```text
-main/                      test/
-   com/                       com/
-      xyz/                       xyz/
-         📜 SomeClass.java          🔨 SomeClassTests.java
+main/                          test/
+   com/                           com/
+      xyz/                           xyz/
+         📜 SomeClass.java              🔨 SomeClassTests.java
 ```
 
-This approach allows the tests to access to all the `public` and package visible members of the classes under test.
+This approach allows test code to access to all the `public` and package visible members of the classes under test.
 
-Based on https://junit.org/junit4/faq.html#organize_1
+Who made it and still makes it work today? The **`classpath`**!
+Every classpath element points to a root of assets contributing to the resources available at runtime.
+A special type of resource is a Java class which in turn declares an package it belongs to.
+There is no enforced restriction of how many times a package may be declared on the classpath.
+All assets are merged logically at runtime, effectively resulting in the same situation where classes under test and test classes reside physically in the same directory.
+Meaning most (all?) access modifiers are irrelevant: packages are treated as white-boxes.  
 
-## Fast-forward
-
-Extrapolate the idea of separated source set roots to the Java module system:
+Ever placed a test class in a different package compared to the class under test?
+Welcome to "black-box testing in the package world"!
 
 ```text
-main/                         test/                            test/
-   com.xyz/                      com.xyz/                         black.box/
-      com/                          com/                             black/
-         abc/                          abc/                             box/
-            📜 OtherClass.java            🔨 OtherClassTests.java           🔲 BlackBoxTests.java
-         xyz/                          xyz/                          ☕ module-info.java
-            📜 SomeClass.java             🔨 SomeClassTests.java
-      ☕ module-info.java            🔥 module-info.[java|test]
+main/                          test/                               test/
+   com/                           com/                                black/
+      xyz/                           xyz/                                box/
+         📜 SomeClass.java              🔨 SomeClassTests.java              🔲 BlackBoxTests.java
 ```
 
-You already noticed that the white-box source set contains a cloak-and-dagger 🔥 `module-info.[java|test]` file.
+// TODO What is accessible from a black-box test?
+
+## Fast-forward to modules
+
+Extrapolate the idea of separated source set roots to the Java module system.
+Packages are now members of modules and only some packages are exported to other modules for consumption.
+// TODO In order to access... 
+
+```text
+main/                          test/                               test/
+   com.xyz/                       com.xyz/                            black.box/
+      com/                           com/                                black/
+         abc/                           abc/                                box/
+            📜 OtherClass.java             🔨 OtherClassTests.java              🔲 BlackBoxTests.java
+         xyz/                           xyz/                             ☕ module-info.java
+            📜 SomeClass.java              🔨 SomeClassTests.java
+      ☕ module-info.java             🔥 module-info.[java|test] 🔥
+```
+
+You already noticed that the _white-box_ source set contains a cloak-and-dagger `module-info.[java|test]` file.
 Before diving into this topic, let's examine the other two plain and simple module descriptors.
 
 ### ☕ `module com.xyz`
@@ -65,13 +84,13 @@ module com.xyz {
     exports com.xyz;
 }
 ```
-_Note! The package `com.abc` should **not** be part of a module named `com.xyz`. Why not? See https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html for details._
+_Note! The package `com.abc` should **not** be part of a module named `com.xyz`. Why not? See [Stephen's JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) blog for details._
 
 ### ☕ `open module black.box`
 
 - The test module descriptor for `black.box` reads module `com.xyz` and a bunch of testing framework modules.
-- It may only refer to published (`public` and residing in an `exported` package) types in those other modules.
-- This includes modules `com.xyz`: tests may refer to published types in package `com.xyz` - test can't refer to types in non-published package `com.abc`.
+- It may only refer to accessible (`public` and residing in an `exported` package) types in those other modules.
+- This includes modules `com.xyz` in particular: tests may refer to published types in package `com.xyz` - test can't refer to types in non-published package `com.abc`.
 - Module `black.box` is declaring itself `open` allowing test discovery via deep reflection.
 
 ```java
