@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2018-09-11](blog/2018-09-11-testing-in-the-modular-world.md) 🔥 Testing In The Modular World 🔥
 - [2018-09-05](blog/2018-09-05-junit-5.3-dynamic-test-source.md) JUnit 5.3 - Test Sources for Dynamic Tests
 - [2018-06-22](blog/2018-06-22-jdk-matrix.md) Install JDK via `--url`: AdoptOpenJDK, Eclipse OpenJ9, Graal VM, Zulu
 - [2018-05-31](blog/2018-05-31-jdk-matrix.md) ✨ JDK matrix on Travis CI (8-11) `jdk: openjdk-ea` ✨
