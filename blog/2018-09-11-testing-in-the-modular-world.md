@@ -341,7 +341,7 @@ Now module `foo` is installed locally and the `maven-invoker-plugin` executes al
 [INFO]------------------------------------------------------------------------
 ```
 
-_Note: although I favor the `MODULAR_PATCHED_TEST_COMPILE` test mode with a `module-info.java` describing the test module for white box testing, I recommend to stick with `` for now._
+_Note: although I favor the `MODULAR_PATCHED_TEST_COMPILE` test mode with a `module-info.java` describing the test module for white box testing, I recommend to stick with `MODULAR_PATCHED_TEST_RUNTIME` for now._
 _Most build tools don't support two module descriptors on the path, nor do they understand module descriptors sharing a single name._
 
 ### Maven + JUnit Platform Maven Plugin
@@ -356,6 +356,8 @@ The [junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/mas
 This project's layout is based on proposals introduced by the [Module System Quick-Start Guide](http://openjdk.java.net/projects/jigsaw/quick-start).
 
 ## Resources
+
+- [Feedback](https://github.com/sormuras/sormuras.github.io/issues) via GitHub
 
 - [Jigsaw](http://openjdk.java.net/projects/jigsaw/) **Key documents, presentations, & other resources**
 - [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
