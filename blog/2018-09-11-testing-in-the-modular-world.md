@@ -1,9 +1,9 @@
 # Testing In The Modular World
 
 This is a blog about how to organize, find and execute tests.
-This is not an introduction to the Java module system.
+This is **not** [an introduction to the Java module system](https://blog.codefx.org/java/java-module-system-tutorial/).
 
-TL;DR - Fork/clone and run sample project [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) using Maven as its build tool.
+_tl;dr fork/clone and run sample project [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) using Maven as its build tool._
 
 ## Good ol' times
 
@@ -36,10 +36,11 @@ This approach allows test code to access to all the `public` and package visible
 
 Who made it and still makes it work today? The **`classpath`**!
 Every classpath element points to a root of assets contributing to the resources available at runtime.
-A special type of resource is a Java class which in turn declares an package it belongs to.
+A special type of resource is a Java class which in turn declares a package it belongs to.
 There is no enforced restriction of how many times a package may be declared on the classpath.
 All assets are merged logically at runtime, effectively resulting in the same situation where classes under test and test classes reside physically in the same directory.
-Meaning most (all?) access modifiers are irrelevant: packages are treated as white boxes.
+Packages are treated as white boxes: test code may access main types as if they were placed in the same package and directory.
+This includes types with using *package private* and `protected` modifiers.
 
 Ever placed a test class in a different package compared to the class under test?
 Welcome (b(l)ack) to "black box testing in the package world"!
@@ -53,6 +54,7 @@ main/                          test/                               test/
 
 Which types and members from main are accessible from such a black box test?
 The answer is left open for a brush-up of the reader's modifier visibility memory.
+_Hint: a visibility table is presented later in this blog._
 
 ## Fast-forward to modules
 
@@ -92,7 +94,7 @@ _Note! The package `com.abc` should **not** be part of a module named `com.xyz`.
 
 - The test module descriptor for `black.box` reads module `com.xyz` and a bunch of testing framework modules.
 - It may only refer to accessible (`public` and residing in an `exported` package) types in those other modules.
-- This includes modules `com.xyz` in particular: tests may refer to published types in package `com.xyz` - test can't refer to types in non-published package `com.abc`.
+- This includes modules `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.abc`.
 - Module `black.box` is declaring itself `open` allowing test discovery via deep reflection.
 
 ```java
@@ -140,7 +142,7 @@ Delete all `module-info.java` files, or exclude them from compilation, and your 
 Use internal implementation details of the Java runtime, 3rd-party libraries including test framework and of course, use the internal types from your _main_ source set.
 The last part was the intended goal -- achieved, yes, but paid a very high price.
 
-Let's explore ways that maintain the boundaries of the Java module system intact.
+Let's explore two other ways that keep boundaries of the Java module system intact.
 
 ### White box modular testing with `module-info.java`
 
@@ -231,11 +233,11 @@ The test mode is defined by the relation of one *main* and one *test* module nam
   }
 ```
 
-## Sample Project
+## Take-away and Sample Projects
 
-### Foundation tools `javac` and `java` (and `jshell`)
+So, how to organize test in the modular world?
 
-[junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/master/junit5-modular-world)
+// TODO Describe current best-practice and introduce sample projects...
 
 ### Maven Blueprint
 
@@ -272,6 +274,10 @@ The test mode is defined by the relation of one *main* and one *test* module nam
 [sawdust - sources](https://github.com/micromata/sawdust)
 
 [sawdust - build](https://travis-ci.org/micromata/sawdust)
+
+### Foundation tools `javac` and `java` (and `jshell`)
+
+[junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/master/junit5-modular-world)
 
 # Resources
 
