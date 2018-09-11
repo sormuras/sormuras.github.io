@@ -3,9 +3,7 @@
 This is a blog about how to organize, find and execute tests.
 This is not an introduction to the Java module system.
 
-TL;DR - Fork/clone and run sample project [sors-modular-testing-blueprint](https://github.com/sormuras/sandbox/blob/master/sors-modular-testing-blueprint)
-
-// TODO Move blueprint to https://github.com/junit-team/junit5-samples
+TL;DR - Fork/clone and run sample project [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) using Maven as its build tool.
 
 ## Good ol' times
 
@@ -241,7 +239,7 @@ The test mode is defined by the relation of one *main* and one *test* module nam
 
 ### Maven Blueprint
 
-[sors-modular-testing-blueprint](https://github.com/sormuras/sandbox/blob/master/sors-modular-testing-blueprint)
+[sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world)
 
 ```text
 .
@@ -256,7 +254,7 @@ The test mode is defined by the relation of one *main* and one *test* module nam
 │       ├── foo                            /       exports foo;
 │       │   └── PackageFooTests.java      /        requires org.junit.jupiter.api;
 │       └── module-info.[java|test] <----<       }
-└── test-integration                      \
+└── it                                    \
     └── bar                                °---- --add-reads
         └── src                                    foo=org.junit.jupiter.api
             └── test                             --add-opens
