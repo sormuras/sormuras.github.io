@@ -111,7 +111,7 @@ open module black.box {
 
 Based on the [Visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table.
 
-- **B** - same module, same package, different class: `package foo; class B {}`
+- **B** - same module, same package, **other** compilation unit: `package foo; class B {}`
 - **C** - same module, **other** package, subclass: `package bar; class C extends foo.A {}`
 - **D** - same module, **other** package, unrelated class: `package bar; class D {}`
 - **E** - **other** module, package `foo` is exported: `package bar; class E {}`
@@ -128,7 +128,7 @@ public class A {       o   o   o   o   -
 }
 ```
 
-## 🔥`module-info.[java|test]`🔥 or
+## 🔥`module-info.[java|test]`🔥
 
 At least three ways exist that lift the strict module boundaries for testing.
 
@@ -137,6 +137,8 @@ At least three ways exist that lift the strict module boundaries for testing.
 Delete all `module-info.java` files, or exclude them from compilation, and your tests ignore all boundaries implied by the Java module system.
 Use internal implementation details of the Java runtime, 3rd-party libraries including test framework and of course, use the internal types from your _main_ source set.
 The last part was the intended goal -- achieved, yes, but paid a very high price.
+
+Let's explore ways that maintain the boundaries of the Java module system intact.
 
 ### White box modular testing with `module-info.java`
 
