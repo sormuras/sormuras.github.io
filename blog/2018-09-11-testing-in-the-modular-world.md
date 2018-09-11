@@ -208,7 +208,11 @@ This option is already "supported" by some IDEs, at least they don't stumble com
 
 ## Test Mode
 
-The test mode is defined by the relation of one *main* and one *test* module name.
+Having common names for the various black and white box testing modes described above is good basis to develop more tooling support, thus I'll introduce a `TestMode` enumeration.
+It can used to determine the intended test mode a user wants to execute.
+Or if a user want a testing framework to execute in a specific test mode, it can be passed as a parameter.
+
+A test mode is defined by the relation of one *main* and one *test* module name.
 
 - `C` = `CLASSIC` -> no modules available
 - `M` = `MODULAR` -> main 'module `foo`' and test 'module `bar`' OR main lacks module and test 'module `any`'
@@ -225,7 +229,9 @@ The test mode is defined by the relation of one *main* and one *test* module nam
      test module bar          M              M             A
 ```
 
-### Test Mode Algorithm Outline
+### Test Mode Detection Algorithm Outline
+
+Copied from [TestMode.java](https://github.com/sormuras/junit-platform-maven-plugin/blob/master/src/main/java/de/sormuras/junit/platform/maven/plugin/TestMode.java):
 
 ```java
   static TestMode of(String main, String test) {
