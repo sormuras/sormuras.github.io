@@ -109,11 +109,11 @@ open module black.box {
 
 Based on the [Visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table.
 
-- **B** Same module, same package, different class: `package foo; class B {}`
-- **C** Same module, **other** package, subclass: `package bar; class C extends foo.A {}`
-- **D** Same module, **other** package, unrelated class: `package bar; class D {}`
-- **E** **Other** module, package `foo` is exported: `package bar; class E {}`
-- **F** **Other** module, package `foo` _not_ exported `package bar; class F {}`
+- **B** - same module, same package, different class: `package foo; class B {}`
+- **C** - same module, **other** package, subclass: `package bar; class C extends foo.A {}`
+- **D** - same module, **other** package, unrelated class: `package bar; class D {}`
+- **E** - **other** module, package `foo` is exported: `package bar; class E {}`
+- **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
 ```text
                        B   C   D   E   F
@@ -144,15 +144,17 @@ The foundation tool `javac` version 9+ and `maven-compiler-plugin` version 3.8.0
 Here you use the default module description syntax to a) shadow the main configuration and b) express addition requirements needed for testing.
 
 - `module-info.java`
+
 ```java
-open module com.xyz {               // same name and open for deep reflection
+// same name as main module and open for deep reflection
+open module com.xyz {
     requires java.logging;          // copied from main module descriptor
-    requires java.sql;              // |
-    exports com.xyz;                // |
+    requires java.sql;              // - " -
+    exports com.xyz;                // - " -
 
     requires org.junit.jupiter.api; // additional test requirement
-    requires org.assertj.core;      // |
-    requires org.mockito;           // |
+    requires org.assertj.core;      // - " -
+    requires org.mockito;           // - " -
 }
 ```
 
@@ -166,6 +168,7 @@ Various test launcher tools allow additional command line options to be passed t
 Here are the additional command line options needed to achieve the same modular configuration as above:
 
 - `module-info.test`
+
 ```text
 --add-opens                                   | "open module com.xyz"
   com.xyz/com.abc=org.junit.platform.commons  |
