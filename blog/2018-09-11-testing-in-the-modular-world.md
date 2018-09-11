@@ -3,6 +3,8 @@
 This is a blog about how to organize, find and execute tests.
 This is not an introduction to the Java module system.
 
+TL;DR - Fork/clone and run sample project [sors-modular-testing-blueprint](https://github.com/sormuras/sandbox/blob/master/sors-modular-testing-blueprint)
+
 ## Good ol' times
 
 Flash-back to the early days of unit testing in Java and to the question: [_"Where should I put my test files?"_](https://junit.org/junit4/faq.html#organize_1)
@@ -127,7 +129,7 @@ public class A {       o   o   o   o   -
 
 ```
 
-## 🔥`module-info.[java|test]`🔥 or white box testing modules
+## 🔥`module-info.[java|test]`🔥 or
 
 At least three ways exist that lift the strict module boundaries for testing.
 
@@ -229,7 +231,7 @@ The test mode is defined by the relation of one *main* and one *test* module nam
 
 ## Sample Project
 
-### Foundation tools `javac` and `java` (and `jshell`!)
+### Foundation tools `javac` and `java` (and `jshell`)
 
 [junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/master/junit5-modular-world)
 
@@ -244,28 +246,29 @@ The test mode is defined by the relation of one *main* and one *test* module nam
 │       ├── foo
 │       │   ├── PackageFoo.java
 │       │   └── PublicFoo.java
-│       └── module-info.java <------------------ | module foo { exports foo; }
+│       └── module-info.java <------------------ module foo { exports foo; }
 ├── test
-│   └── java                                .--- | open module foo {
-│       ├── foo                            /     |   exports foo;
-│       │   └── PackageFooTests.java      /      |   requires org.junit.jupiter.api;
-│       └── module-info.[java|test] <----<       | }
+│   └── java                                .--- open module foo {
+│       ├── foo                            /       exports foo;
+│       │   └── PackageFooTests.java      /        requires org.junit.jupiter.api;
+│       └── module-info.[java|test] <----<       }
 └── test-integration                      \
-    └── bar                                °---- | --add-reads
-        └── src                                  |   foo=org.junit.jupiter.api
-            └── test                             | --add-opens
-                └── java                         |   foo/foo=org.junit.platform.commons
+    └── bar                                °---- --add-reads
+        └── src                                    foo=org.junit.jupiter.api
+            └── test                             --add-opens
+                └── java                           foo/foo=org.junit.platform.commons
                     ├── bar
                     │   └── PublicFooTests.java
-                    └── module-info.java <------ | open module bar {
-                                                 |   requires foo;
-                                                 |   requires org.junit.jupiter.api;
-                                                 | }
+                    └── module-info.java <------ open module bar {
+                                                   requires foo;
+                                                   requires org.junit.jupiter.api;
+                                                 }
 ```
 
 ### Maven + JUnit Platform running all test modes
 
 [sawdust - sources](https://github.com/micromata/sawdust)
+
 [sawdust - build](https://travis-ci.org/micromata/sawdust)
 
 # Resources
@@ -273,7 +276,7 @@ The test mode is defined by the relation of one *main* and one *test* module nam
 - [Jigsaw](http://openjdk.java.net/projects/jigsaw/) **Key documents, presentations, & other resources**
 - [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
 - [JUnit Platform Maven Plugin](https://github.com/sormuras/junit-platform-maven-plugin) **Maven support for test modes defined here**
-- [CodeFX/JPMS](https://blog.codefx.org/tag/jpms/) **Knowledge base **
+- [CodeFX/JPMS](https://blog.codefx.org/tag/jpms/) **Blog about the Java module system and more**
 
 ## Revision
 
