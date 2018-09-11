@@ -131,10 +131,10 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
                        B     C     D    E     F
 package foo;
 public class A {       ✅   ✅   ✅   ✅   ❌  // public
-  public int d;        ✅   ✅   ✅   ✅   ❌  // public
-  protected int c;     ✅   ✅   ❌   ❌   ❌  // protected
-  int b;               ✅   ❌   ❌   ❌   ❌  // _no modifier_ or _package private_
-  private int a;       ❌   ❌   ❌   ❌   ❌  // private
+  public int i;        ✅   ✅   ✅   ✅   ❌  // public
+  protected int j;     ✅   ✅   ❌   ❌   ❌  // protected
+  int k;               ✅   ❌   ❌   ❌   ❌  // _no modifier_ or _package private_
+  private int l;       ❌   ❌   ❌   ❌   ❌  // private
 }
 ```
 
@@ -235,8 +235,8 @@ Copied from [TestMode.java](https://github.com/sormuras/junit-platform-maven-plu
 
 ```java
   static TestMode of(String main, String test) {
-    var mainAbsent = main == null || main.trim().isEmpty(); // 12: main.isBlank();
-    var testAbsent = test == null || test.trim().isEmpty(); // 12: test.isBlank();
+    var mainAbsent = main == null || main.trim().isEmpty(); // 11: main.isBlank();
+    var testAbsent = test == null || test.trim().isEmpty(); // 11: test.isBlank();
     if (mainAbsent) {
       if (testAbsent) {      // trivial case: no modules declared at all
         return CLASSIC;
