@@ -43,7 +43,6 @@ Packages are treated as white boxes: test code may access main types as if they 
 This includes types with using *package private* and `protected` modifiers.
 
 Ever placed a test class in a different package compared to the class under test?
-Welcome (b(l)ack) to "black box testing in the package world"!
 
 ```text
 main/                          test/                               test/
@@ -51,6 +50,8 @@ main/                          test/                               test/
       xyz/                           xyz/                                box/
          📜 SomeClass.java              🔨 SomeClassTests.java              🔲 BlackBoxTests.java
 ```
+
+Welcome (b(l)ack) to "black box testing in the package world"!
 
 Which types and members from main are accessible from such a black box test?
 The answer is left open for a brush-up of the reader's modifier visibility memory.
@@ -92,7 +93,7 @@ _Note! The package `com.abc` should **not** be part of a module named `com.xyz`.
 
 ### ☕ `open module black.box`
 
-- The test module descriptor for `black.box` reads module `com.xyz` and a bunch of testing framework modules.
+- The test module `black.box` reads module `com.xyz` and a bunch of testing framework modules.
 - It may only refer to accessible (`public` and residing in an `exported` package) types in those other modules.
 - This includes modules `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.abc`.
 - Module `black.box` is declaring itself `open` allowing test discovery via deep reflection.
@@ -107,11 +108,14 @@ open module black.box {
 }
 ```
 
-# Modular White Box Testing
+Black box testing was the easy part.
+The test module is your first customer, it reads
+
+## Modular White Box Testing
 
 Let's start this section with an enhanced [visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
 
-## Visibility table
+### Visibility table
 
 The `public class A` in `package foo` with one field for every access level modifier serves as a reference.
 Each column lists another type and shows how access levels affect visibility.
@@ -124,7 +128,7 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 - **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
 ```text
-                       B     C     D     E     F
+                       B     C     D    E     F
 package foo;
 public class A {       ✅   ✅   ✅   ✅   ❌  // public
   public int d;        ✅   ✅   ✅   ✅   ❌  // public
@@ -134,8 +138,9 @@ public class A {       ✅   ✅   ✅   ✅   ❌  // public
 }
 ```
 
-Column E and F are already covered by modular black box testing as shown above in the `open module black.box` section.
-But we want to write unit tests like we always did before and access internal components. We want B, C and D back!
+Column **E** and **F** are already covered by modular black box testing as shown above in the `open module black.box` section.
+With **F** just confirming that a not exported package is not visible from another module.
+But we want to write unit tests like we always did before and access internal components. We want **B**, **C** and **D** back!
 Now you may either drop the entire Java module system (for testing) or pretend your tests reside in the same module as the classes under test.
 Just like in the early days, when split packages were the solution.
 _Same same but different._
@@ -157,7 +162,7 @@ Let's explore two other ways that keep boundaries of the Java module system inta
 
 The foundation tool `javac` version 9+ and `maven-compiler-plugin` version 3.8.0+ support compiling `module-info.java` residing in test source sets.
 
-Here you use the default module description syntax to a) shadow the main configuration and b) express addition requirements needed for testing.
+Here you use the default module description syntax to a) shadow the main configuration and b) express additional requirements needed for testing.
 
 - `module-info.java`
 
@@ -242,18 +247,29 @@ The test mode is defined by the relation of one *main* and one *test* module nam
   }
 ```
 
-# Summary and Sample Projects
+## Summary and Sample Projects
 
-So, how to organize test in the modular world?
+- So, how to organize tests in the modular world?
 
-// TODO Describe current best-practice and introduce sample projects...
+It depends.
+
+It depends on what you want to test.
+Are you writing a standalone program that consumes modules without being designed to be re-usable itself?
+Is it a library you want to distribute as a Java module?
+Is your library distributed as a multi-release JAR?
+Do you test how your library behaves on the [class-path and module-path](https://blog.joda.org/2018/03/jpms-negative-benefits.html)?
+
+For a library, I'd suggest the following blueprint.
 
 ### Maven Blueprint
 
-[sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world)
+Suppose you want to write and test a module named `foo` in a typical single project setup:
+*main* sources are in `src/main/java` directory, *white box test* sources in `src/test/java`.
+The *black box* **i**ntegration **t**esting projects are located under `src/it` and they are executed by the [maven-invoker-plugin](https://github.com/apache/maven-invoker-plugin).
+The simplified layout of [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) looks like:
 
 ```text
-.
+src
 ├── main
 │   └── java
 │       ├── foo
@@ -278,24 +294,69 @@ So, how to organize test in the modular world?
                                                  }
 ```
 
-### Maven + JUnit Platform running all test modes
+```text
+$ mvn verify
+...
+[INFO] Scanning for projects...
+[INFO]
+[INFO]------------------------------------------------------------------------
+[INFO]Building testing-in-the-modular-world 1.0-SNAPSHOT
+[INFO]------------------------------------------------------------------------
+[INFO]---maven-compiler-plugin:3.8.0:compile(default-compile) @testing-in-the-modular-world ---
+[INFO]---maven-compiler-plugin:3.8.0:testCompile(default-testCompile) @testing-in-the-modular-world ---
+[INFO]---junit-platform-maven-plugin:0.0.10:launch-junit-platform(launch) @testing-in-the-modular-world ---
+[INFO] Launching JUnit Platform...
+[INFO] ╷
+[INFO] └─ JUnit Jupiter ✔
+[INFO]    └─ PackageFooTests ✔
+[INFO]       ├─ accessPackageFooInModuleFoo() ✔
+...
+```
 
-[sawdust - sources](https://github.com/micromata/sawdust)
+White box tests are done.
 
-[sawdust - build](https://travis-ci.org/micromata/sawdust)
+Now module `foo` is installed locally and the `maven-invoker-plugin` executes all integration tests:
+
+```
+...
+[INFO]---maven-jar-plugin:2.4:jar(default-jar) @testing-in-the-modular-world ---
+[INFO]---maven-invoker-plugin:3.1.0:install(integration-test) @testing-in-the-modular-world ---
+[INFO]---maven-invoker-plugin:3.1.0:integration-test(integration-test) @testing-in-the-modular-world ---
+[INFO] Building:bar/pom.xml
+[INFO]           bar/pom.xml ......................................SUCCESS (5.8 s)
+[INFO]
+[INFO]---maven-invoker-plugin:3.1.0:verify(integration-test) @testing-in-the-modular-world ---
+[INFO]-------------------------------------------------
+[INFO] Build Summary:
+[INFO]   Passed: 1, Failed: 0, Errors: 0, Skipped: 0
+[INFO]-------------------------------------------------
+[INFO]------------------------------------------------------------------------
+[INFO]BUILD SUCCESS
+[INFO]------------------------------------------------------------------------
+```
+
+_Note: although I favor the `MODULAR_PATCHED_TEST_COMPILE` test mode with a `module-info.java` describing the test module for white box testing, I recommend to stick with `` for now._
+_Most build tools don't support two module descriptors on the path, nor do they understand module descriptors sharing a single name._
+
+### Maven + JUnit Platform Maven Plugin
+
+The [micromata/sawdust](https://github.com/micromata/sawdust) project shows all test modes in action.
+Browse the sources of the sub-projects to see how to configure test mode.
+See also the linked [Job log](https://travis-ci.org/micromata/sawdust) produced by Travis CI to verify you.
 
 ### Foundation tools `javac` and `java` (and `jshell`)
 
-[junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/master/junit5-modular-world)
+The [junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/master/junit5-modular-world) sample project uses Java foundation tools to demonstrate testing the modular world.
+This project's layout is based on proposals introduced by the [Module System Quick-Start Guide](http://openjdk.java.net/projects/jigsaw/quick-start).
 
-# Resources
+## Resources
 
 - [Jigsaw](http://openjdk.java.net/projects/jigsaw/) **Key documents, presentations, & other resources**
 - [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
 - [JUnit Platform Maven Plugin](https://github.com/sormuras/junit-platform-maven-plugin) **Maven support for test modes defined here**
 - [CodeFX/JPMS](https://blog.codefx.org/tag/jpms/) **Blog about the Java module system and more**
 
-## Revision
+## History
 
 This is a living document, it will be updated now-and-then.
 
