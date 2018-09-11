@@ -126,7 +126,6 @@ public class A {       o   o   o   o   -
   protected int c;     o   o   -   -   -
   public int d;        o   o   o   o   -
 }
-
 ```
 
 ## 🔥`module-info.[java|test]`🔥 or
@@ -183,7 +182,6 @@ Here are the additional command line options needed to achieve the same modular 
   com.xyz=org.assertj.core                    |
 --add-reads                                   | "requires org.mockito"
   com.xyz=org.mockito                         |
-}
 ```
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
