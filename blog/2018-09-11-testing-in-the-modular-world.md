@@ -109,28 +109,37 @@ open module black.box {
 
 # Modular White Box Testing
 
+Let's start this section with an enhanced [visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
+
 ## Visibility table
 
-Based on the [Visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table.
+The `public class A` in `package foo` with one field for every access level modifier serves as a reference.
+Each column lists another type and shows how access levels affect visibility.
+An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 
 - **B** - same module, same package, **other** compilation unit: `package foo; class B {}`
 - **C** - same module, **other** package, subclass: `package bar; class C extends foo.A {}`
-- **D** - same module, **other** package, unrelated class: `package bar; class D {}`
+- **D** - same module, **other** package, unrelated: `package bar; class D {}`
 - **E** - **other** module, package `foo` is exported: `package bar; class E {}`
 - **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
 ```text
-                       B   C   D   E   F
+                       B    C    D    E    F
 package foo;
-public class A {       o   o   o   o   -
-  private int a;       -   -   -   -   -
-  int b;               o   -   -   -   -
-  protected int c;     o   o   -   -   -
-  public int d;        o   o   o   o   -
+public class A {       ✅   ✅   ✅   ✅   ❌  // public
+  public int d;        ✅   ✅   ✅   ✅   ❌  // public
+  protected int c;     ✅   ✅   ❌   ❌   ❌  // protected
+  int b;               ✅   ❌   ❌   ❌   ❌  // _no modifier_ or _package private_
+  private int a;       ❌   ❌   ❌   ❌   ❌  // private
 }
 ```
 
-// TODO E and F are covered by modular black box testing, but we want B, C and D back!
+Column E and F are already covered by modular black box testing as shown above in the `open module black.box` section.
+But we want to write unit tests like we always did before and access internal components. We want B, C and D back!
+Now you may either drop the entire Java module system (for testing) or pretend your tests reside in the same module as the classes under test.
+Just like in the early days, when split packages were the solution.
+_Same same but different._
+Because split packages are not allowed in the world of the `module-path`.
 
 ## 🔥`module-info.[java|test]`🔥
 
@@ -233,7 +242,7 @@ The test mode is defined by the relation of one *main* and one *test* module nam
   }
 ```
 
-## Take-away and Sample Projects
+# Summary and Sample Projects
 
 So, how to organize test in the modular world?
 
@@ -291,3 +300,8 @@ So, how to organize test in the modular world?
 This is a living document, it will be updated now-and-then.
 
 2018-09-11 Initial version
+
+Cheers and Happy Testing,
+Christian
+
+✅
