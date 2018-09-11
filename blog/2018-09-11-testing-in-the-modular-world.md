@@ -124,7 +124,7 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 - **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
 ```text
-                       B    C    D    E    F
+                       B     C     D     E     F
 package foo;
 public class A {       ✅   ✅   ✅   ✅   ❌  // public
   public int d;        ✅   ✅   ✅   ✅   ❌  // public
