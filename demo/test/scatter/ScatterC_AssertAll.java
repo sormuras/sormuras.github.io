@@ -12,6 +12,6 @@ class ScatterC_AssertAll {
     assertAll(
         () -> assertNotNull(object),
         () -> assertNotEquals(new Object(), object),
-        () -> assertThrows(IllegalMonitorStateException.class, object::notify));
+        () -> assertThrows(IllegalMonitorStateException.class, object::wait));
   }
 }

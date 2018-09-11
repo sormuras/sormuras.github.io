@@ -21,6 +21,6 @@ class ScatterE_Parameterized {
     return Stream.of(
         Arguments.of("constructor", (Executable) () -> assertNotNull(object)),
         Arguments.of("equality", (Executable) () -> assertNotEquals(new Object(), object)),
-        Arguments.of("notify", (Executable) () -> assertThrows(Exception.class, object::notify)));
+        Arguments.of("wait", (Executable) () -> assertThrows(Exception.class, object::wait)));
   }
 }

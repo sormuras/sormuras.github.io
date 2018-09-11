@@ -19,7 +19,7 @@ class ScatterB_ThreeMethods {
   }
 
   @Test
-  void notifyFails() {
-    assertThrows(IllegalMonitorStateException.class, object::notify);
+  void waitFails() {
+    assertThrows(IllegalMonitorStateException.class, object::wait);
   }
 }

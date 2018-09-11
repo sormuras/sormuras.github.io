@@ -11,6 +11,6 @@ class ScatterA_SingleMethod {
     var object = new Object();
     assertNotNull(object);
     assertNotEquals(new Object(), object);
-    assertThrows(IllegalMonitorStateException.class, object::notify);
+    assertThrows(IllegalMonitorStateException.class, object::wait);
   }
 }

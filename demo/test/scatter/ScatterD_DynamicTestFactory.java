@@ -15,6 +15,6 @@ class ScatterD_DynamicTestFactory {
     return Stream.of(
         dynamicTest("constructor", () -> assertNotNull(object)),
         dynamicTest("equality", () -> assertNotEquals(new Object(), object)),
-        dynamicTest("notify", () -> assertThrows(Exception.class, object::notify)));
+        dynamicTest("wait", () -> assertThrows(Exception.class, object::wait)));
   }
 }
