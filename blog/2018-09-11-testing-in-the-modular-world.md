@@ -5,6 +5,8 @@ This is not an introduction to the Java module system.
 
 TL;DR - Fork/clone and run sample project [sors-modular-testing-blueprint](https://github.com/sormuras/sandbox/blob/master/sors-modular-testing-blueprint)
 
+// TODO Move blueprint to https://github.com/junit-team/junit5-samples
+
 ## Good ol' times
 
 Flash-back to the early days of unit testing in Java and to the question: [_"Where should I put my test files?"_](https://junit.org/junit4/faq.html#organize_1)
@@ -127,6 +129,8 @@ public class A {       o   o   o   o   -
   public int d;        o   o   o   o   -
 }
 ```
+
+// TODO E and F are covered by modular black box testing, but we want B, C and D back!
 
 ## 🔥`module-info.[java|test]`🔥
 
