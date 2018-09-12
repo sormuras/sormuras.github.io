@@ -130,15 +130,15 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 - **E** - **other** module, package `foo` is exported: `package bar; class E {}`
 - **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
-| **A**                |**B** |**C** |**D** |**E** |**F** | Access Level Modifier              |
-|:---------------------|:----:|:----:|:----:|:----:|:----:|:-----------------------------------|
-| `package foo;`       |      |      |      |      |      |                                    |
-| `public class A {`   |  ✅  |  ✅  |  ✅ |  ✅  | ❌  | `public`                           |
-| ..`public int i;`    |  ✅  |  ✅  |  ✅ |  ✅  | ❌  | `public`                           |
-| ..`protected int j;` |  ✅  |  ✅  |  ❌ |  ❌  | ❌  | `protected`                        |
-| ..`int k;`           |  ✅  |  ❌  |  ❌ |  ❌  | ❌  | no modifier or _package private_   |
-| ..`private int l;`   |  ❌  |  ❌  |  ❌ |  ❌  | ❌  | `private`                          |
-| `}`                  |      |      |      |      |      |                                    |
+| **A**                          |**B** |**C** |**D** |**E** |**F** | Access Level Modifier              |
+|:-------------------------------|:----:|:----:|:----:|:----:|:----:|:-----------------------------------|
+| `package foo;`                 |      |      |      |      |      |                                    |
+| `public class A {`             |  ✅  |  ✅  |  ✅ |  ✅  | ❌  | `public`                           |
+| &nbsp;&nbsp;`public int i;`    |  ✅  |  ✅  |  ✅ |  ✅  | ❌  | `public`                           |
+| &nbsp;&nbsp;`protected int j;` |  ✅  |  ✅  |  ❌ |  ❌  | ❌  | `protected`                        |
+| &nbsp;&nbsp;`int k;`           |  ✅  |  ❌  |  ❌ |  ❌  | ❌  | no modifier or _package private_   |
+| &nbsp;&nbsp;`private int l;`   |  ❌  |  ❌  |  ❌ |  ❌  | ❌  | `private`                          |
+| `}`                            |      |      |      |      |      |                                    |
 
 Column **E** and **F** are already covered by modular black box testing as shown above in the `open module black.box` section.
 With **F** just confirming that a not exported package is not visible from another module.
