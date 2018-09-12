@@ -34,10 +34,10 @@ main/                          test/
 
 This approach allows test code to access all the `public` and package visible members of the classes under test.
 
-Who made it and still makes it work today? The **`classpath`**!
-Every classpath element points to a root of assets contributing to the resources available at runtime.
+Who made it and still makes it work today? The **`class-path`**!
+Every class-path element points to a root of assets contributing to the resources available at runtime.
 A special type of resource is a Java class which in turn declares a package it belongs to.
-There is no enforced restriction of how many times a package may be declared on the classpath.
+There is no enforced restriction of how many times a package may be declared on the class-path.
 All assets are merged logically at runtime, effectively resulting in the same situation where classes under test and test classes reside physically in the same directory.
 Packages are treated as white boxes: test code may access main types as if they were placed in the same package and directory.
 This includes types with using *package private* and `protected` modifiers.
@@ -130,7 +130,7 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 - **E** - **other** module, package `foo` is exported: `package bar; class E {}`
 - **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
-| `A`                  | `B`  | `C`  | `D`  | `E`  | `F`  | access level modifier              |
+| **A**                |**B** |**C** |**D** |**E** |**F** | Access Level Modifier              |
 |:---------------------|:----:|:----:|:----:|:----:|:----:|:-----------------------------------|
 | `package foo;`       |      |      |      |      |      |                                    |
 | `public class A {`   |  ✅  |  ✅  |  ✅ |  ✅  | ❌  | `public`                           |
@@ -181,6 +181,16 @@ open module com.xyz {
 }
 ```
 
+The test module is now promoted to be the entry point for test compilation.
+It inherits all elements from the main module and adds additional ones.
+You might read is as: `open (test) module com.xyz extends (main) module com.xyz`
+Now you only need to blend in the main source set into the test module in order to make your test code resolve the classes under test.
+
+- `--patch-module com.xyz=src/main/java`
+
+This results in a standard Java module tuned for testing.
+No need to learn extra command line options which are passed to the test runtime like described in the next section.
+
 _Note: Copying parts from the main module descriptor manually is brittle. The "Java 9 compatible build tool" [pro](https://github.com/forax/pro) solves this by auto-merging a main and test module descriptor on-the-fly._
 
 ### White box modular testing with extra `java` command line options
@@ -205,6 +215,16 @@ Here are the additional command line options needed to achieve the same modular 
 --add-reads                                   | "requires org.mockito"
   com.xyz=org.mockito                         |
 ```
+
+Before running any tests, your test classes first need to be compiled.
+Here build tools usually resort to the `class-path` and ignore the main and potentially all other module descriptors.
+After test compilation you need to blend in the test source set into the main module at test runtime.
+
+- `--patch-module com.xyz=src/test/java`
+
+**and**
+
+- configure the Java module system with the extra command lines denoted in `module-info.test`.
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
 
@@ -370,6 +390,7 @@ This project's layout is based on proposals introduced by the [Module System Qui
 
 This is a living document, it will be updated now-and-then.
 
+2018-09-12 Polishing and improvements by various reader's comments
 2018-09-11 Initial version
 
 Cheers and Happy Testing,
