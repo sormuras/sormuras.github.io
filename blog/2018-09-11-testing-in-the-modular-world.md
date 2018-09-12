@@ -95,7 +95,7 @@ _Note! The package `com.abc` should **not** be part of a module named `com.xyz`.
 
 - The test module `black.box` reads module `com.xyz` and a bunch of testing framework modules.
 - It may only refer to accessible (`public` and residing in an `exported` package) types in those other modules.
-- This includes modules `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.abc`.
+- This includes module `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.abc`.
 - Module `black.box` is declaring itself `open` allowing test discovery via deep reflection.
 
 ```java
@@ -108,8 +108,11 @@ open module black.box {
 }
 ```
 
-Black box testing was the easy part.
-The test module is your first customer, it reads
+Black box testing is the easy part.
+Test module `black.box` is main module `com.xyz`'s first customer.
+It adheres to the modular boundaries in the same way as any other module does.
+
+Now to the not so easy part...
 
 ## Modular White Box Testing
 
