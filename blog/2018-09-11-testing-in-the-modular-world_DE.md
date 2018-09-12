@@ -1,6 +1,6 @@
-# Testing In The Modular World
+# Testen im Modulsystem von Java
 
-In diesem Blog geht es um die Organisation, das Auffinden und Ausführen von Tests.
+In diesem Blog geht es um die Organisation, das Auffinden und Ausführen von Tests im Modulsystem von Java.
 Es ist **keine** [Einführung in das Java Modulsystem](https://blog.codefx.org/java/java-module-system-tutorial/).
 
 _Zu viel Text, her mit dem Code: Beispielprojekt [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) klonen und mit `mvn verify` bauen._
@@ -37,7 +37,7 @@ Dieser Ansatz ermöglicht dennoch dass alle Tests weiterhin auf die gleichen Ele
 
 Wodurch war das damals und ist es heute weiterhin möglich? Durch den **`class-path`**!
 
-// TODO Fließtexte aber hier übersetzen.
+// TODO Fließtexte ab hier weiter übersetzen.
 // TODO Code-Beispiele, markiert durch ```code``` Blöcke, so belassen.
 
 Every classpath element points to a root of assets contributing to the resources available at runtime.
