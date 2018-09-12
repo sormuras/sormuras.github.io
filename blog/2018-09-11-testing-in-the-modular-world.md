@@ -32,7 +32,7 @@ main/                          test/
          📜 SomeClass.java              🔨 SomeClassTests.java
 ```
 
-This approach allows test code to access to all the `public` and package visible members of the classes under test.
+This approach allows test code to access all the `public` and package visible members of the classes under test.
 
 Who made it and still makes it work today? The **`classpath`**!
 Every classpath element points to a root of assets contributing to the resources available at runtime.
@@ -212,8 +212,8 @@ This option is already "supported" by some IDEs, at least they don't stumble com
 ## Test Mode
 
 Having common names for the various black and white box testing modes described above is good basis to develop more tooling support, thus I'll introduce a `TestMode` enumeration.
-It can used to determine the intended test mode a user wants to execute.
-Or if a user want a testing framework to execute in a specific test mode, it can be passed as a parameter.
+It can be used to determine the intended test mode a user wants to execute.
+Or if a user wants a testing framework to execute in a specific test mode, it can be passed as a parameter.
 
 A test mode is defined by the relation of one *main* and one *test* module name.
 
