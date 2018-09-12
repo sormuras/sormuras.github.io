@@ -122,7 +122,7 @@ Let's start this section with an enhanced [visibility](https://docs.oracle.com/j
 
 The `public class A` in `package foo` with one field for every access level modifier serves as a reference.
 Each column lists another type and shows how access levels affect visibility.
-An ✅ indicates that this member of `A` is visible, else ❌ is shown.
+An :+1: indicates that this member of `A` is visible, else :x: is shown.
 
 - **B** - same module, same package, **other** compilation unit: `package foo; class B {}`
 - **C** - same module, **other** package, subclass: `package bar; class C extends foo.A {}`
@@ -130,16 +130,15 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 - **E** - **other** module, package `foo` is exported: `package bar; class E {}`
 - **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
 
-```text
-                       B     C     D    E     F
-package foo;
-public class A {       ✅   ✅   ✅   ✅   ❌  // public
-  public int i;        ✅   ✅   ✅   ✅   ❌  // public
-  protected int j;     ✅   ✅   ❌   ❌   ❌  // protected
-  int k;               ✅   ❌   ❌   ❌   ❌  // _no modifier_ or _package private_
-  private int l;       ❌   ❌   ❌   ❌   ❌  // private
-}
-```
+| `A`                  | `B`  | `C`  | `D`  | `E`  | `F`  | access level modifier
+| :------------------- | :--: | :--: | :--: | :--: | :--: | :--------------------
+| `package foo;`       |      |      |      |      |      |
+| `public class A {`   | :+1: | :+1: | :+1: | :+1: | :x:  | `public`
+| `  public int i;`    | :+1: | :+1: | :+1: | :+1: | :x:  | `public`
+| `  protected int j;` | :+1: | :+1: | :x:  | :x:  | :x:  | `protected`
+| `  int k;`           | :+1: | :x:  | :x:  | :x:  | :x:  | no modifier or _package private_
+| `  private int l;`   | :x:  | :x:  | :x:  | :x:  | :x:  | `private`
+| `}`                  |      |      |      |      |      |
 
 Column **E** and **F** are already covered by modular black box testing as shown above in the `open module black.box` section.
 With **F** just confirming that a not exported package is not visible from another module.
