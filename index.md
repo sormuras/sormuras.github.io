@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2018-09-13](blog/2018-09-13-junit-4-core-vs-jupiter-api.md) JUnit 4 vs Jupiter - a high-level concept & API comparison
 - [2018-09-11](blog/2018-09-11-testing-in-the-modular-world.md) 🔥 Testing In The Modular World 🔥
 - [2018-09-05](blog/2018-09-05-junit-5.3-dynamic-test-source.md) JUnit 5.3 - Test Sources for Dynamic Tests
 - [2018-06-22](blog/2018-06-22-jdk-matrix.md) Install JDK via `--url`: AdoptOpenJDK, Eclipse OpenJ9, Graal VM, Zulu

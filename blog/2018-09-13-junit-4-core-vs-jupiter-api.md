@@ -16,7 +16,7 @@ Basic stuff is basic. Commonly.
 | `org.junit` | `org.junit.jupiter.api` |
 | _The `Test` annotation tells JUnit that the `public void` method to which it is attached can be run as a test case._ | _`@Test` is used to signal that the annotated method is a test method._ |
 
-- Caveat! The `expected` and `timeout` annotation elements of `org.junit.Test` are now handled by dedicated **Jupiter** assertions.
+- Caveat! The `expected` and `timeout` annotation elements of `org.junit.Test` are handled by dedicated **Jupiter** assertions.
  
 ### Checks
  
@@ -66,7 +66,7 @@ Changed, evolved, matured.
 
 ### Tagging and Filtering
 
-In contrast to the limited `org.junit.experimental.categories.Category` annotation and its associated runner in JUnit 4, JUnit Jupiter now uses simple `String`s as markers. 
+In contrast to the limited `org.junit.experimental.categories.Category` annotation and its associated runner in JUnit 4, JUnit Jupiter uses simple `String`s as markers. 
 Test classes and methods can be tagged via the [`@Tag`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/Tag.html) annotation.
 Those tags can later be used to filter test discovery and execution.
 
@@ -84,14 +84,7 @@ For a detailed description consult the [Test Instance Lifecycle](https://junit.o
 
 ### Extension Points
 
-In contrast to the competing `Runner`, `@Rule`, and `@ClassRule` extension points in JUnit 4, the JUnit Jupiter extension model consists of a single, coherent concept: the [`Extension`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/package-summary.html) API.
-
-| JUnit 4 | Jupiter |
-| ------- | ------- |
-| `org.junit` | `org.junit.jupiter.api.extension` |
-| `Rule` +  | `Extension` |
-| `ClassRule` | `Extension` |
-| `Runner` | `Extension` |
+In contrast to the competing `Runner`, `@Rule`, and `@ClassRule` concepts in JUnit 4, the JUnit Jupiter extension model consists of a single, coherent concept: the [`Extension`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/package-summary.html) API.
 
 For a detailed description consult the [Extension Model](https://junit.org/junit5/docs/current/user-guide/#extensions) chapter in the User-Guide.
 
@@ -103,7 +96,7 @@ REVOLUTION! You might have not asked for it, but it is here.
 
 In JUnit Jupiter you should use [`TestReporter`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/TestReporter.html) where you used to print information to _stdout_ or _stderr_ in JUnit 4.
 
-### Grouping, nesting, gathering..._
+### Gathering, Grouping, Nesting
 
 Nested tests give the test writer more capabilities to express the relationship among several group of tests.
 
@@ -144,7 +137,7 @@ For a detailed description consult the [Repeated Tests](https://junit.org/junit5
 
 In JUnit 4 a limiting runner was needed from `org.junit.runners.parameterized`.
 
-In JUnit Jupiter parameterized tests are now implemented as test template extension.
+In JUnit Jupiter parameterized tests are implemented as test template extension.
 The API resides in its own dedicated module: `org.junit.jupiter.params`
 
 For a detailed description consult the [Parameterized Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests) chapter in the User-Guide.
