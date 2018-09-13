@@ -1,4 +1,4 @@
-# JUnit 4 vs Jupiter - a high-level API comparison
+# JUnit 4 vs Jupiter - a high-level concept & API comparison
 
 | JUnit 4 | Jupiter |
 | :-----: | :-----: |
@@ -78,13 +78,13 @@ In order to allow individual test methods to be executed in isolation and to avo
 This "per-method" test instance lifecycle is the default behavior in JUnit Jupiter and is analogous to all previous versions of JUnit, including JUnit 4.
 If you would prefer that JUnit Jupiter execute all test methods on the same test instance, simply annotate your test class with `@TestInstance(Lifecycle.PER_CLASS)`.
 
-`TestInstance` - _`@TestInstance` is a type-level annotation that is used to configure the lifecycle of test instances for the annotated test class or test interface._
+- `org.junit.jupiter.api.TestInstance` _`@TestInstance` is a type-level annotation that is used to configure the lifecycle of test instances for the annotated test class or test interface._
 
 For a detailed description consult the [Test Instance Lifecycle](https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle) chapter in the User-Guide.
 
 ### Extension Points
 
-In contrast to the competing `Runner`, `@Rule`, and `@ClassRule` extension points in JUnit 4, the JUnit Jupiter extension model consists of a single, coherent concept: [the `Extension` API](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/package-summary.html).
+In contrast to the competing `Runner`, `@Rule`, and `@ClassRule` extension points in JUnit 4, the JUnit Jupiter extension model consists of a single, coherent concept: the [`Extension`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/extension/package-summary.html) API.
 
 | JUnit 4 | Jupiter |
 | ------- | ------- |
