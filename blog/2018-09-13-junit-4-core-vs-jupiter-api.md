@@ -87,7 +87,7 @@ For a detailed description consult the [Extension Model](https://junit.org/junit
 
 REVOLUTION! You might have not asked for it, but it is here.
 
-### Emit human-readable messages
+### Messages
 
 In JUnit Jupiter you should use [`TestReporter`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/TestReporter.html) where you used to print information to _stdout_ or _stderr_ in JUnit 4.
 
@@ -97,7 +97,7 @@ Nested tests give the test writer more capabilities to express the relationship 
 
 - `org.junit.jupiter.api.Nested` _`@Nested` is used to signal that the annotated class is a nested, non-static test class (i.e., an inner class) that can share setup and state with an instance of its enclosing class._
 
-For a detailed description consult the [Dynamic Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested) chapter in the User-Guide.
+For a detailed description consult the [Nested Tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests-nested) chapter in the User-Guide.
 
 ### Testlets
 
