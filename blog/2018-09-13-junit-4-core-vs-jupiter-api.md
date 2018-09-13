@@ -2,7 +2,7 @@
 
 | JUnit 4 | Jupiter |
 | :-----: | :-----: |
-| [org/junit/package-summary](https://junit.org/junit4/javadoc/latest/org/junit/package-summary.html) | [org/junit/jupiter/api/package-summary](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/package-summary.html) |
+| [`org.junit`](https://junit.org/junit4/javadoc/latest/org/junit/package-summary.html) | [`org.junit.jupiter.api`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/package-summary.html) |
 
 ## ♻ Common Concepts
 
@@ -13,7 +13,6 @@ Basic stuff is basic. Commonly.
 | JUnit 4 | Jupiter |
 | ------- | ------- |
 | `Test`  | `Test`  |
-| `org.junit` | `org.junit.jupiter.api` |
 | _The `Test` annotation tells JUnit that the `public void` method to which it is attached can be run as a test case._ | _`@Test` is used to signal that the annotated method is a test method._ |
 
 - Caveat! The `expected` and `timeout` annotation elements of `org.junit.Test` are handled by dedicated **Jupiter** assertions.
@@ -23,7 +22,6 @@ Basic stuff is basic. Commonly.
 | JUnit 4 | Jupiter |
 | ------- | ------- |
 | `Assert` | `Assertions` |
-| `org.junit` | `org.junit.jupiter.api` |
 | _A set of assertion methods useful for writing tests._ | _`Assertions` is a collection of utility methods that support asserting conditions in tests._ |
 
 - Mind the flip! From `Assert.assertEquals(String message, Object expected, Object actual)` to `Assertions.assertEquals(Object expected, Object actual, String message)`.
@@ -33,7 +31,6 @@ Basic stuff is basic. Commonly.
 | JUnit 4 | Jupiter |
 | ------- | ------- |
 | `Ignore` | `Disabled` |
-| `org.junit` | `org.junit.jupiter.api` |
 | _Sometimes you want to temporarily disable a test or a group of tests._ | _`@Disabled` is used to signal that the annotated test class or test method is currently disabled and should not be executed._ |
 
 ### Conditional Test Execution
@@ -41,7 +38,6 @@ Basic stuff is basic. Commonly.
 | JUnit 4 | Jupiter |
 | ------- | ------- |
 | `Assume` | `Assumptions` |
-| `org.junit` | `org.junit.jupiter.api` |
 | _A set of methods useful for stating assumptions about the conditions in which a test is meaningful._ | _`Assumptions` is a collection of utility methods that support conditional test execution based on assumptions._ |
 
 - New! Annotation-based conditions for enabling or disabling tests in JUnit Jupiter [org.junit.jupiter.api.condition](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/condition/package-summary.html)
@@ -50,7 +46,6 @@ Basic stuff is basic. Commonly.
 
 | JUnit 4 | Jupiter |
 | ------- | ------- |
-| `org.junit` | `org.junit.jupiter.api` |
 | `BeforeClass` | `BeforeAll` |
 | _Sometimes several tests need to share computationally expensive setup (like logging into a database)._ | _`@BeforeAll` is used to signal that the annotated method should be executed before all tests in the current test class._ |
 | `Before` | `BeforeEach` |
