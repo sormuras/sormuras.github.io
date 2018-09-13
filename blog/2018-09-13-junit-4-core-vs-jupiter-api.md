@@ -4,7 +4,7 @@
 | :-----: | :-----: |
 | [org/junit/package-summary](https://junit.org/junit4/javadoc/latest/org/junit/package-summary.html) | [org/junit/jupiter/api/package-summary](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/package-summary.html) |
 
-## Common Concepts
+## Common Concepts :shell:
 
 Basic stuff is basic. Commonly.
 
@@ -60,7 +60,7 @@ Basic stuff is basic. Commonly.
 | `AfterClass` | `AfterAll` |
 | _If you allocate expensive external resources in a `BeforeClass` method you need to release them after all the tests in the class have run._ | _`@AfterAll` is used to signal that the annotated method should be executed after all tests in the current test class._ |
 
-## Changed Concepts
+## Changed Concepts :banana:
 
 Changed, evolved, matured.
 
@@ -88,7 +88,7 @@ In contrast to the competing `Runner`, `@Rule`, and `@ClassRule` concepts in JUn
 
 For a detailed description consult the [Extension Model](https://junit.org/junit5/docs/current/user-guide/#extensions) chapter in the User-Guide.
 
-## New Concepts
+## New Concepts :boom:
 
 REVOLUTION! You might have not asked for it, but it is here.
 
