@@ -103,7 +103,7 @@ REVOLUTION! You might have not asked for it, but it is here.
 
 In JUnit Jupiter you should use [`TestReporter`](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/TestReporter.html) where you used to print information to _stdout_ or _stderr_ in JUnit 4.
 
-### Grouping, nesting, _BOF-ing..._
+### Grouping, nesting, gathering..._
 
 Nested tests give the test writer more capabilities to express the relationship among several group of tests.
 
