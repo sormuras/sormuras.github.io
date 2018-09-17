@@ -35,19 +35,19 @@ main/                          test/
 
 Dieser Ansatz ermöglicht dennoch dass alle Tests weiterhin auf die gleichen Elemente der Produktionsklassen zugreifen können.
 
-Wodurch war das damals und ist es heute weiterhin möglich? Durch den **`class-path`**!
+Wodurch war das damals und ist es heute weiterhin möglich? Durch den **Klassenpfad**!
+
+Jedes Element des Klassenpfads wird der Laufzeitumgebung als Ursprung eines Resourcenbaums zur Verfügung gestellt.
+Ein spezieller Resourcentypus sind Javaklassen (`.class`-Dateien), die wiederherum zu einem Paket (`package`) gehören.
+Der Klassenpfad schreibt dabei nicht vor, wie häufig ein Paket deklariert werden darf.
+Dadurch werden alle Resourcen zu einem logischen Baum zusammengefügt, was zu einer änhlichen Situation führt, als ob man wie früher alle Resourcen unter einem physikalischen Verzeichnis ablegte.
+Testklassen können somit auf die Produktionsklassen derart zugreifen als ob sie im selben Verzeichnis lägen: Java `package` werden wie "white boxes" behandelt.
+Das schließt den Zugriff auf Klassenelemente, die *package private* oder mit `protected` versehen sind, ein.
 
 // TODO Fließtexte ab hier weiter übersetzen.
 // TODO Code-Beispiele, markiert durch ```code``` Blöcke, so belassen.
 
-Every classpath element points to a root of assets contributing to the resources available at runtime.
-A special type of resource is a Java class which in turn declares a package it belongs to.
-There is no enforced restriction of how many times a package may be declared on the classpath.
-All assets are merged logically at runtime, effectively resulting in the same situation where classes under test and test classes reside physically in the same directory.
-Packages are treated as white boxes: test code may access main types as if they were placed in the same package and directory.
-This includes types with using *package private* and `protected` modifiers.
-
-Ever placed a test class in a different package compared to the class under test?
+Schonmal eine Testklasse in einem anderen Paket als die zu testende Produktionsklassen abgelegt?
 
 ```text
 main/                          test/                               test/
@@ -56,11 +56,10 @@ main/                          test/                               test/
          📜 SomeClass.java              🔨 SomeClassTests.java              🔲 BlackBoxTests.java
 ```
 
-Welcome (b(l)ack) to "black box testing in the package world"!
-
-Which types and members from main are accessible from such a black box test?
-The answer is left open for a brush-up of the reader's modifier visibility memory.
-_Hint: a visibility table is presented later in this blog._
+Das ist dann das "black box"-Testen!
+Hier gelten alle Zugriffsregeln, die es für Sichtbarkeiten von Typen in andere Paketen gibt.
+Wie lauten diese Regeln?
+_Hinweis: weiter unten folgt eine Übersicht zum diesem Thema._
 
 ## Fast-forward to modules
 
