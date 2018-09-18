@@ -226,9 +226,9 @@ Here are the additional command line options needed to achieve the same modular 
 
 Before running any tests, your test classes first need to be compiled.
 Here build tools usually resort to the `class-path` and ignore the main and potentially all other module descriptors.
-After test compilation you need to blend in the test source set into the main module at test runtime.
+After test compilation you need to blend in the test binaries into the main module at test runtime.
 
-- `--patch-module com.xyz=src/test/java`
+- `--patch-module com.xyz=target/test-classes`
 
 **and**
 
