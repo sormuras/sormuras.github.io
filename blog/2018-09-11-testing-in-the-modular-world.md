@@ -111,6 +111,9 @@ open module black.box {
 Black box testing is the easy part.
 Test module `black.box` is main module `com.xyz`'s first customer.
 It adheres to the modular boundaries in the same way as any other module does.
+Same goes for the modules of the external testing frameworks like JUnit, AssertJ, Mockito and others.
+
+![black-box-testing](2018-09-11-testing-in-the-modular-world-black-box-testing.png)
 
 Now to the not so easy part...
 
