@@ -108,18 +108,23 @@ open module black.box {
 }
 ```
 
+#### Black Box Testing Diagram
+
 Black box testing is the easy part.
-Test module `black.box` is main module `com.xyz`'s first customer.
-It adheres to the modular boundaries in the same way as any other module does.
-Same goes for the modules of the external testing frameworks like JUnit, AssertJ, Mockito and others.
 
 ![black-box-testing](2018-09-11-testing-in-the-modular-world-black-box-testing.png)
+
+Test module `black.box` is main module `com.xyz`'s first customer.
+It adheres to the modular boundaries in the same way as any other module does.
+The only visible package is `com.xyz`, package `com.abc` is concealed.
+Same goes for the modules of the external testing frameworks like JUnit, AssertJ, Mockito and others.
+Only their published API is use-able by test classes contained in module `black.box`.
 
 Now to the not so easy part...
 
 ## Modular White Box Testing
 
-Let's start this section with an enhanced [visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
+Let's start the white box testing section with an enhanced [visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
 
 ### Visibility table
 
@@ -230,6 +235,12 @@ After test compilation you need to blend in the test source set into the main mo
 - configure the Java module system with the extra command lines denoted in `module-info.test`.
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
+
+#### White Box Testing Diagram
+
+![white-box-testing](2018-09-11-testing-in-the-modular-world-white-box-testing.png)
+
+_description pending..._ 
 
 ## Test Mode
 
@@ -393,6 +404,7 @@ This project's layout is based on proposals introduced by the [Module System Qui
 
 This is a living document, it will be updated now-and-then.
 
+2018-09-18 Add diagrams for black and white box testing
 2018-09-12 Polishing and improvements by various reader's comments
 2018-09-11 Initial version
 
