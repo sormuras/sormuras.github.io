@@ -120,6 +120,9 @@ The only visible package is `com.xyz`, package `com.abc` is concealed.
 Same goes for the modules of the external testing frameworks like JUnit, AssertJ, Mockito and others.
 Only their published API is use-able by test classes contained in module `black.box`.
 
+Take a 2-minute-break and watch Sander Mak describing modular testing in his [Java Modularity: the Year After](https://vimeo.com/289846017#t=2562s) talk.
+He repeats the just introduced black box testing and gives a brief outlook to white box testing.
+
 Now to the not so easy part...
 
 ## Modular White Box Testing
@@ -398,7 +401,9 @@ This project's layout is based on proposals introduced by the [Module System Qui
 - [Jigsaw](http://openjdk.java.net/projects/jigsaw/) **Key documents, presentations, & other resources**
 - [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
 - [JUnit Platform Maven Plugin](https://github.com/sormuras/junit-platform-maven-plugin) **Maven support for test modes defined here**
+- [Java Modularity: the Year After](https://vimeo.com/289846017) **Adoption of modules in open-source libraries, IDEs, build tools**
 - [CodeFX/JPMS](https://blog.codefx.org/tag/jpms/) **Blog about the Java module system and more**
+- [Pro](https://github.com/forax/pro) **Java 9 compatible build tool**
 
 ## History
 
