@@ -61,10 +61,11 @@ Hier gelten alle Zugriffsregeln, die es für Sichtbarkeiten von Typen in andere 
 Wie lauten diese Regeln?
 _Hinweis: weiter unten folgt eine Übersicht zum diesem Thema._
 
-## Fast-forward to modules
+## Auf zu neuen Ufern, Hallo Java Module
 
-Packages are now members of modules and only some packages are exported to other modules for consumption.
-Extrapolating the idea of separated source set roots to the Java module system could lead to a layout like:
+Mit dem Java Modulsystem kann man eine Gruppe von Paketen unter einem Namen, dem Modulnamen, zusammenfassen.
+Dabei kann man als Author eines Moduls frei entscheiden, welche der Pakete für andere Module zur Verfügung stehen.
+Wenn man nun die oben beschriebene Idee der separierten Verzeichnisse einfach auf das Modulsystem überträgt, ensteht das folgende Bild:
 
 ```text
 main/                          test/                               test/
@@ -77,13 +78,15 @@ main/                          test/                               test/
       ☕ module-info.java             🔥 module-info.[java|test] 🔥
 ```
 
-You already noticed that the _white box_ source set contains a cloak-and-dagger `module-info.[java|test]` file.
-Before diving into this topic, let's examine the other two plain and simple module descriptors.
+Die linke `main` und die rechte `test/black.box` Spalte enthalten keine großen Überraschungen.
+Anders die mittlere `test/com.xyz` oder _white box_ Spalte: hier wurde eine `module-info.[java|test]` Datei hinzugefügt.
+Bevor das Thema _white box_ Testen vertieft wird, starten wir mit den beiden einfacheren Modulen.
 
 ### ☕ `module com.xyz`
 
-- The main module descriptor for `com.xyz` contains some imaginary entries.
-- It only exports package `com.xyz` but also contains the `com.abc` package.
+- Das Module names `com.xyz` enthält ein paar ausgedachte Einträge.
+- Es enthält die Pakete `com.abc` und `com.xyz`.
+- Es exportiert einzig und allein das Paket `com.xyz`.
 
 ```java
 module com.xyz {
@@ -93,7 +96,8 @@ module com.xyz {
     exports com.xyz;
 }
 ```
-_Note! The package `com.abc` should **not** be part of a module named `com.xyz`. Why not? See [Stephen's JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) blog for details._
+_Note! The package `com.abc` should **not** be part of a module named `com.xyz`. Why not? See _
+_Hinweis: Das Paket `com.abc` sollte **nicht** in einem Module names `com.xyz` auftauchen. Warum nicht? Hier erläutert Stephen in seinem Blog [JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) die Details._
 
 ### ☕ `open module black.box`
 
