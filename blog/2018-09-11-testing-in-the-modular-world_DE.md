@@ -96,15 +96,14 @@ module com.xyz {
     exports com.xyz;
 }
 ```
-_Note! The package `com.abc` should **not** be part of a module named `com.xyz`. Why not? See _
 _Hinweis: Das Paket `com.abc` sollte **nicht** in einem Module names `com.xyz` auftauchen. Warum nicht? Hier erläutert Stephen in seinem Blog [JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) die Details._
 
 ### ☕ `open module black.box`
 
-- The test module `black.box` reads module `com.xyz` and a bunch of testing framework modules.
-- It may only refer to accessible (`public` and residing in an `exported` package) types in those other modules.
-- This includes module `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.abc`.
-- Module `black.box` is declaring itself `open` allowing test discovery via deep reflection.
+- Das Testmodul `black.box` benötigt das Modul `com.xyz` sowie eine Reihe anderer Module rund ums Testen.
+- Es kann dabei nur auf zugreifbare (nämlich solche, die `public` versehen und sich gleichzeitig in einem exportierten Paket befinden) Typen in diesen anderen Modulen zugreifen.
+- Das gilt natürlich ebenso für _unser_ `com.xyz` Modul: Tests können auf öffentliche Klassen im Paket `com.xyz` zugreifen - nicht aber auf Klassen im geschützen Paket `com.abc`, selbst wenn die `public` sind.
+- Zusätzlich erlaubt das `black.box` Modul mittels `open` tiefe Reflektion, damit Testframeworks auch _package private_ Tests auffinden und ausführen können.
 
 ```java
 open module black.box {
@@ -116,9 +115,9 @@ open module black.box {
 }
 ```
 
-Black box testing is the easy part.
-Test module `black.box` is main module `com.xyz`'s first customer.
-It adheres to the modular boundaries in the same way as any other module does.
+Black box Testen ist der einfach Teil der Geschichte.
+Das `black.box` Testmodul ist quasi der erste Kunde des Hauptmoduls `com.xyz`.
+Das Testmodul hält sich an die vom Modulsystem vorgegebenen Grenzen -- so wie jedes andere Modul. 
 
 Now to the not so easy part...
 
