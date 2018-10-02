@@ -408,10 +408,10 @@ This project's layout is based on proposals introduced by the [Module System Qui
 ## History
 
 This is a living document, it will be updated now-and-then.
-
-2018-09-18 Add diagrams for black and white box testing
-2018-09-12 Polishing and improvements by various reader's comments
-2018-09-11 Initial version
+ 
+- 2018-09-18 Add diagrams for black and white box testing
+- 2018-09-12 Polishing and improvements by various reader's comments
+- 2018-09-11 Initial version
 
 Cheers and Happy Testing,
 Christian
