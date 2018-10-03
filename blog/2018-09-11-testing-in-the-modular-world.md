@@ -399,6 +399,7 @@ This project's layout is based on proposals introduced by the [Module System Qui
 - [Feedback](https://github.com/sormuras/sormuras.github.io/issues) via GitHub
 
 - [Jigsaw](http://openjdk.java.net/projects/jigsaw/) **Key documents, presentations, & other resources**
+- [Jigsaw: Under The Hood](https://www.youtube.com/watch?v=QnMDsI2GbOc) **Modules, Accessibility, ClassLoaders, and more**
 - [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
 - [JUnit Platform Maven Plugin](https://github.com/sormuras/junit-platform-maven-plugin) **Maven support for test modes defined here**
 - [Java Modularity: the Year After](https://vimeo.com/289846017) **Adoption of modules in open-source libraries, IDEs, build tools**
