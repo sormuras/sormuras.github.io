@@ -54,8 +54,8 @@ main/                          test/                               test/
 Welcome (b(l)ack) to "black box testing in the package world"!
 
 Which types and members from main are accessible from such a black box test?
-The answer is left open for a brush-up of the reader's modifier visibility memory.
-_Hint: a visibility table is presented later in this blog._
+The answer is left open for a brush-up of the reader's access modifier visibility memory.
+_Hint: an accessibility table is presented later in this blog._
 
 ## Fast-forward to modules
 
@@ -127,13 +127,13 @@ Now to the not so easy part...
 
 ## Modular White Box Testing
 
-Let's start the white box testing section with an enhanced [visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
+Let's start the white box testing section with an enhanced [accessibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
 
-### Visibility table
+### Accessibility
 
 The `public class A` in `package foo` with one field for every access level modifier serves as a reference.
 Each column lists another type and shows how access levels affect visibility.
-An ✅ indicates that this member of `A` is visible, else ❌ is shown.
+An ✅ indicates that this member of `A` is accessible, else ❌ is shown.
 
 - **B** - same module, same package, **other** compilation unit: `package foo; class B {}`
 - **C** - same module, **other** package, subclass: `package bar; class C extends foo.A {}`
@@ -152,7 +152,7 @@ An ✅ indicates that this member of `A` is visible, else ❌ is shown.
 | `}`                            |      |      |      |      |      |                                    |
 
 Column **E** and **F** are already covered by modular black box testing as shown above in the `open module black.box` section.
-With **F** just confirming that a not exported package is not visible from another module.
+With **F** just confirming that a _not_ exported package is _not_ accessible from another module.
 But we want to write unit tests like we always did before and access internal components. We want **B**, **C** and **D** back!
 Now you may either drop the entire Java module system (for testing) or pretend your tests reside in the same module as the classes under test.
 Just like in the early days, when split packages were the solution.
@@ -408,7 +408,8 @@ This project's layout is based on proposals introduced by the [Module System Qui
 ## History
 
 This is a living document, it will be updated now-and-then.
- 
+
+- 2018-10-03 The "visibility table" is really about "accessibility"
 - 2018-09-18 Add diagrams for black and white box testing
 - 2018-09-12 Polishing and improvements by various reader's comments
 - 2018-09-11 Initial version
