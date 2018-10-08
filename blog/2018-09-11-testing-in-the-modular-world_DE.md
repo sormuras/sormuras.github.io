@@ -119,23 +119,24 @@ Black box Testen ist der einfach Teil der Geschichte.
 Das `black.box` Testmodul ist quasi der erste Kunde des Hauptmoduls `com.xyz`.
 Das Testmodul hält sich an die vom Modulsystem vorgegebenen Grenzen -- so wie jedes andere Modul. 
 
-Now to the not so easy part...
+Jetzt folgt der spannende Teil...
 
 ## Modular White Box Testing
 
-Let's start this section with an enhanced [visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
+Zunächst erweitern wir die [Zugriffstabelle](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) um eine Spalte.
+Nämlich um eine Spalte die die Zugriffsmöglichkeiten aus einem fremden Module beschreibt.
 
-### Visibility table
+### Zugriffstabelle
 
-The `public class A` in `package foo` with one field for every access level modifier serves as a reference.
-Each column lists another type and shows how access levels affect visibility.
-An ✅ indicates that this member of `A` is visible, else ❌ is shown.
+Die Klasse `A` in `package foo` enthält jeweils ein Feld für jeden Zugriffmodifikator.
+Jede Spalte von `B` bis `F` steht für eine andere Klasse und zeigt die Sichtbarkeit an:
+ein ✅ bedeutet dass das entsprechende Feld von `A` sichtbar ist; ein ❌ steht für nicht sichtbar.
 
-- **B** - same module, same package, **other** compilation unit: `package foo; class B {}`
-- **C** - same module, **other** package, subclass: `package bar; class C extends foo.A {}`
-- **D** - same module, **other** package, unrelated: `package bar; class D {}`
-- **E** - **other** module, package `foo` is exported: `package bar; class E {}`
-- **F** - **other** module, package `foo` _not_ exported `package bar; class F {}`
+- **B** - gleiches `module`, gleiches `package`, **andere** Datei: `package foo; class B {}`
+- **C** - gleiches `module`, **anderes** package, Ableitung: `package bar; class C extends foo.A {}`
+- **D** - gleiches `module`, **anderes** package, beziehungslos: `package bar; class D {}`
+- **E** - **anderes** `module`, package `foo` wird exportiert: `package bar; class E {}`
+- **F** - **anderes** `module`, package `foo` wird _nicht_ exportiert `package bar; class F {}`
 
 ```text
                        B     C     D    E     F
@@ -143,18 +144,21 @@ package foo;
 public class A {       ✅   ✅   ✅   ✅   ❌  // public
   public int i;        ✅   ✅   ✅   ✅   ❌  // public
   protected int j;     ✅   ✅   ❌   ❌   ❌  // protected
-  int k;               ✅   ❌   ❌   ❌   ❌  // _no modifier_ or _package private_
+  int k;               ✅   ❌   ❌   ❌   ❌  // _keine Modifikator_ oder _package private_
   private int l;       ❌   ❌   ❌   ❌   ❌  // private
 }
 ```
 
-Column **E** and **F** are already covered by modular black box testing as shown above in the `open module black.box` section.
-With **F** just confirming that a not exported package is not visible from another module.
-But we want to write unit tests like we always did before and access internal components. We want **B**, **C** and **D** back!
-Now you may either drop the entire Java module system (for testing) or pretend your tests reside in the same module as the classes under test.
-Just like in the early days, when split packages were the solution.
+Die Spalten **E** und **F** wurden bereits im obigen Abschnitt "Modulare Blackbox Testen" behandelt.
+Wobei **F** nur zeigt, dass selbst mit `public` modifizierte Typen aus nicht exportierten `package`s eben nicht sichtbar sind.
+Aber wir möchten ja Unittests so schreiben wie immer, und dabei auch auf interne Typen zugreifen können.
+Wir wollen **B**, **C** und **D** zurück.
+
+Damit wir das gewohnt Verhalten wiederherstellen, können wir entweder das komplette Java Modulsystem (fürs Testen) ausschalten.
+Oder wir nutzen einen neuen Weg der es ermöglicht, dass sich Test- und Haupttypen logisch in ein und demselben Modul befinden.
+Analog zu damals, als die Lösung `split packages` waren, die vom `class-path` aufgelöst wurden.
 _Same same but different._
-Because split packages are not allowed in the world of the `module-path`.
+Nur dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
 
 ## 🔥`module-info.[java|test]`🔥
 
@@ -216,52 +220,6 @@ Here are the additional command line options needed to achieve the same modular 
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
 
-## Test Mode
-
-Having common names for the various black and white box testing modes described above is good basis to develop more tooling support, thus I'll introduce a `TestMode` enumeration.
-It can used to determine the intended test mode a user wants to execute.
-Or if a user want a testing framework to execute in a specific test mode, it can be passed as a parameter.
-
-A test mode is defined by the relation of one *main* and one *test* module name.
-
-- `C` = `CLASSIC` -> no modules available
-- `M` = `MODULAR` -> main 'module `foo`' and test 'module `bar`' OR main lacks module and test 'module `any`'
-- `A` = `MODULAR_PATCHED_TEST_COMPILE` -> main 'module `foo`' and test 'module `foo`'
-- `B` = `MODULAR_PATCHED_TEST_RUNTIME` -> main 'module `foo`' and test lacks module
-
-### Test Mode Table
-
-```text
-                          main plain    main module   main module
-                             ---            foo           bar
-     test plain  ---          C              B             B
-     test module foo          M              A             M
-     test module bar          M              M             A
-```
-
-### Test Mode Detection Algorithm Outline
-
-Copied from [TestMode.java](https://github.com/sormuras/junit-platform-maven-plugin/blob/master/src/main/java/de/sormuras/junit/platform/maven/plugin/TestMode.java):
-
-```java
-  static TestMode of(String main, String test) {
-    var mainAbsent = main == null || main.trim().isEmpty(); // 11: main.isBlank();
-    var testAbsent = test == null || test.trim().isEmpty(); // 11: test.isBlank();
-    if (mainAbsent) {
-      if (testAbsent) {      // trivial case: no modules declared at all
-        return CLASSIC;
-      }
-      return MODULAR;        // only test module is present, no patching involved
-    }
-    if (testAbsent) {        // only main module is present
-      return MODULAR_PATCHED_TEST_RUNTIME;
-    }
-    if (main.equals(test)) { // same module name
-      return MODULAR_PATCHED_TEST_COMPILE;
-    }
-    return MODULAR;          // bi-modular testing, no patching involved
-  }
-```
 
 ## Summary and Sample Projects
 
@@ -369,16 +327,11 @@ This project's layout is based on proposals introduced by the [Module System Qui
 
 - [Feedback](https://github.com/sormuras/sormuras.github.io/issues) via GitHub
 
-- [Jigsaw](http://openjdk.java.net/projects/jigsaw/) **Key documents, presentations, & other resources**
-- [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
-- [JUnit Platform Maven Plugin](https://github.com/sormuras/junit-platform-maven-plugin) **Maven support for test modes defined here**
-- [CodeFX/JPMS](https://blog.codefx.org/tag/jpms/) **Blog about the Java module system and more**
+- _die Resourcen befinden sich im englischen Original_ : 
 
 ## History
 
-This is a living document, it will be updated now-and-then.
-
-2018-09-11 Initial version
+2018-10-11 Erste deutsche Version
 
 Cheers and Happy Testing,
 Christian
