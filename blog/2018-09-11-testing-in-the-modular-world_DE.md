@@ -163,8 +163,9 @@ Nur dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
 ## 🔥`module-info.[java|test]`🔥
 
 At least three ways exist that lift the strict module boundaries for testing.
+Es gibt mindestens drei Möglichkeiten, wie man die strikten Grenzen des Java Modulsystems zum Testen umgehen kann. 
 
-### Resort to the classpath
+### Zurück zum `classpath`
 
 Delete all `module-info.java` files, or exclude them from compilation, and your tests ignore all boundaries implied by the Java module system.
 Use internal implementation details of the Java runtime, 3rd-party libraries including test framework and of course, use the internal types from your _main_ source set.
@@ -172,7 +173,7 @@ The last part was the intended goal -- achieved, yes, but paid a very high price
 
 Let's explore two other ways that keep boundaries of the Java module system intact.
 
-### White box modular testing with `module-info.java`
+### Modulares White Box Testen mit `module-info.java` in `src/test/java`
 
 The foundation tool `javac` version 9+ and `maven-compiler-plugin` version 3.8.0+ support compiling `module-info.java` residing in test source sets.
 
