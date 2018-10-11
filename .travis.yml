@@ -1,9 +1,6 @@
 language: java
-sudo: false
-dist: trusty
 
 before_script:
-- unset -v _JAVA_OPTIONS
 - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 
 jobs:
