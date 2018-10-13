@@ -328,7 +328,7 @@ This project's layout is based on proposals introduced by the [Module System Qui
 
 - [Feedback](https://github.com/sormuras/sormuras.github.io/issues) via GitHub
 
-- _die Resourcen befinden sich im englischen Original_ : 
+- _die Resourcen befinden sich im englischen Original_ : [testing-in-the-modular-world](https://sormuras.github.io/blog/2018-09-11-testing-in-the-modular-world)
 
 ## History
 
