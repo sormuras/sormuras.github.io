@@ -17,7 +17,7 @@ class JumpToSource {
     return Files.walk(Paths.get("demo/test/jump"), 1)
         .filter(path -> path.toString().endsWith(".txt"))
         .map(path -> dynamicTest(
-                "> " + path.getFileName(),
+                "Checking file '" + path.getFileName() + "'",
                 path.toUri(), // test source uri
                 () -> checkLines(path)));
   }
