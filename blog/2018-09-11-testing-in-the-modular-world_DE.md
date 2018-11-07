@@ -222,13 +222,13 @@ Here are the additional command line options needed to achieve the same modular 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
 
 
-## Summary and Sample Projects
+## Zusammenfassung und ein Beispiel
 
-- So, how to organize tests in the modular world?
+- Also, wie organisiert man nun Tests in modularen Projekten?
 
-It depends.
+Das hängt davon ab.
 
-It depends on what you want to test.
+Das hängt davon ab was man testen möchte.
 Are you writing a standalone program that consumes modules without being designed to be re-usable itself?
 Is it a library you want to distribute as a Java module?
 Is your library distributed as a multi-release JAR?
