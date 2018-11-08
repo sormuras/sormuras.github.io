@@ -162,33 +162,38 @@ Nur dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
 
 ## 🔥`module-info.[java|test]`🔥
 
-At least three ways exist that lift the strict module boundaries for testing.
 Es gibt mindestens drei Möglichkeiten, wie man die strikten Grenzen des Java Modulsystems zum Testen umgehen kann. 
 
 ### Zurück zum `classpath`
 
-Delete all `module-info.java` files, or exclude them from compilation, and your tests ignore all boundaries implied by the Java module system.
-Use internal implementation details of the Java runtime, 3rd-party libraries including test framework and of course, use the internal types from your _main_ source set.
-The last part was the intended goal -- achieved, yes, but paid a very high price.
+Alle `module-info.java` Datei löschen, oder zumindest diese vom Kompilieren ausschließen, und schon ignorieren die Tests die Grenzen des Modulsystems.
+Dadurch werden neben internen Details von Java selbst, auch Interna von anderen und eben der eignenen Bibliothek verfügbar.
+Das letztere war das Ziel -- doch die Kosten um es zu erreichen sind hoch.
 
-Let's explore two other ways that keep boundaries of the Java module system intact.
+Wie kann man die Grenzen des Modulsystems intakt lassen und trotzdem die internen Typen der eigenen Bibliothek testen?
+Dazu mehr in den nächsten zwei Abschnitten.
 
 ### Modulares White Box Testen mit `module-info.java` in `src/test/java`
 
-The foundation tool `javac` version 9+ and `maven-compiler-plugin` version 3.8.0+ support compiling `module-info.java` residing in test source sets.
+Die für den Testauthor einfachst Variante besteht darin eine Beschreibung für ein Testmodul anzulegen.
+Die Beschreibung kann mit der gleichen Syntax die bei _normalen_ Modulen eingesetzt wird geschehen:
 
-Here you use the default module description syntax to a) shadow the main configuration and b) express additional requirements needed for testing.
+So kann ein Testmodul aussehen.
+Dabei wird es in zwei logische Abschnitte geteilt:
+
+1. Kopie aller Direktiven aus dem Hauptmodul
+2. Zusätzliche Direktiven fürs Testen
 
 - `module-info.java`
 
 ```java
-// same name as main module and open for deep reflection
+// Selber Modulname wie das Hauptmodule, zusätzlich "open"
 open module com.xyz {
-    requires java.logging;          // copied from main module descriptor
+    requires java.logging;          // Aus dem Hauptmodul kopiert
     requires java.sql;              // - " -
     exports com.xyz;                // - " -
 
-    requires org.junit.jupiter.api; // additional test requirement
+    requires org.junit.jupiter.api; // Test-spezifische Abhängigkeiten 
     requires org.assertj.core;      // - " -
     requires org.mockito;           // - " -
 }
