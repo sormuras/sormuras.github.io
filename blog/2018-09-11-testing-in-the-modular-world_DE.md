@@ -1,6 +1,6 @@
 # Testen im Modulsystem von Java
 
-In diesem Blog geht es um die Organisation, das Auffinden und Ausführen von Tests im Modulsystem von Java.
+In diesem Blog geht es um die Organisation, das Auffinden und das Ausführen von Tests im Modulsystem von Java.
 Es ist **keine** [Einführung in das Java Modulsystem](https://blog.codefx.org/java/java-module-system-tutorial/).
 
 _Zu viel Text, her mit dem Code: Beispielprojekt [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) klonen und mit `mvn verify` bauen._
@@ -9,7 +9,7 @@ _Zu viel Text, her mit dem Code: Beispielprojekt [sormuras/testing-in-the-modula
 
 Zunächst ein kleiner Exkurs in die Vergangenheit, denn schon damals stand diese Frage im Raum: [_"Wo soll ich Testklassen ablegen?"_](https://junit.org/junit4/faq.html#organize_1)
 
-- Lege Testklassen im selben Verzeichnis ab in dem sich auch die Produktionsklassen befinden.
+- Lege Testklassen im selben Verzeichnis ab, in dem sich auch die Produktionsklassen befinden.
 
 Zum Beispiel:
 
@@ -21,10 +21,9 @@ src/
          🔨 SomeClassTests.java
 ```
 
-Für kleinere Projekte war das Vorgehen okay -- wobei schon damals viele Entwickler bei größeren Projekten die Vermischung von Produktions- und Testklassen als Nachteil dieses Ansatzes ausmachten.
-Der Aufwand für das finale Zusammenstellen des Produktes wurde immer höher, denn die Testklassen mussten ja dabei rausgefiltert werden.
+Für kleinere Projekte war das Vorgehen okay -- wobei schon damals viele Entwickler bei größeren Projekten die Vermischung von Produktions- und Testklassen als Nachteil dieses Ansatzes empfanden. Denn der Aufwand für das finale Zusammenstellen des Produktes wurde mit der Zeit immer höher, weil die Testklassen dabei rausgefiltert werden mussten.
 
-- Deswegen war es einfacher die Testklassen in einem separaten aber analog aufgebauten Verzeichnisbaum abzulegen.
+- Deswegen war es einfacher, die Testklassen in einem separaten aber analog aufgebauten Verzeichnisbaum abzulegen.
 
 ```text
 main/                          test/
@@ -33,16 +32,15 @@ main/                          test/
          📜 SomeClass.java              🔨 SomeClassTests.java
 ```
 
-Dieser Ansatz ermöglicht dennoch dass alle Tests weiterhin auf die gleichen Elemente der Produktionsklassen zugreifen können.
+Dieser Ansatz ermöglicht es dennoch, dass alle Tests weiterhin auf die gleichen Elemente der Produktionsklassen zugreifen können.
 
 Wodurch war das damals und ist es heute weiterhin möglich? Durch den **Klassenpfad**!
 
 Jedes Element des Klassenpfads wird der Laufzeitumgebung als Ursprung eines Resourcenbaums zur Verfügung gestellt.
-Ein spezieller Resourcentypus sind Javaklassen (`.class`-Dateien), die wiederherum zu einem Paket (`package`) gehören.
+Ein spezieller Ressourcentypus sind Javaklassen (`.class`-Dateien), die wiederherum zu einem Paket (`package`) gehören.
 Der Klassenpfad schreibt dabei nicht vor, wie häufig ein Paket deklariert werden darf.
-Dadurch werden alle Resourcen zu einem logischen Baum zusammengefügt, was zu einer änhlichen Situation führt, als ob man wie früher alle Resourcen unter einem physikalischen Verzeichnis ablegte.
-Testklassen können somit auf die Produktionsklassen derart zugreifen als ob sie im selben Verzeichnis lägen: Java `package` werden wie "white boxes" behandelt.
-Das schließt den Zugriff auf Klassenelemente, die *package private* oder mit `protected` versehen sind, ein.
+Dadurch werden alle Ressourcen zu einem logischen Baum zusammengefügt, was zu einer änhlichen Situation führt, als ob man wie früher alle Ressourcen unter einem physikalischen Verzeichnis ablegte.
+Testklassen können somit so auf die Produktionsklassen zugreifen, als ob sie im selben Verzeichnis lägen: Java `packages` werden wie "white boxes" behandelt. Das schließt den Zugriff auf Klassenelemente, die mit *package private* oder mit `protected` versehen sind, ein.
 
 // TODO Fließtexte ab hier weiter übersetzen.
 // TODO Code-Beispiele, markiert durch ```code``` Blöcke, so belassen.
@@ -56,15 +54,14 @@ main/                          test/                               test/
          📜 SomeClass.java              🔨 SomeClassTests.java              🔲 BlackBoxTests.java
 ```
 
-Das ist dann das "black box"-Testen!
-Hier gelten alle Zugriffsregeln, die es für Sichtbarkeiten von Typen in andere Paketen gibt.
+Das ist dann das "Black-Box"-Testen! Hier gelten alle Zugriffsregeln, die es für Sichtbarkeiten von Typen in andere Paketen gibt.
 Wie lauten diese Regeln?
 _Hinweis: weiter unten folgt eine Übersicht zum diesem Thema._
 
-## Auf zu neuen Ufern, Hallo Java Module
+## Auf zu neuen Ufern: Hallo Java Module!
 
-Mit dem Java Modulsystem kann man eine Gruppe von Paketen unter einem Namen, dem Modulnamen, zusammenfassen.
-Dabei kann man als Author eines Moduls frei entscheiden, welche der Pakete für andere Module zur Verfügung stehen.
+Mit dem Java-Modulsystem kann man eine Gruppe von Paketen unter einem Modulnamen zusammenfassen.
+Dabei kann man als Autor eines Moduls frei entscheiden, welche der Pakete für andere Module zur Verfügung stehen.
 Wenn man nun die oben beschriebene Idee der separierten Verzeichnisse einfach auf das Modulsystem überträgt, ensteht das folgende Bild:
 
 ```text
@@ -78,13 +75,12 @@ main/                          test/                               test/
       ☕ module-info.java             🔥 module-info.[java|test] 🔥
 ```
 
-Die linke `main` und die rechte `test/black.box` Spalte enthalten keine großen Überraschungen.
-Anders die mittlere `test/com.xyz` oder _white box_ Spalte: hier wurde eine `module-info.[java|test]` Datei hinzugefügt.
-Bevor das Thema _white box_ Testen vertieft wird, starten wir mit den beiden einfacheren Modulen.
+Die linke Spalte `main` und die rechte Spalte `test/black.box` enthalten keine großen Überraschungen.
+Anders die mittlere Spalte `test/com.xyz` oder die Spalte _white box_; hier wurde nämlich eine Datei `module-info.[java|test]` hinzugefügt. Bevor wir aber das Thema _white box_-Testen vertiefen, starten wir mit den beiden einfacheren Modulen.
 
 ### ☕ `module com.xyz`
 
-- Das Module names `com.xyz` enthält ein paar ausgedachte Einträge.
+- Das Module namens `com.xyz` enthält ein paar ausgedachte Einträge.
 - Es enthält die Pakete `com.abc` und `com.xyz`.
 - Es exportiert einzig und allein das Paket `com.xyz`.
 
@@ -96,14 +92,14 @@ module com.xyz {
     exports com.xyz;
 }
 ```
-_Hinweis: Das Paket `com.abc` sollte **nicht** in einem Module names `com.xyz` auftauchen. Warum nicht? Hier erläutert Stephen in seinem Blog [JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) die Details._
+_Hinweis: Das Paket `com.abc` sollte **nicht** in einem Modul namens `com.xyz` auftauchen. Warum nicht? Stephen erläutert in seinem Blog [JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) die Details._
 
 ### ☕ `open module black.box`
 
 - Das Testmodul `black.box` benötigt das Modul `com.xyz` sowie eine Reihe anderer Module rund ums Testen.
-- Es kann dabei nur auf zugreifbare (nämlich solche, die `public` versehen und sich gleichzeitig in einem exportierten Paket befinden) Typen in diesen anderen Modulen zugreifen.
-- Das gilt natürlich ebenso für _unser_ `com.xyz` Modul: Tests können auf öffentliche Klassen im Paket `com.xyz` zugreifen - nicht aber auf Klassen im geschützen Paket `com.abc`, selbst wenn die `public` sind.
-- Zusätzlich erlaubt das `black.box` Modul mittels `open` tiefe Reflektion, damit Testframeworks auch _package private_ Tests auffinden und ausführen können.
+- Es kann dabei nur auf zugreifbare Typen in diesen anderen Modulen zugreifen (nämlich solche, die mit `public` versehen sind und sich gleichzeitig in einem exportierten Paket befinden).
+- Das gilt natürlich ebenso für _unser_ `com.xyz`-Modul: Tests können auf öffentliche Klassen im Paket `com.xyz` zugreifen - nicht aber auf Klassen im geschützen Paket `com.abc`, selbst wenn diese `public` sind.
+- Zusätzlich erlaubt das `black.box`-Modul mittels `open` tiefe Reflektion, damit Testframeworks auch _package private_-Tests auffinden und ausführen können.
 
 ```java
 open module black.box {
@@ -115,22 +111,20 @@ open module black.box {
 }
 ```
 
-Black box Testen ist der einfach Teil der Geschichte.
-Das `black.box` Testmodul ist quasi der erste Kunde des Hauptmoduls `com.xyz`.
-Das Testmodul hält sich an die vom Modulsystem vorgegebenen Grenzen -- so wie jedes andere Modul. 
+Black-Box-Testen ist allerdings der einfache Teil der Geschichte.
+Das `black.box`-Testmodul ist quasi der erste Kunde des Hauptmoduls `com.xyz`.
+Das Testmodul hält sich an die vom Modulsystem vorgegebenen Grenzen -- so wie jedes andere Modul auch. 
 
-Jetzt folgt der spannende Teil...
+Es folgt der spannende Teil.
 
 ## Modular White Box Testing
 
-Zunächst erweitern wir die [Zugriffstabelle](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) um eine Spalte.
-Nämlich um eine Spalte die die Zugriffsmöglichkeiten aus einem fremden Module beschreibt.
+Zunächst erweitern wir die [Zugriffstabelle](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) um eine Spalte. Nämlich um eine Spalte, welche die Zugriffsmöglichkeiten aus einem fremden Modul beschreibt.
 
 ### Zugriffstabelle
 
-Die Klasse `A` in `package foo` enthält jeweils ein Feld für jeden Zugriffmodifikator.
-Jede Spalte von `B` bis `F` steht für eine andere Klasse und zeigt die Sichtbarkeit an:
-ein ✅ bedeutet dass das entsprechende Feld von `A` sichtbar ist; ein ❌ steht für nicht sichtbar.
+Die Klasse `A` in `package foo` enthält jeweils ein Feld für jeden Zugriffsmodifikator.
+Jede Spalte von `B` bis `F` steht für eine andere Klasse und zeigt die Sichtbarkeit an: Ein ✅ bedeutet, dass das entsprechende Feld von `A` sichtbar ist; ein ❌ steht für "nicht sichtbar".
 
 - **B** - gleiches `module`, gleiches `package`, **andere** Datei: `package foo; class B {}`
 - **C** - gleiches `module`, **anderes** package, Ableitung: `package bar; class C extends foo.A {}`
@@ -149,40 +143,37 @@ public class A {       ✅   ✅   ✅   ✅   ❌  // public
 }
 ```
 
-Die Spalten **E** und **F** wurden bereits im obigen Abschnitt "Modulare Blackbox Testen" behandelt.
-Wobei **F** nur zeigt, dass selbst mit `public` modifizierte Typen aus nicht exportierten `package`s eben nicht sichtbar sind.
+Die Spalten **E** und **F** wurden bereits im obigen Abschnitt "Modulares Blackbox-Testen" behandelt.
+Wobei **F** nur zeigt, dass selbst mit `public` modifizierte Typen aus nicht-exportierten `package`s eben nicht sichtbar sind.
 Aber wir möchten ja Unittests so schreiben wie immer, und dabei auch auf interne Typen zugreifen können.
-Wir wollen **B**, **C** und **D** zurück.
 
-Damit wir das gewohnt Verhalten wiederherstellen, können wir entweder das komplette Java Modulsystem (fürs Testen) ausschalten.
-Oder wir nutzen einen neuen Weg der es ermöglicht, dass sich Test- und Haupttypen logisch in ein und demselben Modul befinden.
-Analog zu damals, als die Lösung `split packages` waren, die vom `class-path` aufgelöst wurden.
-_Same same but different._
-Nur dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
+Wir wollen also **B**, **C** und **D** zurück!
+
+Damit wir das gewohnte Verhalten wieder herstellen, können wir entweder das komplette Java-Modulsystem (für's Testen) ausschalten. Oder wir nutzen einen neuen Weg der es ermöglicht, dass sich Test- und Haupttypen logisch in ein und demselben Modul befinden. Analog zu damals, als die Lösung `split packages` waren, die vom `class-path` aufgelöst wurden.
+_Same same but different._ Nur, dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
 
 ## 🔥`module-info.[java|test]`🔥
 
-Es gibt mindestens drei Möglichkeiten, wie man die strikten Grenzen des Java Modulsystems zum Testen umgehen kann. 
+Es gibt mindestens drei Möglichkeiten, wie man die strikten Grenzen des Java-Modulsystems beim Testen umgehen kann. 
 
 ### Zurück zum `classpath`
 
-Alle `module-info.java` Datei löschen, oder zumindest diese vom Kompilieren ausschließen, und schon ignorieren die Tests die Grenzen des Modulsystems.
-Dadurch werden neben internen Details von Java selbst, auch Interna von anderen und eben der eignenen Bibliothek verfügbar.
-Das letztere war das Ziel -- doch die Kosten um es zu erreichen sind hoch.
+Alle `module-info.java`-Dateien löschen, oder diese zumindest vom Kompilieren ausschließen - und schon ignorieren die Tests die Grenzen des Modulsystems! Dadurch werden, neben internen Details von Java selbst, auch Interna von anderen und eben der eignenen Bibliothek verfügbar. Letzteres war das Ziel -- doch die Kosten, es zu erreichen, sind hoch.
 
-Wie kann man die Grenzen des Modulsystems intakt lassen und trotzdem die internen Typen der eigenen Bibliothek testen?
+Wie aber können wir die Grenzen des Modulsystems intakt lassen und trotzdem die internen Typen der eigenen Bibliothek testen?
 Dazu mehr in den nächsten zwei Abschnitten.
 
-### Modulares White Box Testen mit `module-info.java` in `src/test/java`
+### Modulares White-Box-Testen mit `module-info.java` in `src/test/java`
 
-Die für den Testauthor einfachst Variante besteht darin eine Beschreibung für ein Testmodul anzulegen.
-Die Beschreibung kann mit der gleichen Syntax die bei _normalen_ Modulen eingesetzt wird geschehen:
+Die für den Testautor einfachste Variante besteht darin, eine Beschreibung für ein Testmodul anzulegen.
+Die Beschreibung kann mit der gleichen Syntax geschehen, die bei _normalen_ Modulen eingesetzt wird:
 
-So kann ein Testmodul aussehen.
+So kann ein Testmodul aussehen
+
 Dabei wird es in zwei logische Abschnitte geteilt:
 
 1. Kopie aller Direktiven aus dem Hauptmodul
-2. Zusätzliche Direktiven fürs Testen
+2. Zusätzliche Direktiven für das Testen
 
 - `module-info.java`
 
@@ -200,6 +191,8 @@ open module com.xyz {
 ```
 
 _Note: Copying parts from the main module descriptor manually is brittle. The "Java 9 compatible build tool" [pro](https://github.com/forax/pro) solves this by auto-merging a main and test module descriptor on-the-fly._
+
+Notiz Jule: Ab hier plötzlich ENGLISCH
 
 ### White box modular testing with extra `java` command line options
 
@@ -226,14 +219,16 @@ Here are the additional command line options needed to achieve the same modular 
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
 
+Notiz Jule: Ende ENGLISCH
 
 ## Zusammenfassung und ein Beispiel
 
-- Also, wie organisiert man nun Tests in modularen Projekten?
+- Wie organisieren wir also Tests in modularen Projekten?
 
-Das hängt davon ab.
+Das hängt davon ab. Und zwar davon, was wir testen wollen.
 
-Das hängt davon ab was man testen möchte.
+Notiz Jule: Ab hier plötzlich ENGLISCH
+
 Are you writing a standalone program that consumes modules without being designed to be re-usable itself?
 Is it a library you want to distribute as a Java module?
 Is your library distributed as a multi-release JAR?
