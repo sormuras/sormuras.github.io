@@ -21,7 +21,8 @@ src/
          🔨 SomeClassTests.java
 ```
 
-Für kleinere Projekte war das Vorgehen okay -- wobei schon damals viele Entwickler bei größeren Projekten die Vermischung von Produktions- und Testklassen als Nachteil dieses Ansatzes empfanden. Denn der Aufwand für das finale Zusammenstellen des Produktes wurde mit der Zeit immer höher, weil die Testklassen dabei rausgefiltert werden mussten.
+Für kleinere Projekte war das Vorgehen okay -- wobei schon damals viele Entwickler bei größeren Projekten die Vermischung von Produktions- und Testklassen als Nachteil dieses Ansatzes empfanden.
+Denn der Aufwand für das finale Zusammenstellen des Produktes wurde mit der Zeit immer höher, weil die Testklassen dabei rausgefiltert werden mussten.
 
 - Deswegen war es einfacher, die Testklassen in einem separaten aber analog aufgebauten Verzeichnisbaum abzulegen.
 
@@ -76,7 +77,8 @@ main/                          test/                               test/
 ```
 
 Die linke Spalte `main` und die rechte Spalte `test/black.box` enthalten keine großen Überraschungen.
-Anders die mittlere Spalte `test/com.xyz` oder die Spalte _white box_; hier wurde nämlich eine Datei `module-info.[java|test]` hinzugefügt. Bevor wir aber das Thema _white box_-Testen vertiefen, starten wir mit den beiden einfacheren Modulen.
+Anders die mittlere Spalte `test/com.xyz` oder die Spalte _white box_; hier wurde nämlich eine Datei `module-info.[java|test]` hinzugefügt.
+Bevor wir aber das Thema _white box_-Testen vertiefen, starten wir mit den beiden einfacheren Modulen.
 
 ### ☕ `module com.xyz`
 
@@ -119,7 +121,8 @@ Es folgt der spannende Teil.
 
 ## Modular White Box Testing
 
-Zunächst erweitern wir die [Zugriffstabelle](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) um eine Spalte. Nämlich um eine Spalte, welche die Zugriffsmöglichkeiten aus einem fremden Modul beschreibt.
+Zunächst erweitern wir die [Zugriffstabelle](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) aus dem Java Tutorial um eine Spalte.
+Nämlich um eine Spalte, welche die Zugriffsmöglichkeiten aus einem fremden Modul beschreibt.
 
 ### Zugriffstabelle
 
@@ -149,7 +152,9 @@ Aber wir möchten ja Unittests so schreiben wie immer, und dabei auch auf intern
 
 Wir wollen also **B**, **C** und **D** zurück!
 
-Damit wir das gewohnte Verhalten wieder herstellen, können wir entweder das komplette Java-Modulsystem (für's Testen) ausschalten. Oder wir nutzen einen neuen Weg der es ermöglicht, dass sich Test- und Haupttypen logisch in ein und demselben Modul befinden. Analog zu damals, als die Lösung `split packages` waren, die vom `class-path` aufgelöst wurden.
+Damit wir das gewohnte Verhalten wieder herstellen, können wir entweder das komplette Java-Modulsystem (für's Testen) ausschalten.
+Oder wir nutzen einen neuen Weg der es ermöglicht, dass sich Test- und Haupttypen logisch in ein und demselben Modul befinden.
+Analog zu damals, als die Lösung `split packages` waren, die vom `class-path` aufgelöst wurden.
 _Same same but different._ Nur, dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
 
 ## 🔥`module-info.[java|test]`🔥
@@ -158,7 +163,9 @@ Es gibt mindestens drei Möglichkeiten, wie man die strikten Grenzen des Java-Mo
 
 ### Zurück zum `classpath`
 
-Alle `module-info.java`-Dateien löschen, oder diese zumindest vom Kompilieren ausschließen - und schon ignorieren die Tests die Grenzen des Modulsystems! Dadurch werden, neben internen Details von Java selbst, auch Interna von anderen und eben der eignenen Bibliothek verfügbar. Letzteres war das Ziel -- doch die Kosten, es zu erreichen, sind hoch.
+Alle `module-info.java`-Dateien löschen, oder diese zumindest vom Kompilieren ausschließen - und schon ignorieren die Tests die Grenzen des Modulsystems!
+Dadurch werden, neben internen Details von Java selbst, auch Interna von anderen und eben der eignenen Bibliothek verfügbar.
+Letzteres war das Ziel -- doch die Kosten, es zu erreichen, sind hoch.
 
 Wie aber können wir die Grenzen des Modulsystems intakt lassen und trotzdem die internen Typen der eigenen Bibliothek testen?
 Dazu mehr in den nächsten zwei Abschnitten.
@@ -219,15 +226,11 @@ Here are the additional command line options needed to achieve the same modular 
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
 
-Notiz Jule: Ende ENGLISCH
-
 ## Zusammenfassung und ein Beispiel
 
 - Wie organisieren wir also Tests in modularen Projekten?
 
 Das hängt davon ab. Und zwar davon, was wir testen wollen.
-
-Notiz Jule: Ab hier plötzlich ENGLISCH
 
 Are you writing a standalone program that consumes modules without being designed to be re-usable itself?
 Is it a library you want to distribute as a Java module?
@@ -236,93 +239,11 @@ Do you test how your library behaves on the [class-path and module-path](https:/
 
 For a library, I'd suggest the following blueprint.
 
-### Maven Blueprint
-
-Suppose you want to write and test a module named `foo` in a typical single project setup:
-*main* sources are in `src/main/java` directory, *white box test* sources in `src/test/java`.
-The *black box* **i**ntegration **t**esting projects are located under `src/it` and they are executed by the [maven-invoker-plugin](https://github.com/apache/maven-invoker-plugin).
-The simplified layout of [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) looks like:
-
-```text
-src
-├── main
-│   └── java
-│       ├── foo
-│       │   ├── PackageFoo.java
-│       │   └── PublicFoo.java
-│       └── module-info.java <------------------ module foo { exports foo; }
-├── test
-│   └── java                                .--- open module foo {
-│       ├── foo                            /       exports foo;
-│       │   └── PackageFooTests.java      /        requires org.junit.jupiter.api;
-│       └── module-info.[java|test] <----<       }
-└── it                                    \
-    └── bar                                °---- --add-reads
-        └── src                                    foo=org.junit.jupiter.api
-            └── test                             --add-opens
-                └── java                           foo/foo=org.junit.platform.commons
-                    ├── bar
-                    │   └── PublicFooTests.java
-                    └── module-info.java <------ open module bar {
-                                                   requires foo;
-                                                   requires org.junit.jupiter.api;
-                                                 }
-```
-
-```text
-$ mvn verify
-...
-[INFO] Scanning for projects...
-[INFO]
-[INFO]------------------------------------------------------------------------
-[INFO]Building testing-in-the-modular-world 1.0-SNAPSHOT
-[INFO]------------------------------------------------------------------------
-[INFO]---maven-compiler-plugin:3.8.0:compile(default-compile) @testing-in-the-modular-world ---
-[INFO]---maven-compiler-plugin:3.8.0:testCompile(default-testCompile) @testing-in-the-modular-world ---
-[INFO]---junit-platform-maven-plugin:0.0.10:launch-junit-platform(launch) @testing-in-the-modular-world ---
-[INFO] Launching JUnit Platform...
-[INFO] ╷
-[INFO] └─ JUnit Jupiter ✔
-[INFO]    └─ PackageFooTests ✔
-[INFO]       ├─ accessPackageFooInModuleFoo() ✔
-...
-```
-
-White box tests are done.
-
-Now module `foo` is installed locally and the `maven-invoker-plugin` executes all integration tests:
-
-```
-...
-[INFO]---maven-jar-plugin:2.4:jar(default-jar) @testing-in-the-modular-world ---
-[INFO]---maven-invoker-plugin:3.1.0:install(integration-test) @testing-in-the-modular-world ---
-[INFO]---maven-invoker-plugin:3.1.0:integration-test(integration-test) @testing-in-the-modular-world ---
-[INFO] Building:bar/pom.xml
-[INFO]           bar/pom.xml ......................................SUCCESS (5.8 s)
-[INFO]
-[INFO]---maven-invoker-plugin:3.1.0:verify(integration-test) @testing-in-the-modular-world ---
-[INFO]-------------------------------------------------
-[INFO] Build Summary:
-[INFO]   Passed: 1, Failed: 0, Errors: 0, Skipped: 0
-[INFO]-------------------------------------------------
-[INFO]------------------------------------------------------------------------
-[INFO]BUILD SUCCESS
-[INFO]------------------------------------------------------------------------
-```
-
-_Note: although I favor the `MODULAR_PATCHED_TEST_COMPILE` test mode with a `module-info.java` describing the test module for white box testing, I recommend to stick with `MODULAR_PATCHED_TEST_RUNTIME` for now._
-_Most build tools don't support two module descriptors on the path, nor do they understand module descriptors sharing a single name._
-
 ### Maven + JUnit Platform Maven Plugin
 
 The [micromata/sawdust](https://github.com/micromata/sawdust) project shows all test modes in action.
 Browse the sources of the sub-projects to see how to configure test mode.
 See also the linked [Job log](https://travis-ci.org/micromata/sawdust) produced by Travis CI to verify you.
-
-### Foundation tools `javac` and `java` (and `jshell`)
-
-The [junit5-modular-world](https://github.com/junit-team/junit5-samples/tree/master/junit5-modular-world) sample project uses Java foundation tools to demonstrate testing the modular world.
-This project's layout is based on proposals introduced by the [Module System Quick-Start Guide](http://openjdk.java.net/projects/jigsaw/quick-start).
 
 ## Resources
 
@@ -332,7 +253,7 @@ This project's layout is based on proposals introduced by the [Module System Qui
 
 ## History
 
-2018-10-11 Erste deutsche Version
+2018-11-15 Erste deutsche Version
 
 Cheers and Happy Testing,
 Christian
