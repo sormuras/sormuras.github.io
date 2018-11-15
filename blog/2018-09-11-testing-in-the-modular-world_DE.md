@@ -197,9 +197,8 @@ open module com.xyz {
 }
 ```
 
-_Note: Copying parts from the main module descriptor manually is brittle. The "Java 9 compatible build tool" [pro](https://github.com/forax/pro) solves this by auto-merging a main and test module descriptor on-the-fly._
-
-Notiz Jule: Ab hier plötzlich ENGLISCH
+_Notiz: Das Kopieren von Direktiven aus dem Hauptmodul is natürlich etwas mühselig und fehleranfällig.
+Das Buildtool [pro](https://github.com/forax/pro) automatisiert diesen Schritt und erlaubt es ausschließlich die zusätzlichen Direktiven fürs Testen anzugeben._
 
 ### White box modular testing with extra `java` command line options
 
