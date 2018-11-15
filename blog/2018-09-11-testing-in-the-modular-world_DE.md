@@ -198,14 +198,15 @@ open module com.xyz {
 ```
 
 _Notiz: Das Kopieren von Direktiven aus dem Hauptmodul is natürlich etwas mühselig und fehleranfällig.
-Das Buildtool [pro](https://github.com/forax/pro) automatisiert diesen Schritt und erlaubt es ausschließlich die zusätzlichen Direktiven fürs Testen anzugeben._
+Das [pro](https://github.com/forax/pro) Buildtool automatisiert diesen Schritt und erlaubt es ausschließlich die zusätzlichen Direktiven fürs Testen anzugeben._
 
 ### White box modular testing with extra `java` command line options
 
-The foundation tool `java` version 9+ provides command line options configure the Java module system "on-the-fly" at start up time.
-Various test launcher tools allow additional command line options to be passed to the test runtime.
+Neben der gerade beschriebenen Variante eines dediziertem Testmoduls, kann man auch mittels `java` Kommandozeilenparameter ans Ziel kommen.
+Man konfiguriert so das Modulsystem quasi beim Starten der JVM. 
+Die meisten Buildtools unterstützen die Angabe solcher `java` Kommandozeilenparameter beim Starten eines Testlaufs.
 
-Here are the additional command line options needed to achieve the same modular configuration as above:
+Um obiges Testmodul mittels `java` nachzubauen, braucht es folgende Parameter: 
 
 - `module-info.test`
 
@@ -223,26 +224,43 @@ Here are the additional command line options needed to achieve the same modular 
   com.xyz=org.mockito                         |
 ```
 
-This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
-
 ## Zusammenfassung und ein Beispiel
 
-- Wie organisieren wir also Tests in modularen Projekten?
+- Wie organisiert man nun Tests in modularen Projekten?
 
-Das hängt davon ab. Und zwar davon, was wir testen wollen.
+Es ist in meine Augen notwendig, dass sowohl Black Box als auch White Box Tests geschrieben und ausgeführt werden.
+Das [micromata/sawdust](https://github.com/micromata/sawdust) Projekt zeigt eine mögliche Struktur:
 
-Are you writing a standalone program that consumes modules without being designed to be re-usable itself?
-Is it a library you want to distribute as a Java module?
-Is your library distributed as a multi-release JAR?
-Do you test how your library behaves on the [class-path and module-path](https://blog.joda.org/2018/03/jpms-negative-benefits.html)?
+```text
+├───modular-blackbox
+│   └───src
+│       ├───main
+│       │   └───java    | module foo {}
+│       │       └───foo
+│       └───test
+│           └───java    | open module bar { requires foo; ...jupiter.api; }
+│               └───bar
+│
+├───modular-whitebox-patch-compile
+│   └───src
+│       ├───main
+│       │   └───java    | module foo {}
+│       │       └───foo
+│       └───test
+│           └───java    | open module foo { requires org.junit.jupiter.api; }
+│               └───foo | --patch-module foo=src/main/java
+│
+└───modular-whitebox-patch-runtime
+    └───src
+        ├───main
+        │   └───java    | module foo {}
+        │       └───foo
+        └───test
+            └───java    | "module-info.test"
+                └───foo | --patch-module foo=target/test/classes
+```
 
-For a library, I'd suggest the following blueprint.
-
-### Maven + JUnit Platform Maven Plugin
-
-The [micromata/sawdust](https://github.com/micromata/sawdust) project shows all test modes in action.
-Browse the sources of the sub-projects to see how to configure test mode.
-See also the linked [Job log](https://travis-ci.org/micromata/sawdust) produced by Travis CI to verify you.
+Dazu kommt noch, dass man das Verhalten seines Moduls sowohl auf [class-path als auch module-path](https://blog.joda.org/2018/03/jpms-negative-benefits.html) testen sollte.
 
 ## Resources
 
