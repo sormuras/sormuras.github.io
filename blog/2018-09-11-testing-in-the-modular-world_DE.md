@@ -1,7 +1,7 @@
 # Testen im Modulsystem von Java
 
 In diesem Blog geht es um die Organisation, das Auffinden und das Ausführen von Tests im Modulsystem von Java.
-Es ist **keine** [Einführung in das Java Modulsystem](https://blog.codefx.org/java/java-module-system-tutorial/).
+Es ist **keine** [Einführung in das Java Modulsystem](https://blog.codefx.org/java/java-module-system-tutorial/), auch bekannt als Projekt [Jigsaw](https://openjdk.java.net/projects/jigsaw/).
 
 _Zu viel Text, her mit dem Code: Beispielprojekt [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) klonen und mit `mvn verify` bauen._
 
@@ -59,7 +59,7 @@ Das ist dann das "Black-Box"-Testen! Hier gelten alle Zugriffsregeln, die es fü
 Wie lauten diese Regeln?
 _Hinweis: weiter unten folgt eine Übersicht zum diesem Thema._
 
-## Auf zu neuen Ufern: Hallo Java Module!
+## Auf zu neuen Ufern: Hallo Jigsaw, Hallo Java Module!
 
 Mit dem Java-Modulsystem kann man eine Gruppe von Paketen unter einem Modulnamen zusammenfassen.
 Dabei kann man als Autor eines Moduls frei entscheiden, welche der Pakete für andere Module zur Verfügung stehen.
@@ -155,7 +155,7 @@ Wir wollen also **B**, **C** und **D** zurück!
 Damit wir das gewohnte Verhalten wieder herstellen, können wir entweder das komplette Java-Modulsystem (für's Testen) ausschalten.
 Oder wir nutzen einen neuen Weg der es ermöglicht, dass sich Test- und Haupttypen logisch in ein und demselben Modul befinden.
 Analog zu damals, als die Lösung `split packages` waren, die vom `class-path` aufgelöst wurden.
-_Same same but different._ Nur, dass `split packages` in der modularen Welt nicht mehr erlaubt sind.
+_Same same but different._ Nur, dass `split packages` in der modularen Welt von Jigsaw nicht mehr erlaubt sind.
 
 ## 🔥`module-info.[java|test]`🔥
 
@@ -173,9 +173,7 @@ Dazu mehr in den nächsten zwei Abschnitten.
 ### Modulares White-Box-Testen mit `module-info.java` in `src/test/java`
 
 Die für den Testautor einfachste Variante besteht darin, eine Beschreibung für ein Testmodul anzulegen.
-Die Beschreibung kann mit der gleichen Syntax geschehen, die bei _normalen_ Modulen eingesetzt wird:
-
-So kann ein Testmodul aussehen
+Die Beschreibung kann mit der gleichen Syntax geschehen, die bei _normalen_ Modulen eingesetzt wird.
 
 Dabei wird es in zwei logische Abschnitte geteilt:
 
