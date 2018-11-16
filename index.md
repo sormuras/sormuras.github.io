@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2018-11-16](blog/2018-11-16-invalid-automatic-module-names.md) Invalid `Automatic-Module-Name`s at Maven Central
 - [2018-09-13](blog/2018-09-13-junit-4-core-vs-jupiter-api.md) JUnit 4 vs Jupiter - a high-level concept & API comparison
 - [2018-09-11](blog/2018-09-11-testing-in-the-modular-world.md) 🔥 Testing In The Modular World 🔥
 - [2018-09-05](blog/2018-09-05-junit-5.3-dynamic-test-source.md) JUnit 5.3 - Test Sources for Dynamic Tests
