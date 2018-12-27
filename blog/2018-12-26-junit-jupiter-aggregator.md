@@ -81,11 +81,26 @@ Since Gradle 5, this build tool supports [Separation of compile and runtime depe
 > where the separation between api and implementation dependencies is reflected in the published scopes.
 
 
-Use a single `testCompile('org.junit.jupiter:junit-jupiter:VERSION')`:
+You may configure the _single_ aggregator artifact junit-jupiter in your project like:
+
+```groovy
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:<VERSION>'
+}
+```
 
 ![implicit-jupiter](2018-12-26-junit-jupiter-aggregator-implicit-jupiter.png)
 
 instead of configuring each api and implementation dependency manually:
+
+```groovy
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:<VERSION>'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:<VERSION>'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:<VERSION>'
+}
+```
 
 ![implicit-jupiter](2018-12-26-junit-jupiter-aggregator-explicit-api+engine.png)
 
