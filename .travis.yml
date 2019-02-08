@@ -31,7 +31,7 @@ jobs:
 
   - stage: 🚀 Graal, Zulu, ...
     env: JDK=graalvm-ce-1.0.0-rc6
-    script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-1.0.0-rc6/graalvm-ce-1.0.0-rc6-linux-amd64.tar.gz
+    script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-1.0.0-rc12/graalvm-ce-1.0.0-rc12-linux-amd64.tar.gz
   - # stage: ...
     env: JDK=zulu10.3+5-jdk10.0.2
     script: source install-jdk.sh --url https://cdn.azul.com/zulu/bin/zulu10.3+5-jdk10.0.2-linux_x64.tar.gz
