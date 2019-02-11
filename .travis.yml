@@ -30,7 +30,7 @@ jobs:
     script: source install-jdk.sh --url https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=openj9&os=linux&arch=x64&release=latest&heap_size=normal&type=jdk
 
   - stage: 🚀 Graal, Zulu, ...
-    env: JDK=graalvm-ce-1.0.0-rc6
+    env: JDK=graalvm-ce-1.0.0-rc12
     script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-1.0.0-rc12/graalvm-ce-1.0.0-rc12-linux-amd64.tar.gz
   - # stage: ...
     env: JDK=zulu10.3+5-jdk10.0.2
