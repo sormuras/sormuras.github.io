@@ -41,8 +41,9 @@ jobs:
     env: JDK=openjdk-shenandoah-jdk11-latest
     script: source install-jdk.sh --url https://builds.shipilev.net/openjdk-shenandoah-jdk11/openjdk-shenandoah-jdk11-latest-linux-x86_64-release.tar.xz
   - # stage: ...
+    # Amazon -- https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html
     env: JDK=amazon-corretto-11
-    script: source install-jdk.sh --url https://d2jnoze5tfhthg.cloudfront.net/amazon-corretto-11.0.2.9.2-linux-x64.tar.gz
+    script: source install-jdk.sh --url https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-linux-x64.tar.gz
 
 after_script:
 - echo JAVA_HOME = ${JAVA_HOME}
