@@ -38,6 +38,7 @@ jobs:
     env: JDK=zulu12.2.3-ca-jdk12.0.1
     script: source install-jdk.sh --url https://cdn.azul.com/zulu/bin/zulu12.2.3-ca-jdk12.0.1-linux_x64.tar.gz
   - # stage: ...
+    # shipilev.net -- https://builds.shipilev.net
     env: JDK=openjdk-shenandoah-jdk11-latest
     script: source install-jdk.sh --url https://builds.shipilev.net/openjdk-shenandoah-jdk11/openjdk-shenandoah-jdk11-latest-linux-x86_64-release.tar.xz
   - # stage: ...
