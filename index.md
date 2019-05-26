@@ -4,6 +4,7 @@
 
 ## blog
 
+- [2019-05-26](blog/2019-05-26-jdk-module-layer-class-loader.md) JDK `ModuleLayer` locks modular jars
 - [2018-12-26](blog/2018-12-26-junit-jupiter-aggregator.md) Single `junit-jupiter` Aggregator Artifact
 - [2018-11-16](blog/2018-11-16-invalid-automatic-module-names.md) Invalid `Automatic-Module-Name`s at Maven Central
 - [2018-09-13](blog/2018-09-13-junit-4-core-vs-jupiter-api.md) JUnit 4 vs Jupiter - a high-level concept & API comparison
