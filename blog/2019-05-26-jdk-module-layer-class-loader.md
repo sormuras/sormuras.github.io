@@ -2,12 +2,13 @@
 
 Why doesn't `jdk.internal.loader.Loader` implement `AutoCloseable`?
 
-- or -
+_or_
 
 How to dispose a custom `ModuleLayer` gracefully if you don't start a new process?
 
 ```java
-class JarLockTests {
+class JarLock {
+
   @Test
   void viaModuleLayer() throws Exception {  
     var jar = copyJar();
@@ -34,4 +35,4 @@ class JarLockTests {
 ```
 
 Find more tests in [JarLock.java](https://github.com/sormuras/sormuras.github.io/tree/master/demo/test/jdk/JarLock.java).
-Here a case using `URLClassLoader` shows the desired feature.
+It contains a case using `URLClassLoader` that shows the desired `close()` feature.
