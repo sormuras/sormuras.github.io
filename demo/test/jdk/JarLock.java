@@ -66,11 +66,12 @@ class JarLock {
 
     // loader.close(); // Where art thou?
 
-    // loader = null; // Collect garbage...
-    // System.gc(); System.gc();  System.gc();
-    // Thread.yield(); Thread.sleep(1000); Thread.yield();
+    layer = null;
+    loader = null;
+    mainClass = null;
 
-    // Files.delete(jar); // throws "FileSystemException", can't access "a.jar"...
-    Assertions.assertThrows(Exception.class, () -> Files.delete(jar));
+    System.gc();
+    Thread.sleep(2000);
+    Files.delete(jar);
   }
 }

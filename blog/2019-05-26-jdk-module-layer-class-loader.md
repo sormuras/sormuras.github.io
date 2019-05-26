@@ -1,4 +1,4 @@
-# Closing `jdk.internal.loader.Loader`...
+# Closing jdk.internal.loader.Loader...
 
 Why doesn't `jdk.internal.loader.Loader` implement `AutoCloseable`?
 
@@ -25,10 +25,6 @@ class JarLock {
 
     // loader.close(); // Where art thou?
 
-    // loader = null; // Collect garbage...
-    // System.gc(); System.gc();  System.gc();
-    // Thread.yield(); Thread.sleep(1000); Thread.yield();
-
     Files.delete(jar); // throws "FileSystemException", can't access "a.jar"...
   }
 }    
@@ -36,3 +32,30 @@ class JarLock {
 
 Find more tests in [JarLock.java](https://github.com/sormuras/sormuras.github.io/tree/master/demo/test/jdk/JarLock.java).
 It contains a case using `URLClassLoader` that shows the desired `close()` feature.
+
+## Work-around via System.gc()
+
+Alan Bateman suggested to [null out all references](http://mail.openjdk.java.net/pipermail/jigsaw-dev/2019-May/014228.html) in play.
+That did the trick! ✅
+
+Looking forward to the change of _"Windows sharing mode JarFile/ZipFile uses to open JAR files"_.
+
+```java
+class JarLock {
+
+  @Test
+  void viaModuleLayer() throws Exception {  
+    // ...
+
+    // loader.close(); // Where art thou?
+
+    layer = null;
+    loader = null;
+    mainClass = null;
+
+    System.gc();
+    Thread.sleep(2000);
+    Files.delete(jar); // ✅
+  }
+}    
+```
