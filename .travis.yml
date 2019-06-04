@@ -40,7 +40,7 @@ jobs:
   - # stage: ...
     # shipilev.net -- https://builds.shipilev.net
     env: JDK=openjdk-shenandoah-jdk11-latest
-    script: source install-jdk.sh --url https://builds.shipilev.net/openjdk-shenandoah-jdk11/openjdk-shenandoah-jdk11-latest-linux-x86_64-release.tar.xz
+    script: source install-jdk.sh --url https://builds.shipilev.net/openjdk-shenandoah-jdk11/openjdk-shenandoah-jdk11-latest-linux-x86-release.tar.xz
   - # stage: ...
     # Amazon -- https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html
     env: JDK=amazon-corretto-11
