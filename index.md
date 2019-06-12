@@ -4,7 +4,7 @@
 
 ## upcoming events
 
-- [2019-07-17](https://www.meetup.com/JUG-Mainz) JUG Mainz - Talk - "JUnit 5 - Platform & Jupiter API"
+- [2019-07-17](https://www.meetup.com/JUG-Mainz/events/262059653) JUG Mainz - Talk - "JUnit 5 - Platform & Jupiter API"
 - [2019-09-12](https://2019.javazone.no) JavaZone Oslo - Talk - "Testing In The Modular World"
 - [2019-09-24](https://accento.dev) Accento.dev Karlsruhe - Talk - "Testing In The Modular World"
 - [2019-09-26](https://jcon.one) JCON Düsseldorf - Talk - "Testing In The Modular World"
