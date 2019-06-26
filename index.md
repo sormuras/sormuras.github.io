@@ -44,6 +44,7 @@
 
 - [forax/pro](https://github.com/forax/pro) A Java build tool that works seamlessly with modules
 - [google/google-java-format](https://github.com/google/google-java-format) Reformats Java source code to comply with Google Java Style
+- [sandermak/modulescanner](https://github.com/sandermak/modulescanner) Inspect Maven Central to check what libraries are Java modules
 
 ## past events
 
