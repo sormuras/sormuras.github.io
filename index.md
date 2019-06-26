@@ -30,6 +30,21 @@
 - [2017-12-13](blog/2017-12-13-module-info-properties.md) `module-version.properties`
 - [2017-12-08](blog/2017-12-08-install-jdk-on-travis.md) Install JDK on Travis CI _(updated 2018-01-28)_
 
+## active projects
+
+- [JUnit 5](https://junit.org) The new major version of the programmer-friendly testing framework for Java
+- [junit-platform-maven-plugin](https://github.com/sormuras/junit-platform-maven-plugin) Maven Plugin launching the JUnit Platform
+- [mainrunner](https://github.com/sormuras/mainrunner) JUnit Platform Test Engine launching Java programs
+- [install-jdk.sh](https://github.com/sormuras/bach#install-jdksh) Install the latest-and-greatest OpenJDK releases
+- [bach](https://github.com/sormuras/bach) Use jshell/java to build your modular Java project
+- [modules](https://github.com/sormuras/modules) Java modules published at Maven Central
+- [java-compiler-script-engine](https://github.com/sormuras/java-compiler-script-engine) JSR 223 facade for `javac`, the foundation Java compiler
+
+## contributing to...
+
+- [forax/pro](https://github.com/forax/pro) A Java build tool that works seamlessly with modules
+- [google/google-java-format](https://github.com/google/google-java-format) Reformats Java source code to comply with Google Java Style
+
 ## past events
 
 - [2019-05-29](https://www.meetup.com/Java-User-Group-Koblenz/events/261282474) JUG Koblenz - Talk -  "JUnit 5 - Platform & Jupiter API"
