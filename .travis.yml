@@ -7,6 +7,13 @@ jobs:
   include:
 
   - stage: ☕ jdk.java.net - OpenJDK - GPL
+    env: JDK=ea
+    script: source install-jdk.sh -F ea
+  - # stage: ...
+    env: JDK=ea
+    os: osx
+    script: source install-jdk.sh -F ea
+  - # stage: ...
     env: JDK=14
     script: source install-jdk.sh -F 14
   - # stage: ...
@@ -18,6 +25,10 @@ jobs:
     script: source install-jdk.sh -F 12
   - # stage: ...
     env: JDK=11 (LTS)
+    script: source install-jdk.sh -F 11
+  - # stage: ...
+    env: JDK=11 (LTS)
+    os: osx
     script: source install-jdk.sh -F 11
   - # stage: ...
     env: JDK=10 🚫
