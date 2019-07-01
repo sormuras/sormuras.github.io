@@ -12,7 +12,7 @@ jobs:
   - # stage: ...
     env: JDK=ea
     os: osx
-    script: source install-jdk.sh -F ea
+    script: source install-jdk.sh --verbose -F ea
   - # stage: ...
     env: JDK=14
     script: source install-jdk.sh -F 14
@@ -29,7 +29,7 @@ jobs:
   - # stage: ...
     env: JDK=11 (LTS)
     os: osx
-    script: source install-jdk.sh -F 11
+    script: source install-jdk.sh --verbose -F 11
   - # stage: ...
     env: JDK=10 🚫
     script: source install-jdk.sh -F 10
