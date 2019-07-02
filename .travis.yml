@@ -8,34 +8,34 @@ jobs:
 
   - stage: ☕ jdk.java.net - OpenJDK - GPL
     env: JDK=ea
-    script: source install-jdk.sh -F ea
+    script: source install-jdk.sh --feature ea
   - # stage: ...
     env: JDK=ea
     os: osx
-    script: source install-jdk.sh --verbose -F ea
+    script: source install-jdk.sh --verbose --feature ea
   - # stage: ...
     env: JDK=14
-    script: source install-jdk.sh -F 14
+    script: source install-jdk.sh --feature 14
   - # stage: ...
     env: JDK=13
-    script: source install-jdk.sh -F 13
+    script: source install-jdk.sh --feature 13
 
   - stage: 🍺 adoptopenjdk.net - HotSpot
     env: JDK=12
-    script: source install-jdk.sh -F 12
+    script: source install-jdk.sh --feature 12
   - # stage: ...
     env: JDK=11 (LTS)
-    script: source install-jdk.sh -F 11
+    script: source install-jdk.sh --feature 11
   - # stage: ...
     env: JDK=11 (LTS)
     os: osx
-    script: source install-jdk.sh --verbose -F 11
+    script: source install-jdk.sh --verbose --feature 11
   - # stage: ...
     env: JDK=10 🚫
-    script: source install-jdk.sh -F 10
+    script: source install-jdk.sh --verbose --feature 10 --cacerts
   - # stage: ...
     env: JDK=9 🚫
-    script: source install-jdk.sh -F 9
+    script: source install-jdk.sh --feature 9
 
   - stage: 🚀 AdoptOpenJDK + OpenJ9, Graal, Zulu, ...
     # AdoptOpenJDK -- https://adoptopenjdk.net
