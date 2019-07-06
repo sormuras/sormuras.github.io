@@ -6,9 +6,9 @@ before_script:
 jobs:
   include:
 
-  - stage: ☕ jdk.java.net - OpenJDK - GPL
+  - stage: ☕ jdk.java.net - Java Development Kit builds, from Oracle
     env: JDK=ea
-    script: source install-jdk.sh --feature ea
+    script: source install-jdk.sh --verbose --feature ea
   - # stage: ...
     env: JDK=ea
     os: osx
@@ -19,32 +19,32 @@ jobs:
   - # stage: ...
     env: JDK=13
     script: source install-jdk.sh --feature 13
-
-  - stage: 🍺 adoptopenjdk.net - HotSpot
+  - # stage: ...
     env: JDK=12
     script: source install-jdk.sh --feature 12
-  - # stage: ...
-    env: JDK=11 (LTS)
+
+  - stage: 🚫 jdk.java.net - Archived OpenJDK General-Availability Releases
+    env: JDK=11 🚫
     script: source install-jdk.sh --feature 11
   - # stage: ...
-    env: JDK=11 (LTS)
-    os: osx
-    script: source install-jdk.sh --verbose --feature 11
-  - # stage: ...
     env: JDK=10 🚫
-    script: source install-jdk.sh --verbose --feature 10 --cacerts
+    script: source install-jdk.sh --feature 10
   - # stage: ...
     env: JDK=9 🚫
     script: source install-jdk.sh --feature 9
 
   - stage: 🚀 AdoptOpenJDK + OpenJ9, Graal, Zulu, ...
     # AdoptOpenJDK -- https://adoptopenjdk.net
+    env: JDK=adoptopenjdk11 + HotSpot
+    script: source install-jdk.sh --url 'https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release=latest&heap_size=normal&type=jdk'
+  - # stage: ...
+    # AdoptOpenJDK -- https://adoptopenjdk.net
     env: JDK=adoptopenjdk11 + OpenJ9
     script: source install-jdk.sh --url 'https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=openj9&os=linux&arch=x64&release=latest&heap_size=normal&type=jdk'
   - # stage: ...
     # Graal -- https://github.com/oracle/graal/releases
-    env: JDK=graalvm-ce-19.0.2
-    script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-19.0.2/graalvm-ce-linux-amd64-19.0.2.tar.gz
+    env: JDK=graalvm-ce-19.1.0
+    script: source install-jdk.sh --url https://github.com/oracle/graal/releases/download/vm-19.1.0/graalvm-ce-linux-amd64-19.1.0.tar.gz
   - # stage: ...
     # Zulu -- https://www.azul.com/downloads/zulu
     env: JDK=zulu12.2.3-ca-jdk12.0.1
