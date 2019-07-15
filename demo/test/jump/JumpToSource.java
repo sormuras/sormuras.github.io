@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
@@ -13,17 +13,31 @@ import org.junit.jupiter.api.TestFactory;
 class JumpToSource {
 
   @TestFactory
-  Stream<DynamicTest> checkAllTextFiles() throws Exception {
-    return Files.walk(Paths.get("demo/test/jump"), 1)
+  Stream<DynamicTest> walkAllTextFiles() throws Exception {
+    return Files.walk(Path.of("demo/test/jump"), 1)
         .filter(path -> path.toString().endsWith(".txt"))
-        .map(path -> dynamicTest(
-                "Checking file '" + path.getFileName() + "'",
-                path.toUri(), // test source uri
-                () -> checkLines(path)));
+        .map(this::newDynamicTest);
   }
 
-  private void checkLines(Path path) throws Exception {
-    var lines = Files.readAllLines(path);
+  @TestFactory
+  Iterable<DynamicTest> globAllTextFiles() throws Exception {
+    var path = Path.of("demo/test/jump");
+    var tests = new ArrayList<DynamicTest>();
+    Files.newDirectoryStream(path, "*.txt").forEach(file -> tests.add(newDynamicTest(file)));
+    return tests;
+  }
+
+  private DynamicTest newDynamicTest(Path file) {
+    var displayName = "Checking file '" + file.getFileName() + "'";
+    return dynamicTest(displayName, file.toUri(), () -> checkLines(file));
+  }
+
+  private void checkLines(Path file) throws Exception {
+    var lines = Files.readAllLines(file);
+    assertEquals(
+        2,
+        lines.size(),
+        "Expected exactly two lines, but read " + lines.size() + " line(s) from " + file.toUri());
     var expected = lines.get(1);
     var actual = new StringBuilder(lines.get(0)).reverse().toString();
     assertEquals(expected, actual, "Second line is not the reversed first!");
