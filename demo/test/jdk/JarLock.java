@@ -1,12 +1,15 @@
 package jdk;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.lang.module.ModuleFinder;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Set;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 // "ZipFile/JarFile should open zip/JAR file with FILE_SHARE_DELETE sharing mode on Windows"
@@ -22,9 +25,9 @@ class JarLock {
   void deleteJar() throws Exception {
     var jar = copyJar();
 
-    Assertions.assertTrue(Files.exists(jar));
+    assertTrue(Files.exists(jar));
     Files.delete(jar);
-    Assertions.assertTrue(Files.notExists(jar));
+    assertTrue(Files.notExists(jar));
   }
 
   @Test
@@ -33,10 +36,10 @@ class JarLock {
 
     var loader = URLClassLoader.newInstance(new URL[] {jar.toUri().toURL()});
     var mainClass = loader.loadClass("com.greetings.Main");
-    Assertions.assertEquals("Main", mainClass.getSimpleName());
+    assertEquals("Main", mainClass.getSimpleName());
 
     // Files.delete(jar); // throws "FileSystemException", can't access "a.jar"...
-    Assertions.assertThrows(Exception.class, () -> Files.delete(jar));
+    assertThrows(Exception.class, () -> Files.delete(jar));
   }
 
   @Test
@@ -45,12 +48,12 @@ class JarLock {
 
     var loader = URLClassLoader.newInstance(new URL[] {jar.toUri().toURL()});
     var mainClass = loader.loadClass("com.greetings.Main");
-    Assertions.assertEquals("Main", mainClass.getSimpleName());
+    assertEquals("Main", mainClass.getSimpleName());
 
     loader.close();
 
     Files.delete(jar);
-    Assertions.assertTrue(Files.notExists(jar));
+    assertTrue(Files.notExists(jar));
   }
 
   @Test
@@ -64,7 +67,7 @@ class JarLock {
     var layer = parent.defineModulesWithOneLoader(cf, scl);
     var loader = layer.findLoader("com.greetings");
     var mainClass = loader.loadClass("com.greetings.Main");
-    Assertions.assertEquals("Main", mainClass.getSimpleName());
+    assertEquals("Main", mainClass.getSimpleName());
 
     // loader.close(); // Where art thou?
 
