@@ -9,6 +9,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+// "ZipFile/JarFile should open zip/JAR file with FILE_SHARE_DELETE sharing mode on Windows"
+// See: https://bugs.openjdk.java.net/browse/JDK-8224794
 class JarLock {
 
   private static Path copyJar() throws Exception {
