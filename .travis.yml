@@ -21,7 +21,7 @@ jobs:
     script: source install-jdk.sh --feature 13
   - # stage: ...
     env: JDK=12
-    script: source install-jdk.sh --feature 12
+    script: source ./install-jdk.sh --feature 12
 
   - stage: 🚫 jdk.java.net - Archived OpenJDK General-Availability Releases
     env: JDK=11 🚫
