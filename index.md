@@ -4,7 +4,6 @@
 
 ## upcoming events
 
-- [2019-07-17](https://www.meetup.com/JUG-Mainz/events/262059653) JUG Mainz - Talk - "JUnit 5 - Platform & Jupiter API"
 - [2019-09-12](https://2019.javazone.no) JavaZone Oslo - Talk - "Testing In The Modular World"
 - [2019-09-24](https://accento.dev) Accento.dev Karlsruhe - Talk - "Testing In The Modular World"
 - [2019-09-26](https://jcon.one) JCON Düsseldorf - Talk - "Testing In The Modular World"
@@ -49,6 +48,7 @@
 
 ## past events
 
+- [2019-07-17](https://www.meetup.com/JUG-Mainz/events/262059653) JUG Mainz - Talk - "JUnit 5 - Platform & Jupiter API"
 - [2019-05-29](https://www.meetup.com/Java-User-Group-Koblenz/events/261282474) JUG Koblenz - Talk -  "JUnit 5 - Platform & Jupiter API"
 - [2019-05-28](https://www.iplabs.de) ip.labs - Workshop -  "Java Module System"
 - [2019-03-31](https://programm.javaland.eu/2019/#/scheduledEvent/569055) JavaLand - Workshop - "Java Module System" with @nicolaiparlog
