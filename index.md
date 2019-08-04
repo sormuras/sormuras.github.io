@@ -1,6 +1,8 @@
 # sormuras.github.io
 
-[<img src="https://github.com/favicon.ico" width="14">](https://github.com/sormuras/sormuras.github.io/issues) [<img src="feed-icon-14x14.png">](https://github.com/sormuras/sormuras.github.io/commits/master.atom)
+[<img src="https://github.com/favicon.ico" width="14">](https://github.com/sormuras/sormuras.github.io/issues)
+[<img src="feed-icon-14x14.png">](https://github.com/sormuras/sormuras.github.io/commits/master.atom)
+[@sormuras](https://twitter.com/sormuras)
 
 ## upcoming events
 
