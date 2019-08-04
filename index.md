@@ -11,6 +11,7 @@
 
 ## blog
 
+- [2019-08-04](blog/2019-08-04-maven-coordinates-and-java-module-names.md) Maven Coordinates and Java Module Names
 - [2019-05-31](blog/2019-05-31-life-after-java-8-by-trisha-gee.md) Life After Java 8 by Trisha Gee
 - [2019-05-26](blog/2019-05-26-jdk-module-layer-class-loader.md) JDK `ModuleLayer` locks modular jars
 - [2018-12-26](blog/2018-12-26-junit-jupiter-aggregator.md) Single `junit-jupiter` Aggregator Artifact
