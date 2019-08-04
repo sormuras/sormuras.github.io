@@ -1,14 +1,16 @@
 # Maven Coordinates and Java Module Names
 
-*Group* de.sormuras.blog
-*Artifact* de.sormuras.blog.example
-*Version* 1-ea
+This is an example of my current naming pattern for Maven Coordinates in modular Java world: 
 
-*Java Module Name* de.sormuras.blog.example
-*Java Package Name Pattern* de.sormuras.blog.example[.$name]*
+- *Group* de.sormuras.blog
+- *Artifact* de.sormuras.blog.example
+- *Version* 1-ea
+
+- *Java Module Name* de.sormuras.blog.example
+- *Java Package Name Pattern* de.sormuras.blog.example[.$name]*
 
 ## In words
-- Let the artifact ID start exactly with the Group ID
+- Let the Maven Artifact ID start exactly with the Group ID
 - Use only valid Java names between the dots
 - The version string must be parseable by ModuleDescriptor.Version
 
