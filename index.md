@@ -6,9 +6,7 @@
 
 ## upcoming events
 
-- [2019-09-12](https://2019.javazone.no) JavaZone Oslo - Talk - "Testing In The Modular World"
 - [2019-09-24](https://accento.dev) Accento.dev Karlsruhe - Talk - "Testing In The Modular World"
-- [2019-09-26](https://jcon.one) JCON Düsseldorf - Talk - "Testing In The Modular World"
 
 ## blog
 
@@ -46,10 +44,12 @@
 
 - [forax/pro](https://github.com/forax/pro) A Java build tool that works seamlessly with modules
 - [google/google-java-format](https://github.com/google/google-java-format) Reformats Java source code to comply with Google Java Style
+- [openjdk/skara](https://github.com/openjdk/skara) Tooling for working with OpenJDK projects and their repositories
 - [sandermak/modulescanner](https://github.com/sandermak/modulescanner) Inspect Maven Central to check what libraries are Java modules
 
 ## past events
 
+- [2019-09-12](https://2019.javazone.no) JavaZone Oslo - Talk - "Testing In The Modular World"
 - [2019-07-17](https://www.meetup.com/JUG-Mainz/events/262059653) JUG Mainz - Talk - "JUnit 5 - Platform & Jupiter API"
 - [2019-05-29](https://www.meetup.com/Java-User-Group-Koblenz/events/261282474) JUG Koblenz - Talk -  "JUnit 5 - Platform & Jupiter API"
 - [2019-05-28](https://www.iplabs.de) ip.labs - Workshop -  "Java Module System"
