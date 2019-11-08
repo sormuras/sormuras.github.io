@@ -6,7 +6,8 @@
 
 ## upcoming events
 
-- [2019-10-12](https://www.meetup.com/de-DE/Softwerkskammer-Ruhrgebiet/events/259817215/) Hackergarten Dortmund
+- [2019-11-09](https://www.meetup.com/de-DE/rheinJUG/events/265467649/) EntwickelBar 5.0 Düsseldorf
+- [2020-03-17/18](https://www.javaland.eu/en/program/programm-waiting-notice/) JavaLand 2020
 
 ## blog
 
@@ -49,6 +50,7 @@
 
 ## past events
 
+- [2019-10-12](https://www.meetup.com/de-DE/Softwerkskammer-Ruhrgebiet/events/259817215/) Hackergarten Dortmund
 - [2019-09-24](https://accento.dev) Accento.dev Karlsruhe - Talk - "Testing In The Modular World"
 - [2019-09-12](https://2019.javazone.no) JavaZone Oslo - Talk - "Testing In The Modular World"
 - [2019-07-17](https://www.meetup.com/JUG-Mainz/events/262059653) JUG Mainz - Talk - "JUnit 5 - Platform & Jupiter API"
