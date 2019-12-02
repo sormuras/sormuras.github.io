@@ -6,8 +6,8 @@
 
 ## upcoming events
 
-- [2019-11-09](https://www.meetup.com/de-DE/rheinJUG/events/265467649/) EntwickelBar 5.0 Düsseldorf
-- [2020-03-17/18](https://www.javaland.eu/en/program/programm-waiting-notice/) JavaLand 2020
+- [2020-02-13](https://www.meetup.com/de-DE/Java-User-Group-Saarland-jugsaar/events/266878874) JUG Saarland - Talk - "JUnit 5 - Platform & Jupiter API"
+- [2020-03-17](https://programm.javaland.eu/2020/#/scheduledEvent/590918) JavaLand 2020 - Talk - "JUnit 5 & Project Loom"
 
 ## blog
 
@@ -35,11 +35,11 @@
 ## active projects
 
 - [JUnit 5](https://junit.org) The new major version of the programmer-friendly testing framework for Java
+- [bach](https://github.com/sormuras/bach) Use jshell/java to build your modular Java project
+- [modules](https://github.com/sormuras/modules) Java modules published at Maven Central
 - [junit-platform-maven-plugin](https://github.com/sormuras/junit-platform-maven-plugin) Maven Plugin launching the JUnit Platform
 - [mainrunner](https://github.com/sormuras/mainrunner) JUnit Platform Test Engine launching Java programs
 - [install-jdk.sh](https://github.com/sormuras/bach#install-jdksh) Install the latest-and-greatest OpenJDK releases
-- [bach](https://github.com/sormuras/bach) Use jshell/java to build your modular Java project
-- [modules](https://github.com/sormuras/modules) Java modules published at Maven Central
 - [java-compiler-script-engine](https://github.com/sormuras/java-compiler-script-engine) JSR 223 facade for `javac`, the foundation Java compiler
 
 ## contributing to...
@@ -51,6 +51,7 @@
 
 ## past events
 
+- [2019-11-09](https://www.meetup.com/de-DE/rheinJUG/events/265467649/) EntwickelBar 5.0 Düsseldorf
 - [2019-10-12](https://www.meetup.com/de-DE/Softwerkskammer-Ruhrgebiet/events/259817215/) Hackergarten Dortmund
 - [2019-09-24](https://accento.dev) Accento.dev Karlsruhe - Talk - "Testing In The Modular World"
 - [2019-09-12](https://2019.javazone.no) JavaZone Oslo - Talk - "Testing In The Modular World"
