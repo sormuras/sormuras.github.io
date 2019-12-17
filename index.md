@@ -6,6 +6,7 @@
 
 ## upcoming events
 
+- [2020-02-02](https://fosdem.org/2020/schedule/event/bach) FOSDEM Brussels - Talk - "Bach.java"
 - [2020-02-13](https://www.meetup.com/de-DE/Java-User-Group-Saarland-jugsaar/events/266878874) JUG Saarland - Talk - "JUnit 5 - Platform & Jupiter API"
 - [2020-03-17](https://programm.javaland.eu/2020/#/scheduledEvent/590918) JavaLand 2020 - Talk - "JUnit 5 & Project Loom"
 
