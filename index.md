@@ -1,9 +1,8 @@
 # sormuras.github.io
 
-:heart: [Sponsor](https://github.com/sponsors/sormuras)
-[<img src="https://github.com/favicon.ico" width="14">](https://github.com/sormuras/sormuras.github.io/issues)
-[<img src="feed-icon-14x14.png">](https://github.com/sormuras/sormuras.github.io/commits/master.atom)
-[@sormuras](https://twitter.com/sormuras)
+💖 [sponsor](https://github.com/sponsors/sormuras)
+/ <img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" width="32">[github](https://github.com/sormuras)
+/ 🐦 [@sormuras](https://twitter.com/sormuras)
 
 ## upcoming events
 
