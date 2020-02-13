@@ -2,7 +2,7 @@ package scripting;
 
 import javax.script.ScriptEngineManager;
 
-class ListAllScriptEngines {
+public class ListAllScriptEngines {
   public static void main(String[] args) {
     var manager = new ScriptEngineManager();
     var factories = manager.getEngineFactories();
