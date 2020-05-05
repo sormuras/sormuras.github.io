@@ -9,6 +9,8 @@ Or, these new methods can also reside in a `java.util.Records` helper taking the
 Yes, an externally hosted `Records` helper class is probably the best target.
 For the time being.
 
+> Beware! ⚠ ["Records are addictive!!"](https://twitter.com/delabassee/status/1255497443568955397) _David Delabassée_
+
 ## `<R extends Record> R copy(R template, Map<String, Object> overrides)`
 
 This method creates a copy of the specified record object using the given named value overrides.
