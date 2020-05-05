@@ -16,7 +16,12 @@ For the time being.
 > _David Delabassée_
 
 Sources can be found and copied from the [records](../demo/test/records) package.
-Feedback on the ideas and the code is appreciated: https://github.com/sormuras/sormuras.github.io/issues
+[Feedback](https://github.com/sormuras/sormuras.github.io/issues) on the ideas and the code is much appreciated. 
+
+#### Proposed Methods
+
+- [Records.copy](2020-05-05-records-copy.md)
+- Records.toTextBlock (soon)
 
 ## `Records.copy(Record template, Map<String, Object> overrides)`
 
