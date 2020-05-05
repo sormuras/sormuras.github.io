@@ -1,4 +1,4 @@
-# Java Records
+# Java Records - Records.copy
 
 Let's enhance the upcoming Java programming language enhancement `record`.
 Records are described in [JEP 359(Preview)](https://openjdk.java.net/jeps/359) (follow-up to [JEP draft(Second Preview)](https://openjdk.java.net/jeps/8242303)) and by Brian Goetz in [Data Classes and Sealed Types for Java](https://cr.openjdk.java.net/~briangoetz/amber/datum.html).
@@ -9,9 +9,13 @@ Or, these new methods can also reside in a `java.util.Records` helper taking the
 Yes, an externally hosted `Records` helper class is probably the best target.
 For the time being.
 
-> Beware! ⚠ ["Records are addictive!!"](https://twitter.com/delabassee/status/1255497443568955397) _David Delabassée_
+**Beware!**
 
-## `<R extends Record> R copy(R template, Map<String, Object> overrides)`
+> ⚠ ["Records are addictive!!"](https://twitter.com/delabassee/status/1255497443568955397)
+>
+> _David Delabassée_
+
+## `Records.copy(Record template, Map<String, Object> overrides)`
 
 This method creates a copy of the specified record object using the given named value overrides.
 If a component is not overridden, i.e. the `overrides` map doesn't contain the name of a component as a key, the component value of the record object being copied is used as the value.
@@ -20,7 +24,7 @@ An `overrides` map with all components being present is equal to calling the can
 
 The proposed `copy` method works best on records with many declared components and a few overrides.
 
-### Usage Example
+### Pseudo-Code Usage Sample
 ```java
 record R(T0 n0, T1 n1, ... Tn nn) {}
 
