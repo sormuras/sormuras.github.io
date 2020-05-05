@@ -10,6 +10,7 @@
 
 ## blog
 
+- [2020-05-05](blog/2020-05-05-records-copy.md) Java Records - `Records.copy(Record, Map)`
 - [2019-11-07](https://github.com/sormuras/modules)`sormuras/modules` mentioned by Stuart Marks at [Devoxx BE 2019](https://youtu.be/qKeMB7OoGJk?t=2562)
 - [2019-08-04](blog/2019-08-04-maven-coordinates-and-java-module-names.md) Maven Coordinates and Java Module Names
 - [2019-05-31](blog/2019-05-31-life-after-java-8-by-trisha-gee.md) Life After Java 8 by Trisha Gee

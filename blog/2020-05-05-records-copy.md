@@ -15,6 +15,9 @@ For the time being.
 >
 > _David Delabassée_
 
+Sources can be found and copied from the [records](../demo/test/records) package.
+Feedback on the ideas and the code is appreciated: https://github.com/sormuras/sormuras.github.io/issues
+
 ## `Records.copy(Record template, Map<String, Object> overrides)`
 
 This method creates a copy of the specified record object using the given named value overrides.
@@ -51,7 +54,7 @@ var copy = new R(template, n1 -> o1, ...);
 
 ### Proof Of Concept Implementation for Java 14+
 
-This proof-of-concept implemenation leverages the record-related reflection API introduced by JEP 359.
+This proof-of-concept implementation leverages the record-related reflection API introduced by JEP 359.
 It requires the `--enable-preview` switch to be present at compile time and runtime.
 The canonical constructor is used as a copy constructor.
 The signature of the canonical constructor is determined on-the-fly.
@@ -81,7 +84,8 @@ static <R extends Record> R clone(R template, Map<String, Object> overrides) {
 ### Variant for Java 9+
 
 This variant copies an object of a record-like class that also implements `Cloneable`.
-No `--enable-preview` required -- but might fail to `InaccessibleObjectException` being thrown.
+No `--enable-preview` required here.
+But might fail due to `InaccessibleObjectException` instances being thrown.
 
 ```java
 public static <R extends Cloneable> R copy(R template, Map<String, Object> overrides) {
@@ -98,4 +102,5 @@ public static <R extends Cloneable> R copy(R template, Map<String, Object> overr
   } catch (ReflectiveOperationException e) {
     throw new AssertionError("Reflection over " + recordLikeClass + " failed: " + e, e);
   }
+}
 ```
