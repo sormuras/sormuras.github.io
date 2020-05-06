@@ -4,7 +4,7 @@ Let's enhance the upcoming Java programming language enhancement `record`.
 Records are described in [JEP 359(Preview)](https://openjdk.java.net/jeps/359) (follow-up to [JEP draft(Second Preview)](https://openjdk.java.net/jeps/8242303)) and by Brian Goetz in [Data Classes and Sealed Types for Java](https://cr.openjdk.java.net/~briangoetz/amber/datum.html).
 Looking forward to the Java release, that doesn't mandate the `--enable-preview` switch to use records anymore.
 
-Starting with mini series about `record`s, I propose new methods to be added to the `java.lang.Record` type.
+Starting a mini series about `record`s with this blog, I propose new methods to be added to the `java.lang.Record` type.
 Or, these new methods can also reside in a `java.util.Records` helper taking the record object as a first parameter.
 Yes, an externally hosted `Records` helper class is probably the best target.
 For the time being.
@@ -15,7 +15,7 @@ For the time being.
 >
 > _David Delabassée_
 
-Sources can be found and copied from the [records](../demo/test/records) package.
+Sources can be found and copied from the [records](https://github.com/sormuras/sormuras.github.io/tree/master/demo/test/records) package.
 [Feedback](https://github.com/sormuras/sormuras.github.io/issues) on the ideas and the code is much appreciated. 
 
 #### Proposed Methods
@@ -38,6 +38,7 @@ record R(T0 n0, T1 n1, ... Tn nn) {}
 
 var template = new R(v0, v1, v2, ...);
 var expected = new R(v0, o1, v2, ...);
+
 var actual = Records.copy(template, Map.of("n1", o1));
 
 assert expected.equals(actual);
