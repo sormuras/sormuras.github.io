@@ -6,7 +6,7 @@ This is the second part of the mini series about `record`s.
 #### Proposed Methods
 
 - [Records.copy](2020-05-05-records-copy.md)
-- [Records.toTextBlock](2020-05-06-records-toTextBlock.md)
+- [Records.toTextBlock](2020-05-06-records-to-text-block.md)
 
 ## `Records.toTextBlock(Record)`
 

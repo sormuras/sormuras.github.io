@@ -21,7 +21,7 @@ Sources can be found and copied from the [records](https://github.com/sormuras/s
 #### Proposed Methods
 
 - [Records.copy](2020-05-05-records-copy.md)
-- Records.toTextBlock (soon)
+- [Records.toTextBlock](2020-05-06-records-to-text-block.md)
 
 ## `Records.copy(Record template, Map<String, Object> overrides)`
 
