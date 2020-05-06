@@ -68,7 +68,41 @@ R
 
 ### Proof Of Concept Implementation
 
-_TODO_
+```java
+class Records {
+  /** Returns a multi-line string representation of the given object. */
+  public static String toTextBlock(Record record) {
+    return toTextBlock(0, record, "\t", Class::getSimpleName, true);
+  }
+
+  /** Returns a multi-line string representation of the given object. */
+  private static String toTextBlock(int level, Record record, String indent, Function<Class<?>, String> caption, boolean sortByName) {
+    var lines = new ArrayList<String>();
+    if (level == 0) lines.add(caption.apply(record.getClass()));
+
+    var components = record.getClass().getRecordComponents();
+    if (sortByName) Arrays.sort(components, Comparator.comparing(RecordComponent::getName));
+
+    for (var component : components) {
+      var name = component.getName();
+      var shift = indent.repeat(level);
+      try {
+        var value = component.getAccessor().invoke(record);
+        var nested = value.getClass();
+        if (nested.isRecord()) {
+          lines.add(String.format("%s%s%s -> %s", shift, indent, name, caption.apply(nested)));
+          lines.add(toTextBlock(level + 2, (Record) value, indent, caption, sortByName));
+          continue;
+        }
+        lines.add(String.format("%s%s%s = %s", shift, indent, name, value));
+      } catch (ReflectiveOperationException e) {
+        lines.add("// Reflection over " + component + " failed: " + e);
+      }
+    }
+    return String.join(System.lineSeparator(), lines);
+  }
+}
+```
 
 ### Java 9+ variant w/o `--enable-preview`
 
@@ -88,18 +122,13 @@ class Records {
     return toTextBlock(0, object, "\t", Class::getSimpleName, true);
   }
 
-  private static String toTextBlock(
-      int level,
-      Object object,
-      String indent,
-      Function<Class<?>, String> caption,
-      boolean sortComponentsByName) {
+  private static String toTextBlock(int level, Object object, String indent, Function<Class<?>, String> caption, boolean sortByName) {
 
     var lines = new ArrayList<String>();
     if (level == 0) lines.add(caption.apply(object.getClass()));
 
     var fields = object.getClass().getDeclaredFields();
-    if (sortComponentsByName) Arrays.sort(fields, Comparator.comparing(Field::getName));
+    if (sortByName) Arrays.sort(fields, Comparator.comparing(Field::getName));
 
     for (var field : fields) {
       // if not a "private final field" continue
