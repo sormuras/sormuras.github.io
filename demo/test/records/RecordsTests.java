@@ -40,7 +40,25 @@ class RecordsTests {
 
     assertEquals("Point[x=1, y=2]", a.toString());
     assertLinesMatch(
-        List.of("Point", "  x = 1", "  y = 2"),
+        List.of("Point", "\tx = 1", "\ty = 2"),
         Records.toTextBlock(a).lines().collect(Collectors.toList()));
+  }
+
+  @Test
+  void printLineAsTextBlock() {
+    var line = new Line("Silver", new Point(1, 2), new Point(3, 4));
+
+    assertEquals("Line[name='Silver', p=Point[x=1, y=2], q=Point[x=3, y=4]]", line.toString());
+    assertLinesMatch(
+        List.of(
+            "Line",
+            "\tname = Silver",
+            "\tp -> Point",
+            "\t\t\tx = 1",
+            "\t\t\ty = 2",
+            "\tq -> Point",
+            "\t\t\tx = 3",
+            "\t\t\ty = 4"),
+        Records.toTextBlock(line).lines().collect(Collectors.toList()));
   }
 }
