@@ -58,9 +58,9 @@ While `Record.toString()` represents that within the same line:
 R
 \tn0 = v0
 \tn1 = v1
-\tn2 = T2
-\t\tnA = w0
-\t\tnB = w1
+\tn2 -> T2
+\t\t\tnA = w0
+\t\t\tnB = w1
 ...
 \tnn = vn
 """
@@ -69,3 +69,58 @@ R
 ### Proof Of Concept Implementation
 
 _TODO_
+
+### Java 9+ variant w/o `--enable-preview`
+
+```java
+class Records {
+
+  /**
+   * An informative annotation type used to indicate that a class type declaration is intended to be
+   * transmuted into a {@code record} as defined by JEP 359, soon.
+   */
+  @Target(ElementType.TYPE)
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface Record {}
+
+  /** Returns a multi-line string representation of the given object. */
+  public static String toTextBlock(Object object) {
+    return toTextBlock(0, object, "\t", Class::getSimpleName, true);
+  }
+
+  private static String toTextBlock(
+      int level,
+      Object object,
+      String indent,
+      Function<Class<?>, String> caption,
+      boolean sortComponentsByName) {
+
+    var lines = new ArrayList<String>();
+    if (level == 0) lines.add(caption.apply(object.getClass()));
+
+    var fields = object.getClass().getDeclaredFields();
+    if (sortComponentsByName) Arrays.sort(fields, Comparator.comparing(Field::getName));
+
+    for (var field : fields) {
+      // if not a "private final field" continue
+      var name = field.getName();
+      var method = object.getClass().getDeclaredMethod(name);
+      // if not a "matching component accessor" continue
+      try {
+        var shift = indent.repeat(level);
+        var value = method.invoke(object);
+        var nested = value.getClass();
+        if (nested.isAnnotationPresent(Record.class)) {
+          lines.add(String.format("%s%s%s -> %s", shift, indent, name, caption.apply(nested)));
+          lines.add(toTextBlock(level + 2, value, indent, caption, sortComponentsByName));
+          continue;
+        }
+        lines.add(String.format("%s%s%s = %s", shift, indent, name, value));
+      } catch (ReflectiveOperationException e) {
+        lines.add("// Reflection over " + method + " failed: " + e);
+      }
+    }
+    return String.join(System.lineSeparator(), lines);
+  }
+}
+```
