@@ -72,16 +72,16 @@ R
 class Records {
   /** Returns a multi-line string representation of the given object. */
   public static String toTextBlock(Record record) {
-    return toTextBlock(0, record, "\t", Class::getSimpleName, true);
+    return toTextBlock(0, record, "\t");
   }
 
   /** Returns a multi-line string representation of the given object. */
-  private static String toTextBlock(int level, Record record, String indent, Function<Class<?>, String> caption, boolean sortByName) {
+  private static String toTextBlock(int level, Record record, String indent) {
     var lines = new ArrayList<String>();
-    if (level == 0) lines.add(caption.apply(record.getClass()));
+    if (level == 0) lines.add(record.getClass().getSimpleName());
 
     var components = record.getClass().getRecordComponents();
-    if (sortByName) Arrays.sort(components, Comparator.comparing(RecordComponent::getName));
+    Arrays.sort(components, Comparator.comparing(RecordComponent::getName));
 
     for (var component : components) {
       var name = component.getName();
@@ -90,8 +90,8 @@ class Records {
         var value = component.getAccessor().invoke(record);
         var nested = value.getClass();
         if (nested.isRecord()) {
-          lines.add(String.format("%s%s%s -> %s", shift, indent, name, caption.apply(nested)));
-          lines.add(toTextBlock(level + 2, (Record) value, indent, caption, sortByName));
+          lines.add(String.format("%s%s%s -> %s", shift, indent, name, nested.getSimpleName()));
+          lines.add(toTextBlock(level + 2, (Record) value, indent));
           continue;
         }
         lines.add(String.format("%s%s%s = %s", shift, indent, name, value));
@@ -119,16 +119,16 @@ class Records {
 
   /** Returns a multi-line string representation of the given object. */
   public static String toTextBlock(Object object) {
-    return toTextBlock(0, object, "\t", Class::getSimpleName, true);
+    return toTextBlock(0, object, "\t");
   }
 
-  private static String toTextBlock(int level, Object object, String indent, Function<Class<?>, String> caption, boolean sortByName) {
+  private static String toTextBlock(int level, Object object, String indent) {
 
     var lines = new ArrayList<String>();
-    if (level == 0) lines.add(caption.apply(object.getClass()));
+    if (level == 0) lines.add(object.getClass().getSimpleName());
 
     var fields = object.getClass().getDeclaredFields();
-    if (sortByName) Arrays.sort(fields, Comparator.comparing(Field::getName));
+    Arrays.sort(fields, Comparator.comparing(Field::getName));
 
     for (var field : fields) {
       // if not a "private final field" continue
@@ -140,8 +140,8 @@ class Records {
         var value = method.invoke(object);
         var nested = value.getClass();
         if (nested.isAnnotationPresent(Record.class)) {
-          lines.add(String.format("%s%s%s -> %s", shift, indent, name, caption.apply(nested)));
-          lines.add(toTextBlock(level + 2, value, indent, caption, sortComponentsByName));
+          lines.add(String.format("%s%s%s -> %s", shift, indent, name, nested.getSimpleName()));
+          lines.add(toTextBlock(level + 2, value, indent));
           continue;
         }
         lines.add(String.format("%s%s%s = %s", shift, indent, name, value));
