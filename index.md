@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-- _none, yet_
+- [2020-05-23](https://blog.codefx.org/25-hours-of-java) 2330 UTC Release [Bach.java](https://github.com/sormuras/bach) **11** on [Java's 25th birthday](https://twitter.com/java/status/1260630982337667072) together with [Nicolai](https://twitter.com/nipafx)
 
 ## blog
 
