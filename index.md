@@ -10,6 +10,7 @@
 
 ## blog
 
+- [2020-05-11](blog/2020-05-11-bach-intro-1.md) 🎼 Bach.java - Intro 1 - `Greetings`
 - [2020-05-06](blog/2020-05-06-records-to-text-block.md) Java Records II - `Records.toTextBlock(Record)`
 - [2020-05-05](blog/2020-05-05-records-copy.md) Java Records I - `Records.copy(Record, Map)`
 - [2019-11-07](https://github.com/sormuras/modules)`sormuras/modules` mentioned by Stuart Marks at [Devoxx BE 2019](https://youtu.be/qKeMB7OoGJk?t=2562)
