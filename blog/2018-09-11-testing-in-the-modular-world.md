@@ -39,21 +39,21 @@ Every class-path element points to a root of assets contributing to the resource
 A special type of resource is a Java class which in turn declares a package it belongs to.
 There is no enforced restriction of how many times a package may be declared on the class-path.
 All assets are merged logically at runtime, effectively resulting in the same situation where classes under test and test classes reside physically in the same directory.
-Packages are treated as white boxes: test code may access main types as if they were placed in the same package and directory.
+Packages are treated as open name spaces: test code may access main types as if they were placed in the same package and directory.
 This includes types with using *package private* and `protected` modifiers.
 
 Ever placed a test class in a different package compared to the class under test?
 
 ```text
 main/                          test/                               test/
-   com/                           com/                                black/
-      xyz/                           xyz/                                box/
-         📜 SomeClass.java              🔨 SomeClassTests.java              🔲 BlackBoxTests.java
+   com/                           com/                                it/
+      xyz/                           xyz/                                💚 PackageComXyzApiTests.java
+         📜 SomeClass.java              🔨 SomeClassTests.java
 ```
 
-Welcome (b(l)ack) to "black box testing in the package world"!
+Welcome back to "extra-modular testing in the package world"!
 
-Which types and members from main are accessible from such a black box test?
+Which types and members from main are accessible from such an external test?
 The answer is left open for a brush-up of the reader's access modifier visibility memory.
 _Hint: an accessibility table is presented later in this blog._
 
@@ -64,22 +64,22 @@ Extrapolating the idea of separated source set roots to the Java module system c
 
 ```text
 main/                          test/                               test/
-   com.xyz/                       com.xyz/                            black.box/
-      com/                           com/                                black/
-         abc/                           abc/                                box/
-            📜 OtherClass.java             🔨 OtherClassTests.java              🔲 BlackBoxTests.java
-         xyz/                           xyz/                             ☕ module-info.java
+   com.xyz/                       com.xyz/                            it/
+      ☕ module-info.java             🔥 module-info.[java|test]        💚 module-info.java
+      com/                           com/                                it/
+         xyz/                           xyz/                                💚 ModuleComXyzApiTests.java
             📜 SomeClass.java              🔨 SomeClassTests.java
-      ☕ module-info.java             🔥 module-info.[java|test] 🔥
+            internal/                      internal/
+               📜 OtherClass.java             🔨 OtherClassTests.java
 ```
 
-You already noticed that the _white box_ source set contains a cloak-and-dagger `module-info.[java|test]` file.
+You already noticed that the source set in the middle contains a cloak-and-dagger `module-info.[java|test]` file.
 Before diving into this topic, let's examine the other two plain and simple module descriptors.
 
 ### ☕ `module com.xyz`
 
 - The main module descriptor for `com.xyz` contains some imaginary entries.
-- It only exports package `com.xyz` but also contains the `com.abc` package.
+- It only exports package `com.xyz` but also contains the `com.xyz.internal` package.
 
 ```java
 module com.xyz {
@@ -89,17 +89,19 @@ module com.xyz {
     exports com.xyz;
 }
 ```
-_Note! The package `com.abc` should **not** be part of a module named `com.xyz`. Why not? See [Stephen's JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) blog for details._
+> _Note!_ A module named `com.xyz` should only contain packages whose names start with `com.xyz` as well.
+Why?
+See [Stephen's JPMS module naming](https://blog.joda.org/2017/04/java-se-9-jpms-module-naming.html) blog for details.
 
-### ☕ `open module black.box`
+### 💚 `open module it`
 
-- The test module `black.box` reads module `com.xyz` and a bunch of testing framework modules.
+- The test module `it` reads module `com.xyz` and a bunch of testing framework modules.
 - It may only refer to accessible (`public` and residing in an `exported` package) types in those other modules.
-- This includes module `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.abc`.
-- Module `black.box` is declaring itself `open` allowing test discovery via deep reflection.
+- This includes module `com.xyz` in particular: tests may refer to public types in package `com.xyz` - test can't refer to types in non-exported package `com.xyz.internal`.
+- Module `it` is declaring itself `open` allowing test discovery via deep reflection.
 
 ```java
-open module black.box {
+open module it {
     requires com.xyz;
 
     requires org.junit.jupiter.api;
@@ -108,26 +110,26 @@ open module black.box {
 }
 ```
 
-#### Black Box Testing Diagram
+#### Extra-Modular Testing Diagram
 
-Black box testing is the easy part.
+Extra-modular testing is the easy part.
 
-![black-box-testing](2018-09-11-testing-in-the-modular-world-black-box-testing.png)
+> _TODO Extra-Modular Testing Diagram_
 
-Test module `black.box` is main module `com.xyz`'s first customer.
+Test module `it` is main module `com.xyz`'s first customer.
 It adheres to the modular boundaries in the same way as any other module does.
-The only visible package is `com.xyz`, package `com.abc` is concealed.
+The only visible package is `com.xyz`, package `com.xyz.internal` is concealed.
 Same goes for the modules of the external testing frameworks like JUnit, AssertJ, Mockito and others.
-Only their published API is use-able by test classes contained in module `black.box`.
+Only their published API is use-able by test classes contained in module `it`.
 
 Take a 2-minute-break and watch Sander Mak describing modular testing in his [Java Modularity: the Year After](https://vimeo.com/289846017#t=2562s) talk.
-He repeats the just introduced black box testing and gives a brief outlook to white box testing.
+He repeats the just introduced extra-modular testing and gives a brief outlook to in-module testing.
 
 Now to the not so easy part...
 
 ## Modular White Box Testing
 
-Let's start the white box testing section with an enhanced [accessibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
+Let's start the in-module testing section with an enhanced [accessibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
 
 ### Accessibility
 
@@ -151,7 +153,7 @@ An ✅ indicates that this member of `A` is accessible, else ❌ is shown.
 | &nbsp;&nbsp;`private int l;`   |  ❌  |  ❌  |  ❌ |  ❌  | ❌  | `private`                          |
 | `}`                            |      |      |      |      |      |                                    |
 
-Column **E** and **F** are already covered by modular black box testing as shown above in the `open module black.box` section.
+Column **E** and **F** are already covered by modular extra-modular testing as shown above in the `open module it` section.
 With **F** just confirming that a _not_ exported package is _not_ accessible from another module.
 But we want to write unit tests like we always did before and access internal components. We want **B**, **C** and **D** back!
 Now you may either drop the entire Java module system (for testing) or pretend your tests reside in the same module as the classes under test.
@@ -159,21 +161,21 @@ Just like in the early days, when split packages were the solution.
 _Same same but different._
 Because split packages are not allowed in the world of the `module-path`.
 
-## 🔥`module-info.[java|test]`🔥
+## 🔥 `module-info.[java|test]`
 
 At least three ways exist that lift the strict module boundaries for testing.
 
 ### Resort to the classpath
 
 Delete all `module-info.java` files, or exclude them from compilation, and your tests ignore all boundaries implied by the Java module system.
-Use internal implementation details of the Java runtime, 3rd-party libraries including test framework and of course, use the internal types from your _main_ source set.
+Use internal implementation details of the Java runtime, 3rd-party libraries including test frameworks and of course, use the internal types from your _main_ source set.
 The last part was the intended goal -- achieved, yes, but paid a very high price.
 
 Let's explore two other ways that keep boundaries of the Java module system intact.
 
-### White box modular testing with `module-info.java`
+### In-module testing with `module-info.java`
 
-The foundation tool `javac` version 9+ and `maven-compiler-plugin` version 3.8.0+ support compiling `module-info.java` residing in test source sets.
+The `javac` tool version 9+ and `maven-compiler-plugin` version 3.8.0+ support compiling `module-info.java` residing in test source sets.
 
 Here you use the default module description syntax to a) shadow the main configuration and b) express additional requirements needed for testing.
 
@@ -193,20 +195,20 @@ open module com.xyz {
 ```
 
 The test module is now promoted to be the entry point for test compilation.
-It inherits all elements from the main module and adds additional ones.
+It copies all elements from the main module and adds additional ones.
 You might read is as: `open (test) module com.xyz extends (main) module com.xyz`
 Now you only need to blend in the main source set into the test module in order to make your test code resolve the classes under test.
 
 - `--patch-module com.xyz=src/main/java`
 
 This results in a standard Java module tuned for testing.
-No need to learn extra command line options which are passed to the test runtime like described in the next section.
+No need to learn extra command line options with super-powers which are passed to the test runtime like described in the next section.
 
 _Note: Copying parts from the main module descriptor manually is brittle. The "Java 9 compatible build tool" [pro](https://github.com/forax/pro) solves this by auto-merging a main and test module descriptor on-the-fly._
 
-### White box modular testing with extra `java` command line options
+### In-module testing with extra `java` command line options
 
-The foundation tool `java` version 9+ provides command line options configure the Java module system "on-the-fly" at start up time.
+The `java` tool version 9+ provides command line options that configure the Java module system "on-the-fly" at start up time.
 Various test launcher tools allow additional command line options to be passed to the test runtime.
 
 Here are the additional command line options needed to achieve the same modular configuration as above:
@@ -239,58 +241,12 @@ After test compilation you need to blend in the test binaries into the main modu
 
 This option is already "supported" by some IDEs, at least they don't stumble compiling tests when a `module-info.test` file is present.
 
-#### White Box Testing Diagram
+#### In-module Testing Diagram
 
-![white-box-testing](2018-09-11-testing-in-the-modular-world-white-box-testing.png)
+> TODO In-module Testing Diagram
 
 _description pending..._ 
 
-## Test Mode
-
-Having common names for the various black and white box testing modes described above is good basis to develop more tooling support, thus I'll introduce a `TestMode` enumeration.
-It can be used to determine the intended test mode a user wants to execute.
-Or if a user wants a testing framework to execute in a specific test mode, it can be passed as a parameter.
-
-A test mode is defined by the relation of one *main* and one *test* module name.
-
-- `C` = `CLASSIC` -> no modules available
-- `M` = `MODULAR` -> main 'module `foo`' and test 'module `bar`' OR main lacks module and test 'module `any`'
-- `A` = `MODULAR_PATCHED_TEST_COMPILE` -> main 'module `foo`' and test 'module `foo`'
-- `B` = `MODULAR_PATCHED_TEST_RUNTIME` -> main 'module `foo`' and test lacks module
-
-### Test Mode Table
-
-```text
-                          main plain    main module   main module
-                             ---            foo           bar
-     test plain  ---          C              B             B
-     test module foo          M              A             M
-     test module bar          M              M             A
-```
-
-### Test Mode Detection Algorithm Outline
-
-Copied from [TestMode.java](https://github.com/sormuras/junit-platform-maven-plugin/blob/master/src/main/java/de/sormuras/junit/platform/maven/plugin/TestMode.java):
-
-```java
-  static TestMode of(String main, String test) {
-    var mainAbsent = main == null || main.trim().isEmpty(); // 11: main.isBlank();
-    var testAbsent = test == null || test.trim().isEmpty(); // 11: test.isBlank();
-    if (mainAbsent) {
-      if (testAbsent) {      // trivial case: no modules declared at all
-        return CLASSIC;
-      }
-      return MODULAR;        // only test module is present, no patching involved
-    }
-    if (testAbsent) {        // only main module is present
-      return MODULAR_PATCHED_TEST_RUNTIME;
-    }
-    if (main.equals(test)) { // same module name
-      return MODULAR_PATCHED_TEST_COMPILE;
-    }
-    return MODULAR;          // bi-modular testing, no patching involved
-  }
-```
 
 ## Summary and Sample Projects
 
@@ -309,8 +265,8 @@ For a library, I'd suggest the following blueprint.
 ### Maven Blueprint
 
 Suppose you want to write and test a module named `foo` in a typical single project setup:
-*main* sources are in `src/main/java` directory, *white box test* sources in `src/test/java`.
-The *black box* **i**ntegration **t**esting projects are located under `src/it` and they are executed by the [maven-invoker-plugin](https://github.com/apache/maven-invoker-plugin).
+*main* sources are in `src/main/java` directory, *in-module test* sources in `src/test/java`.
+The *external* **i**ntegration **t**esting projects are located under `src/it` and they are executed by the [maven-invoker-plugin](https://github.com/apache/maven-invoker-plugin).
 The simplified layout of [sormuras/testing-in-the-modular-world](https://github.com/sormuras/testing-in-the-modular-world) looks like:
 
 ```text
@@ -358,9 +314,9 @@ $ mvn verify
 ...
 ```
 
-White box tests are done.
+In-module tests are done.
 
-Now module `foo` is installed locally and the `maven-invoker-plugin` executes all integration tests:
+Now module `foo` is installed locally and the `maven-invoker-plugin` executes all extra-modular integration tests:
 
 ```
 ...
@@ -380,8 +336,7 @@ Now module `foo` is installed locally and the `maven-invoker-plugin` executes al
 [INFO]------------------------------------------------------------------------
 ```
 
-_Note: although I favor the `MODULAR_PATCHED_TEST_COMPILE` test mode with a `module-info.java` describing the test module for white box testing, I recommend to stick with `MODULAR_PATCHED_TEST_RUNTIME` for now._
-_Most build tools don't support two module descriptors on the path, nor do they understand module descriptors sharing a single name._
+_Note: Most build tools don't support two module descriptors on the path, nor do they understand module descriptors sharing a single name._
 
 ### Maven + JUnit Platform Maven Plugin
 
@@ -410,8 +365,9 @@ This project's layout is based on proposals introduced by the [Module System Qui
 
 This is a living document, it will be updated now-and-then.
 
+- 2020-06-07 Use more precise terms: "in-module testing" and "extra-modular testing"
 - 2018-10-03 The "visibility table" is really about "accessibility"
-- 2018-09-18 Add diagrams for black and white box testing
+- 2018-09-18 Add diagrams for extra-modular and in-module testing
 - 2018-09-12 Polishing and improvements by various reader's comments
 - 2018-09-11 Initial version
 
