@@ -114,7 +114,7 @@ open module it {
 
 Extra-modular testing is the easy part.
 
-> _TODO Extra-Modular Testing Diagram_
+![extra-modular-testing](2018-09-11-testing-in-the-modular-world-extra-modular-testing.png)
 
 Test module `it` is main module `com.xyz`'s first customer.
 It adheres to the modular boundaries in the same way as any other module does.
@@ -127,7 +127,7 @@ He repeats the just introduced extra-modular testing and gives a brief outlook t
 
 Now to the not so easy part...
 
-## Modular White Box Testing
+## In-module Testing
 
 Let's start the in-module testing section with an enhanced [accessibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) table that includes columns for being in a different module.
 
@@ -243,7 +243,7 @@ This option is already "supported" by some IDEs, at least they don't stumble com
 
 #### In-module Testing Diagram
 
-> TODO In-module Testing Diagram
+![in-module-testing](2018-09-11-testing-in-the-modular-world-in-module-testing.png)
 
 _description pending..._ 
 
