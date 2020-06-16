@@ -10,6 +10,7 @@ _none, for the time being_
 
 ## blog
 
+- [2020-06-16](blog/2020-06-16-structured-concurrency-today.md) Structured Concurrency, today
 - [2020-05-11](blog/2020-05-11-bach-intro-1.md) 🎼 Bach.java - Intro 1 - `Greetings`
 - [2020-05-06](blog/2020-05-06-records-to-text-block.md) Java Records II - `Records.toTextBlock(Record)`
 - [2020-05-05](blog/2020-05-05-records-copy.md) Java Records I - `Records.copy(Record, Map)`
