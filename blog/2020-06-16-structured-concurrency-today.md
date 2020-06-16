@@ -97,12 +97,15 @@ try (var executor = new AutoCloseableExecutorService(Executors.newFixedThreadPoo
 }
 
 System.out.println("END.");
+```
 
-  int printThreadNameAndSleep() throws Exception {
-    System.out.println(Thread.currentThread().getName());
-    Thread.sleep(500);
-    return 0;
-  }
+with this "task" method:
+
+```java
+int printThreadNameAndSleep() throws Exception {
+  System.out.println(Thread.currentThread().getName());
+  Thread.sleep(500);
+  return 0;
 }
 ```
 
