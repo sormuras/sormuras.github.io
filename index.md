@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-_none, for the time being_
+- [2020-07-07](https://2020.accento.dev) Moderating the Java track at Accento Digital
 
 ## blog
 
