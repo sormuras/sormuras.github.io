@@ -7,8 +7,8 @@ Welcome to the series of blog posts describing how [Bach.java](https://github.co
 > "The tools we use have a profound (and devious!) influence on our thinking habits, and, therefore, on our thinking abilities." [Edsger W.Dijkstra, 18 June 1975](https://www.cs.virginia.edu/~evans/cs655/readings/ewd498.html)
 
 - One single `module-info.java` file
-- Zero installation
-- Zero configuration
+- Zero build tool installation
+- Zero build tool configuration
 - Invoke `jshell https://sormuras.de/bach/build` with a recent JDK (at least 12)
 
 ```java
