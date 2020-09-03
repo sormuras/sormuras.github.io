@@ -10,6 +10,7 @@ _none_
 
 ## blog
 
+- [2020-09-03](blog/2020-09-03-bach-simplicissimus.md) 🎼 Bach.java - Simplicissimus
 - [2020-06-16](blog/2020-06-16-structured-concurrency-today.md) Structured Concurrency, today
 - [2020-05-11](blog/2020-05-11-bach-intro-1.md) 🎼 Bach.java - Intro 1 - `Greetings`
 - [2020-05-06](blog/2020-05-06-records-to-text-block.md) Java Records II - `Records.toTextBlock(Record)`
