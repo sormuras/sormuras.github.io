@@ -14,11 +14,13 @@ jobs:
     os: osx
     script: source ./install-jdk.sh --verbose --feature ea
   - # stage: ...
-    env: JDK=14
-    script: source ./install-jdk.sh --feature 14
-
+    env: JDK=15
+    script: source ./install-jdk.sh --feature 15
 
   - stage: 🚫 jdk.java.net - Archived OpenJDK General-Availability Releases
+    env: JDK=14 🚫
+    script: source ./install-jdk.sh --feature 14
+  - # stage: ...
     env: JDK=13 🚫
     script: source ./install-jdk.sh --feature 13
   - # stage: ...
@@ -33,27 +35,6 @@ jobs:
   - # stage: ...
     env: JDK=9 🚫
     script: source ./install-jdk.sh --feature 9
-
-  - stage: 🚀 AdoptOpenJDK + OpenJ9, Graal, Zulu, ...
-    # AdoptOpenJDK -- https://adoptopenjdk.net
-    env: JDK=adoptopenjdk11 + HotSpot
-    script: source ./install-jdk.sh --url 'https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=hotspot&os=linux&arch=x64&release=latest&heap_size=normal&type=jdk'
-  - # stage: ...
-    # AdoptOpenJDK -- https://adoptopenjdk.net
-    env: JDK=adoptopenjdk11 + OpenJ9
-    script: source ./install-jdk.sh --url 'https://api.adoptopenjdk.net/v2/binary/releases/openjdk11?openjdk_impl=openj9&os=linux&arch=x64&release=latest&heap_size=normal&type=jdk'
-  - # stage: ...
-    # Graal -- https://github.com/oracle/graal/releases
-    env: JDK=graalvm-ce-java11-linux-amd64-20.2.0
-    script: source ./install-jdk.sh --url https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
-  - # stage: ...
-    # Zulu -- https://www.azul.com/downloads/zulu
-    env: JDK=zulu14.29.23-ca-jdk14.0.2
-    script: source ./install-jdk.sh --url https://cdn.azul.com/zulu/bin/zulu14.29.23-ca-jdk14.0.2-linux_x64.tar.gz
-  - # stage: ...
-    # Amazon -- https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html
-    env: JDK=amazon-corretto-11
-    script: source ./install-jdk.sh --url https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
 
 after_script:
 - echo JAVA_HOME = ${JAVA_HOME}
