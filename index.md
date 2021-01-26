@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-_none_
+- [2021-02-06](https://fosdem.org/2021/schedule/event/bach/) FOSDEM 2021 Online - Talk - "Bach Builds (on(ly)) Java Modules"
 
 ## blog
 
