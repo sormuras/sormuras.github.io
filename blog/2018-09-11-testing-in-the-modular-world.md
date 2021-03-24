@@ -168,7 +168,7 @@ At least three ways exist that lift the strict module boundaries for testing.
 ### Resort to the classpath
 
 Delete all `module-info.java` files, or exclude them from compilation, and your tests ignore all boundaries implied by the Java module system.
-Use internal implementation details of the Java runtime, 3rd-party libraries including test frameworks and of course, use the internal types from your _main_ source set.
+Use non-exported implementations of the Java runtime, 3rd-party libraries including test frameworks and of course, use the non-exported types from your _main_ source set.
 The last part was the intended goal -- achieved, yes, but paid a very high price.
 
 Let's explore two other ways that keep boundaries of the Java module system intact.
@@ -358,13 +358,15 @@ This project's layout is based on proposals introduced by the [Module System Qui
 - [Sawdust](https://github.com/micromata/sawdust) **Show-casing test modes defined here**
 - [JUnit Platform Maven Plugin](https://github.com/sormuras/junit-platform-maven-plugin) **Maven support for test modes defined here**
 - [Java Modularity: the Year After](https://vimeo.com/289846017) **Adoption of modules in open-source libraries, IDEs, build tools**
-- [CodeFX/JPMS](https://blog.codefx.org/tag/jpms/) **Blog about the Java module system and more**
+- [CodeFX/Java Module System](https://blog.codefx.org/tag/jpms/) **Blog about the Java module system and more**
 - [Pro](https://github.com/forax/pro) **Java 9 compatible build tool**
+- [🎼 Bach](https://github.com/sormuras/bach) **Builds (on(ly)) Modules**
 
 ## History
 
 This is a living document, it will be updated now-and-then.
 
+- 2021-03-24 You don't just access Java internals since Java 16 [JEP 396](https://openjdk.java.net/jeps/396)
 - 2020-06-07 Use more precise terms: "in-module testing" and "extra-modular testing"
 - 2018-10-03 The "visibility table" is really about "accessibility"
 - 2018-09-18 Add diagrams for extra-modular and in-module testing
