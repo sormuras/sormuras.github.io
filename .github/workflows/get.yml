@@ -6,9 +6,12 @@ jobs:
   linux:
     name: Linux
     runs-on: ubuntu-latest
-    container: openjdk:11
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: '16'
     - name: Print Java version
       run: java --version
     - name: Get JUnit 3.7 JAR from Maven Central
