@@ -6,11 +6,11 @@
 
 ## upcoming events
 
-- [2021-04-13](https://www.twitch.tv/nipafx) Nicolai's Twitch Stream - "Bach's Prelude and more"
 - [2021-05-29](https://paris2021.hack-commit-pu.sh) hack.commit.push - "Bach + GitHub Actions"
 
 ## blog
 
+- [2021-05-09](blog/2021-05-09-in-memory-http-server-handler.md) In-memory HttpServer Handler
 - [2021-01-26](https://github.com/sormuras/modules)`sormuras/modules` now focusses on 🦄 Unique Java Modules
 - [2020-09-03](blog/2020-09-03-bach-simplicissimus.md) 🎼 Bach.java - Simplicissimus
 - [2020-06-16](blog/2020-06-16-structured-concurrency-today.md) Structured Concurrency, today
@@ -57,6 +57,7 @@
 
 ## past events
 
+- [2021-04-13](https://www.twitch.tv/nipafx) Nicolai's Twitch Stream - "Bach's Prelude and more"
 - [2021-02-06](https://fosdem.org/2021/schedule/event/bach/) FOSDEM 2021 Online - Talk - "Bach Builds (on(ly)) Java Modules"
 - [2020-05-23](https://blog.codefx.org/25-hours-of-java) _2330 UTC_ 🎼 [Bach.java](https://github.com/sormuras/bach) on ☕ [Java's 25th birthday](https://twitter.com/java/status/1260630982337667072) together with 🤠 [Nicolai](https://twitter.com/nipafx)
 - ~~[2020-03-17](https://programm.javaland.eu/2020/#/scheduledEvent/590918) JavaLand 2020 - Talk - "JUnit 5 & Project Loom" (CANCELLED)~~
