@@ -1,9 +1,9 @@
 # Multi-Release JAR Check
 
-As of 2021, Maven and Gradle and Ant (and other build tools) don't use JDK's `jar` tool to create or update JAR files.
-Said simplified, most of them make use of `zip`-like process that generates a `.zip` file with a `.jar` as an ending.
+As of May 2021, Maven and Gradle and Ant (and other build tools) don't use JDK's `jar` tool to create or update JAR files.
+Said (over-)simplified, most of them make use of a `zip`-like process that generates a `.zip` file with a `.jar` as an ending.
 
-Since Java 9, `jar` also tries to validate the contents of JAR file.
+Since Java 9, `jar` also tries to validate the contents of a JAR file it creates or updates.
 This goes for plain JAR file, modular JAR files, plain MR-JAR files, and also modular MR-JAR files.
 
 This blog is about validating existing MR-JAR files, be they plain or modular, in regard of the following two categories.
