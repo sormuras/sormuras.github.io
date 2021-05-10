@@ -64,13 +64,13 @@ public class MultiReleaseCheck {
     if (!Files.isRegularFile(jar)) {
       throw new IllegalArgumentException("path doesn't point to a regular file: " + jar);
     }
+    if (validateJar(jar) != 0) {
+      return 1;
+    }
     try (var jarFile = new JarFile(jar.toFile())) {
       if (!jarFile.isMultiRelease()) {
         writer.printf("File %s isn't a multi-release JAR file.%n", jar);
         return 0;
-      }
-      if (validateJar(jar) != 0) {
-        return 1;
       }
       return jarFile.stream()
           .filter(e -> !e.isDirectory())
@@ -101,9 +101,20 @@ public class MultiReleaseCheck {
 
   private int validateJar(Path jar) {
     try {
-    var temporary = Files.createTempFile("MultiReleaseCheck", ".emtpy");
-    return ToolProvider.findFirst("jar").orElseThrow()
-        .run(writer, writer, "--update", "--file", jar.toString(), "--release", "9", temporary.toString());
+      var temp = Files.createTempDirectory("MultiReleaseCheck-");
+      var copy = Files.copy(jar, temp.resolve(jar.getFileName()));
+      var file = Files.writeString(temp.resolve("file"), "<empty>");
+      return ToolProvider.findFirst("jar")
+          .orElseThrow()
+          .run(
+              writer,
+              writer,
+              "--update",
+              "--file",
+              copy.toString(),
+              "--release",
+              "9",
+              file.toString());
     } catch (IOException exception) {
       throw new UncheckedIOException("Create temp file failed", exception);
     }
