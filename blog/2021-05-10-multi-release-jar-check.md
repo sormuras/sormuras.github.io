@@ -11,13 +11,13 @@ I'll extend this list when needed.
 
 ## New or Different Classes
 
-- https://github.com/unitsofmeasurement/indriya/issues/346
+- <https://github.com/unitsofmeasurement/indriya/issues/346>
 
 > (...) the classes in a multi-release JAR file should be exactly the same across versions.
 
 ## Wrong Release
 
-- https://github.com/sandermak/modulescanner/issues/14
+- <https://github.com/sandermak/modulescanner/issues/14>
 
 > For example, when a MR-JAR contains a version `9` directory within its `META-INF` facility,
 > it shouldn't contain classes that are compiled with `--release 10` or higher.
