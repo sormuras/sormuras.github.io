@@ -52,7 +52,7 @@ entry: META-INF/versions/14/tech/units/indriya/AbstractSystemOfUnits.class, cont
 invalid multi-release jar file $TEMP/MultiReleaseCheck-4926303968850859607/indriya-2.1.2.jar deleted
 ```
 
-- Or via `jbang`: `jbang --java 16 sormuras.github.io/demo/main/MultiReleaseCheck.java <JAR|GAV>`
+- Or via [`jbang`](https://jbang.dev): `jbang --java 16 https://sormuras.github.io/demo/main/MultiReleaseCheck.java <JAR|GAV>`
 
 ## Links
 
