@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-- [2021-06-10](https://twitter.com/sormuras/status/1402262480047464449) Build with Bach: Ikonli
+None, yet.
 
 ## blog
 
@@ -58,6 +58,7 @@
 
 ## past events
 
+- [2021-06-10](https://twitter.com/sormuras/status/1402262480047464449) Build with Bach: Ikonli
 - [2021-05-29](https://paris2021.hack-commit-pu.sh) hack.commit.push - "Bach + GitHub Actions"
 - [2021-04-13](https://www.twitch.tv/nipafx) Nicolai's Twitch Stream - "Bach's Prelude and more"
 - [2021-02-06](https://fosdem.org/2021/schedule/event/bach/) FOSDEM 2021 Online - Talk - "Bach Builds (on(ly)) Java Modules"
