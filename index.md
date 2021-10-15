@@ -10,6 +10,7 @@ None, yet.
 
 ## blog
 
+- [2021-10-15](blog/2021-10-15-records-with-dedicated-components.md) Java Records III - Dedicated Components
 - [2021-05-10](blog/2021-05-10-multi-release-jar-check.md) MR-JAR Check
 - [2021-05-09](blog/2021-05-09-in-memory-http-server-handler.md) In-memory HttpServer Handler
 - [2021-01-26](https://github.com/sormuras/modules)`sormuras/modules` now focusses on 🦄 Unique Java Modules
