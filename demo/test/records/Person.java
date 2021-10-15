@@ -1,6 +1,6 @@
 package records;
 
-public record Person(Name name, Nickname nickname) {
+public record Person(String name, String nickname) {
 
   public sealed interface Component {}
 
@@ -8,18 +8,14 @@ public record Person(Name name, Nickname nickname) {
 
   public record Nickname(String value) implements Component {}
 
-  public static Person of(String name, Component... components) {
-    return new Person(name).with(components);
-  }
-
   public Person(String name) {
-    this(new Name(name), new Nickname("None"));
+    this(name, "");
   }
 
   public Person with(Component component) {
     return new Person(
-        component instanceof Name name ? name : name,
-        component instanceof Nickname nickname ? nickname : nickname);
+        component instanceof Name name ? name.value : name,
+        component instanceof Nickname nickname ? nickname.value : nickname);
   }
 
   public Person with(Component... components) {
@@ -29,7 +25,14 @@ public record Person(Name name, Nickname nickname) {
   }
 
   public static void main(String[] args) {
-    // Person[name=Name[value=Terence], nickname=Nickname[value=Nobody]]
-    System.out.println(Person.of("Terence").with(new Nickname("Nobody")));
+    var person =
+        new Person("Terence")
+            .with(new Nickname("Nobody"))
+            .with(new Nickname("Somebody"), new Name("Mario"));
+
+    assert "Mario".equals(person.name());
+    assert "Somebody".equals(person.nickname());
+
+    System.out.println(person); // Person[name=Mario, nickname=Somebody]
   }
 }
