@@ -14,11 +14,11 @@ Names of record components aren't supported directly by the Java language, yet.
 As described in [Functional transformation of immutable objects](https://github.com/openjdk/amber-docs/blob/master/eg-drafts/reconstruction-records-and-classes.md#extrapolating-from-records), they may be supported in the future. 
 
 In the meanwhile, here's a way to achieve something similar with minimal extra code.
-It leverages following features of Java 17:
+It leverages following features, all available in Java 17:
 
-- `record` 
-- `sealed`
-- Pattern matching for `instanceof`
+- [JEP 395: Records](https://openjdk.java.net/jeps/395) 
+- [JEP 409: Sealed Classes](https://openjdk.java.net/jeps/409)
+- [JEP 394: Pattern Matching for `instanceof`](https://openjdk.java.net/jeps/394)
 
 ```java
 public record Person(Name name, Nickname nickname) {
