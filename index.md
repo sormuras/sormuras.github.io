@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-None, yet.
+- [2021-11-17](https://info.jetbrains.com/info.jetbrains.com/idea-webinar-november17-2021.html) IntelliJ IDEA and JUnit: Writing, Finding, and Running Tests
 
 ## blog
 
