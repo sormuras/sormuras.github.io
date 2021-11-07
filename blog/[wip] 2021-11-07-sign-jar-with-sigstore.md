@@ -57,6 +57,7 @@ Found matching entries (listed by UUID):
 
 ```text
 > rekor get --uuid 66a0d3f8d4164e798d11a79f2455f5b41dcc067fe7b4f5a02212ad7ae9e93d65
+
 LogID: c0d23d6ad406973f9559f3ba2d1ca01f84147d8ffc5b8445c224f98b9591801d
 Index: 833640
 IntegratedTime: 2021-11-07T16:57:59Z
@@ -78,6 +79,7 @@ Body: {
     }
   }
 }
+```
 
 ```text
 > certutil -decode junit-4.13.2.cert.b64 junit-4.13.2.cert
@@ -85,6 +87,7 @@ Body: {
 
 ```text
 > cosign verify-blob -signature junit-4.13.2.sig -cert junit-4.13.2.cert junit-4.13.2.jar
+
 No TUF root installed, using embedded CA certificate.
 Certificate is trusted by Fulcio Root CA
 Email: [sormuras@gmail.com]
