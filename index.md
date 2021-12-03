@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-_none_
+- [2021-12-15](https://cyberland.ijug.eu/2021-12-open-source-camp/) CyberLand Open Source Camp - Advent Pu(n)sh mit JUnit 5
 
 ## blog
 
