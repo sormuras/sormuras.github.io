@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-- [2021-12-15](https://cyberland.ijug.eu/2021-12-open-source-camp/) CyberLand Open Source Camp - Advent Pu(n)sh mit JUnit 5
+_none_
 
 ## blog
 
@@ -59,6 +59,7 @@
 
 ## past events
 
+- [2021-12-15](https://cyberland.ijug.eu/2021-12-open-source-camp/) CyberLand Open Source Camp - Advent Pu(n)sh mit JUnit 5
 - [2021-11-17](https://info.jetbrains.com/info.jetbrains.com/idea-webinar-november17-2021.html) IntelliJ IDEA and JUnit: Writing, Finding, and Running Tests
 - [2021-06-10](https://twitter.com/sormuras/status/1402262480047464449) Build with Bach: Ikonli
 - [2021-05-29](https://paris2021.hack-commit-pu.sh) hack.commit.push - "Bach + GitHub Actions"
