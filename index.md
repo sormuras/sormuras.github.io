@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-_none_
+- [2022-09-22](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Darmstadt - JDK Tools and where to find them
 
 ## blog
 
@@ -59,6 +59,7 @@ _none_
 
 ## past events
 
+- [2022-04-26](https://www.meetup.com/Java-User-Group-Karlsruhe/events/285085119/) JUG Karlsruhe - JDK Tools and where to find them
 - [2021-12-15](https://cyberland.ijug.eu/2021-12-open-source-camp/) CyberLand Open Source Camp - Advent Pu(n)sh mit JUnit 5
 - [2021-11-17](https://info.jetbrains.com/info.jetbrains.com/idea-webinar-november17-2021.html) IntelliJ IDEA and JUnit: Writing, Finding, and Running Tests
 - [2021-06-10](https://twitter.com/sormuras/status/1402262480047464449) Build with Bach: Ikonli
