@@ -6,8 +6,8 @@
 
 ## upcoming events
 
-- [2022-10-26](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Bonn - JDK Tools and where to find them
-- [2022-11-05](https://paris2022.hack-commit-pu.sh/) hack.commit.push 2022 - Bach and JUnit 5
+- [2022-10-26](https://www.meetup.com/jug-bonn/events/288800528) JUG Bonn - JDK Tools and where to find them
+- [2022-11-05](https://paris2022.hack-commit-pu.sh) hack.commit.push 2022 - Bach and JUnit 5
 
 ## blog
 
