@@ -6,7 +6,8 @@
 
 ## upcoming events
 
-- [2022-09-22](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Darmstadt - JDK Tools and where to find them
+- [2022-10-26](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Bonn - JDK Tools and where to find them
+- [2022-11-05](https://paris2022.hack-commit-pu.sh/) hack.commit.push 2022 - Bach and JUnit 5
 
 ## blog
 
@@ -59,11 +60,12 @@
 
 ## past events
 
+- [2022-09-22](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Darmstadt - JDK Tools and where to find them
 - [2022-04-26](https://www.meetup.com/Java-User-Group-Karlsruhe/events/285085119/) JUG Karlsruhe - JDK Tools and where to find them
 - [2021-12-15](https://cyberland.ijug.eu/2021-12-open-source-camp/) CyberLand Open Source Camp - Advent Pu(n)sh mit JUnit 5
 - [2021-11-17](https://info.jetbrains.com/info.jetbrains.com/idea-webinar-november17-2021.html) IntelliJ IDEA and JUnit: Writing, Finding, and Running Tests
 - [2021-06-10](https://twitter.com/sormuras/status/1402262480047464449) Build with Bach: Ikonli
-- [2021-05-29](https://paris2021.hack-commit-pu.sh) hack.commit.push - "Bach + GitHub Actions"
+- [2021-05-29](https://paris2021.hack-commit-pu.sh) hack.commit.push 2021 - "Bach + GitHub Actions"
 - [2021-04-13](https://www.twitch.tv/nipafx) Nicolai's Twitch Stream - "Bach's Prelude and more"
 - [2021-02-06](https://fosdem.org/2021/schedule/event/bach/) FOSDEM 2021 Online - Talk - "Bach Builds (on(ly)) Java Modules"
 - [2020-05-23](https://blog.codefx.org/25-hours-of-java) _2330 UTC_ 🎼 [Bach.java](https://github.com/sormuras/bach) on ☕ [Java's 25th birthday](https://twitter.com/java/status/1260630982337667072) together with 🤠 [Nicolai](https://twitter.com/nipafx)
