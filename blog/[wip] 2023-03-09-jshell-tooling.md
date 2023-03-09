@@ -1,14 +1,13 @@
 ## JShell Tooling
 
 ```text
-jshell
-|  Welcome to JShell -- Version 11.0.14.1
+ jshell
+|  Welcome to JShell -- Version 17.0.6
 |  For an introduction type: /help intro
 
 jshell> /open https://github.com/sormuras/jdk-tools/raw/main/TOOLING.jsh
 
 jshell> tools()
-
 jar
 javac
 javadoc
@@ -16,48 +15,37 @@ javap
 jdeps
 jlink
 jmod
-```
+jpackage
 
-```text
+jshell> run("javap", "-version")
+17.0.6
+
 jshell> javap("-version")
+17.0.6
 
-11.0.14.1
-```
-
-```text
-jshell> javap("-c", "java.lang.Runnable")
-
-Compiled from "Runnable.java"
-public interface java.lang.Runnable {
-  public abstract void run();
-}
-```
-
-```text
-jshell> javap(Runnable.class)
-
-Classfile jrt:/modules/java.base/java/lang/Runnable.class
-  Last modified Feb 27, 2022; size 201 bytes
-  MD5 checksum 18222535968b132563fe0ad616f6fbc7
+jshell> javap(java.lang.Runnable.class)
+Classfile jrt:/java.base/java/lang/Runnable.class
+  Last modified Dec 6, 2022; size 201 bytes
+  SHA-256 checksum a4525fd4150d870abe74d18d81470c2ba6b345bbbea96e2a8d09acfb0026e5f8
   Compiled from "Runnable.java"
 public interface java.lang.Runnable
   minor version: 0
-  major version: 55
+  major version: 61
   flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
   this_class: #1                          // java/lang/Runnable
-  super_class: #2                         // java/lang/Object
+  super_class: #3                         // java/lang/Object
   interfaces: 0, fields: 0, methods: 1, attributes: 2
 Constant pool:
-   #1 = Class              #9             // java/lang/Runnable
-   #2 = Class              #10            // java/lang/Object
-   #3 = Utf8               run
-   #4 = Utf8               ()V
-   #5 = Utf8               SourceFile
-   #6 = Utf8               Runnable.java
-   #7 = Utf8               RuntimeVisibleAnnotations
-   #8 = Utf8               Ljava/lang/FunctionalInterface;
-   #9 = Utf8               java/lang/Runnable
-  #10 = Utf8               java/lang/Object
+   #1 = Class              #2             // java/lang/Runnable
+   #2 = Utf8               java/lang/Runnable
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               run
+   #6 = Utf8               ()V
+   #7 = Utf8               SourceFile
+   #8 = Utf8               Runnable.java
+   #9 = Utf8               RuntimeVisibleAnnotations
+  #10 = Utf8               Ljava/lang/FunctionalInterface;
 {
   public abstract void run();
     descriptor: ()V
@@ -65,60 +53,40 @@ Constant pool:
 }
 SourceFile: "Runnable.java"
 RuntimeVisibleAnnotations:
-  0: #8()
+  0: #10()
     java.lang.FunctionalInterface
-```
 
-```text
-jshell> class Empty {}
-
-|  created class Empty
+jshell> interface Empty {}
+|  created interface Empty
 
 jshell> javap(Empty.class)
-
-Classfile /tmp/TOOLING-17832827764353920976.class
-  Last modified Mar 9, 2023; size 284 bytes
-  MD5 checksum 48ec6cfb46485ad9ebc48ad49c156861
-  Compiled from "$JShell$30.java"
-public class REPL.$JShell$30$Empty
+Classfile /tmp/TOOLING-11160583645141535433.class
+  Last modified Mar 9, 2023; size 191 bytes
+  SHA-256 checksum 1b2d874a42c3695a136f3ce0bb849ce2aa09f6a96c8b5f4d18f7c1f07fc8bf20
+  Compiled from "$JShell$27.java"
+public interface REPL.$JShell$27$Empty
   minor version: 0
-  major version: 55
-  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
-  this_class: #2                          // REPL/$JShell$30$Empty
+  major version: 61
+  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
+  this_class: #1                          // REPL/$JShell$27$Empty
   super_class: #3                         // java/lang/Object
-  interfaces: 0, fields: 0, methods: 1, attributes: 3
+  interfaces: 0, fields: 0, methods: 0, attributes: 3
 Constant pool:
-   #1 = Methodref          #3.#12         // java/lang/Object."<init>":()V
-   #2 = Class              #13            // REPL/$JShell$30$Empty
-   #3 = Class              #16            // java/lang/Object
-   #4 = Utf8               <init>
-   #5 = Utf8               ()V
-   #6 = Utf8               Code
-   #7 = Utf8               LineNumberTable
-   #8 = Utf8               SourceFile
-   #9 = Utf8               $JShell$30.java
-  #10 = Utf8               NestHost
-  #11 = Class              #17            // REPL/$JShell$30
-  #12 = NameAndType        #4:#5          // "<init>":()V
-  #13 = Utf8               REPL/$JShell$30$Empty
-  #14 = Utf8               Empty
-  #15 = Utf8               InnerClasses
-  #16 = Utf8               java/lang/Object
-  #17 = Utf8               REPL/$JShell$30
+   #1 = Class              #2             // REPL/$JShell$27$Empty
+   #2 = Utf8               REPL/$JShell$27$Empty
+   #3 = Class              #4             // java/lang/Object
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               SourceFile
+   #6 = Utf8               $JShell$27.java
+   #7 = Utf8               NestHost
+   #8 = Class              #9             // REPL/$JShell$27
+   #9 = Utf8               REPL/$JShell$27
+  #10 = Utf8               InnerClasses
+  #11 = Utf8               Empty
 {
-  public REPL.$JShell$30$Empty();
-    descriptor: ()V
-    flags: (0x0001) ACC_PUBLIC
-    Code:
-      stack=1, locals=1, args_size=1
-         0: aload_0
-         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
-         4: return
-      LineNumberTable:
-        line 5: 0
 }
-SourceFile: "$JShell$30.java"
-NestHost: class REPL/$JShell$30
+SourceFile: "$JShell$27.java"
+NestHost: class REPL/$JShell$27
 InnerClasses:
-  public static #14= #2 of #11;           // Empty=class REPL/$JShell$30$Empty of class REPL/$JShell$30
+  public static #11= #1 of #8;            // Empty=class REPL/$JShell$27$Empty of class REPL/$JShell$27
 ```
