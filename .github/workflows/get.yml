@@ -1,17 +1,17 @@
 name: Java Get.java CI
 
-on: [push]
+on: [ push ]
 
 jobs:
   linux:
     name: Linux
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-java@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
       with:
-        distribution: 'zulu'
-        java-version: '16'
+        distribution: 'oracle'
+        java-version: '17'
     - name: Print Java version
       run: java --version
     - name: Get JUnit 3.7 JAR from Maven Central
