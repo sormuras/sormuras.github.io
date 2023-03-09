@@ -6,8 +6,8 @@
 
 ## upcoming events
 
-- [2022-10-26](https://www.meetup.com/jug-bonn/events/288800528) JUG Bonn - JDK Tools and where to find them
-- [2022-11-05](https://paris2022.hack-commit-pu.sh) hack.commit.push 2022 - Bach and JUnit 5
+- [2023-05-29](https://techcamp.hamburg) Tech Conference & Barcamp - JDK Tools and where to find them
+- [2023-03-21](https://www.javaland.eu/en/home) JavaLand 2023 - JDK Tools and where to find them
 
 ## blog
 
@@ -43,15 +43,17 @@
 
 ## active projects
 
-- [JUnit 5](https://junit.org) The new major version of the programmer-friendly testing framework for Java
+- [JDK](https://github.com/openjdk/jdk) JDK main-line development
+- [jtreg](https://github.com/openjdk/jtreg) The Regression Test Harness for the OpenJDK platform
+- [JUnit](https://junit.org) The new major version of the programmer-friendly testing framework for Java
+- [duke](https://github.com/sormuras/duke) Java's mascot and an enhanced entry-point exploration
 - [bach](https://github.com/sormuras/bach) Use jshell/java to build your modular Java project
 - [modules](https://github.com/sormuras/modules) Java modules published at Maven Central
 - [junit-platform-maven-plugin](https://github.com/sormuras/junit-platform-maven-plugin) Maven Plugin launching the JUnit Platform
 - [mainrunner](https://github.com/sormuras/mainrunner) JUnit Platform Test Engine launching Java programs
-- [install-jdk.sh](https://github.com/sormuras/bach#install-jdksh) Install the latest-and-greatest OpenJDK releases
 - [java-compiler-script-engine](https://github.com/sormuras/java-compiler-script-engine) JSR 223 facade for `javac`, the foundation Java compiler
 
-## contributing to...
+## contributed to...
 
 - [forax/pro](https://github.com/forax/pro) A Java build tool that works seamlessly with modules
 - [google/google-java-format](https://github.com/google/google-java-format) Reformats Java source code to comply with Google Java Style
@@ -60,6 +62,8 @@
 
 ## past events
 
+- ~~[2022-11-05](https://paris2022.hack-commit-pu.sh) hack.commit.push 2022 - Bach and JUnit 5~~
+- [2022-10-26](https://www.meetup.com/jug-bonn/events/288800528) JUG Bonn - JDK Tools and where to find them
 - [2022-09-22](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Darmstadt - JDK Tools and where to find them
 - [2022-04-26](https://www.meetup.com/Java-User-Group-Karlsruhe/events/285085119/) JUG Karlsruhe - JDK Tools and where to find them
 - [2021-12-15](https://cyberland.ijug.eu/2021-12-open-source-camp/) CyberLand Open Source Camp - Advent Pu(n)sh mit JUnit 5
