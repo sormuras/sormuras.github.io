@@ -6,7 +6,7 @@
 
 ## upcoming events
 
-- [2023-05-29](https://techcamp.hamburg) Tech Conference & Barcamp - JDK Tools and where to find them
+- [2023-05-29](https://techcamp.hamburg) Techcamp Hamburg - JDK Tools and where to find them
 - [2023-03-21](https://www.javaland.eu/en/home) JavaLand 2023 - JDK Tools and where to find them
 
 ## blog
