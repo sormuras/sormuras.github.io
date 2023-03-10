@@ -1,7 +1,13 @@
-## Java Shell Tooling Script
+## Running JDK Tools within a JShell Session
 
-This blog post is about running tools provided by the Java Development Kit in an interactive Java Shell session. 
-The example presented below will print out verbose disassembled code with internal type signatures of a Java class created in the current Java Shell session.   
+This blog post is about running [tools](https://docs.oracle.com/en/java/javase/17/docs/specs/man/) provided by the Java Development Kit (JDK) in a JShell session.
+
+JShell was introduced in JDK 9 by [JEP 222 - jshell: The Java Shell (Read-Eval-Print Loop)](https://openjdk.org/jeps/222) as an interactive tool to evaluate Java code.
+When using JShell for interactive development and code exploration, it is often desirable to run JDK tools, that are usually executed on the command-line, "in-shell":
+for example to avoid starting a new operating system shell and also for feeding a just created class as an input to a JDK tool and evaluate its output. 
+The `TOOLING.jsh` script introduced later in this blog post makes it easy to run a selection of JDK tools.
+
+An example presented below will print out verbose disassembled code with internal type signatures of a Java class created in the current JShell session.  
 
 ### Goal
 
@@ -29,17 +35,7 @@ Classfile .../Empty.class
 interface Empty
   minor version: 0
   major version: 61
-  flags: (0x0600) ACC_INTERFACE, ACC_ABSTRACT
-  this_class: #1                          // Empty
-  super_class: #3                         // java/lang/Object
-  interfaces: 0, fields: 0, methods: 0, attributes: 1
-Constant pool:
-  #1 = Class              #2              // Empty
-  #2 = Utf8               Empty
-  #3 = Class              #4              // java/lang/Object
-  #4 = Utf8               java/lang/Object
-  #5 = Utf8               SourceFile
-  #6 = Utf8               Empty.java
+[...]
 {
 }
 SourceFile: "Empty.java"
@@ -61,20 +57,11 @@ void javadoc(String... args) { run("javadoc", args); }
 void javap(String... args) { run("javap", args); }
 // ...
 
-// Arbitrary tool running method
-void run(String name, String... args) {
-    var tool = java.util.spi.ToolProvider.findFirst(name).orElseThrow();
-    tool.get().run(System.out, System.err, args);
-}
+// Run named tool with an array of arguments
+void run(String tool, String... args) { /* ... */ }
 
-// List loadable tool providers
-void tools() {
-    java.util.ServiceLoader.load(java.util.spi.ToolProvider.class).stream()
-            .map(java.util.ServiceLoader.Provider::get)
-            .map(java.util.spi.ToolProvider::name)
-            .sorted()
-            .forEach(System.out::println);
-}
+// List available tools
+void tools() { /* ... */ }
 ```
 
 Consult the API documentation of [ServiceLoader](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html) (since Java 6) and [ToolProvider](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/spi/ToolProvider.html) (since Java 9) for more details. 
@@ -98,6 +85,13 @@ The section of `jshell`'s man page reads:
 >   _Defines print, println, and printf as jshell methods for use within the tool._
 
 In addition to local files and predefined scripts you may also load a remote resource.
+
+**This JShell feature must be used carefully!**
+
+You should only load a remote script from a site you trust.
+Open it in a browser window first, check that it only contains non-malicious snippets in text form.
+Follow any nested `/open file` command.
+Also, double-check the exact spelling when copying `/open https://...` commands.
 
 ---
 Open `TOOLING.jsh` in a fresh Java Shell session.
@@ -123,20 +117,21 @@ _Note that not all tools listed by the [Java Development Kit Tool Specifications
 _Some might do so in the future, some never will._
 
 ---
-Run an arbitrary tool by passing its name and command-line arguments to the `run()` method.
+Run an arbitrary tool by passing its name and command-line arguments to the `run(String, String...)` method.
 ```text
 jshell> run("javap", "-version")
 17.0.6
 ```
 
 ---
-Run a tool by using its dedicated wrapper method and passing command-line arguments.
+Run a tool by using its dedicated wrapper method `javap(String...)` and passing command-line arguments.
 ```text
 jshell> javap("-version")
 17.0.6
 ```
+
 ---
-Run `javap` tool for the `Runnable` class (from package `java.lang` in module `java.base` loaded by the Java Runtime `jrt:` file system) by using the `javap()` overload that takes an instance of `Class<?>` as an argument.
+Run `javap` tool for the `Runnable` class (from package `java.lang` in module `java.base` loaded by the Java Runtime file system `jrt:`) by using the `javap(Class)` overload.
 ```text
 jshell> javap(java.lang.Runnable.class)
 Classfile jrt:/java.base/java/lang/Runnable.class
@@ -146,21 +141,7 @@ Classfile jrt:/java.base/java/lang/Runnable.class
 public interface java.lang.Runnable
   minor version: 0
   major version: 61
-  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
-  this_class: #1                          // java/lang/Runnable
-  super_class: #3                         // java/lang/Object
-  interfaces: 0, fields: 0, methods: 1, attributes: 2
-Constant pool:
-   #1 = Class              #2             // java/lang/Runnable
-   #2 = Utf8               java/lang/Runnable
-   #3 = Class              #4             // java/lang/Object
-   #4 = Utf8               java/lang/Object
-   #5 = Utf8               run
-   #6 = Utf8               ()V
-   #7 = Utf8               SourceFile
-   #8 = Utf8               Runnable.java
-   #9 = Utf8               RuntimeVisibleAnnotations
-  #10 = Utf8               Ljava/lang/FunctionalInterface;
+[...]
 {
   public abstract void run();
     descriptor: ()V
@@ -188,22 +169,7 @@ Classfile /tmp/TOOLING-11160583645141535433.class
 public interface REPL.$JShell$27$Empty
   minor version: 0
   major version: 61
-  flags: (0x0601) ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT
-  this_class: #1                          // REPL/$JShell$27$Empty
-  super_class: #3                         // java/lang/Object
-  interfaces: 0, fields: 0, methods: 0, attributes: 3
-Constant pool:
-   #1 = Class              #2             // REPL/$JShell$27$Empty
-   #2 = Utf8               REPL/$JShell$27$Empty
-   #3 = Class              #4             // java/lang/Object
-   #4 = Utf8               java/lang/Object
-   #5 = Utf8               SourceFile
-   #6 = Utf8               $JShell$27.java
-   #7 = Utf8               NestHost
-   #8 = Class              #9             // REPL/$JShell$27
-   #9 = Utf8               REPL/$JShell$27
-  #10 = Utf8               InnerClasses
-  #11 = Utf8               Empty
+[...]
 {
 }
 SourceFile: "$JShell$27.java"
