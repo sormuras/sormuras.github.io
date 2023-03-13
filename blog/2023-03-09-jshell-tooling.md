@@ -9,6 +9,8 @@ The `TOOLING.jsh` script introduced later in this blog post makes it easy to run
 
 An example presented below will print out verbose disassembled code with internal type signatures of a Java class created in the current JShell session.  
 
+Consult <https://dev.java/learn/jshell-tool/> to learn more about JShell features.
+
 ### Goal
 
 In other words, the goal is to be able to write something like the following:
@@ -185,3 +187,8 @@ NestHost: class REPL/$JShell$27
 InnerClasses:
   public static #11= #1 of #8;            // Empty=class REPL/$JShell$27$Empty of class REPL/$JShell$27
 ```
+
+### Next Steps
+
+- Consult <https://dev.java/learn/jshell-tool/> to learn more about JShell features
+- Find more JDK tools at <https://docs.oracle.com/en/java/javase/17/docs/specs/man/>
