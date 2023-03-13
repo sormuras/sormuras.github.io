@@ -41,32 +41,7 @@ interface Empty
 SourceFile: "Empty.java"
 ```
 
-### Introducing TOOLING.jsh
-
-The source of `TOOLING.jsh` is shared at: <https://github.com/sormuras/jdk-tools/blob/main/TOOLING.jsh>
-
-Take a moment to follow the link read it before proceeding with using `TOOLING.jsh`.
-
-tl;dr:
-
-```jshelllanguage
-// Dedicated tool running methods
-void jar(String... args) { run("jar", args); }
-void javac(String... args) { run("javac", args); }
-void javadoc(String... args) { run("javadoc", args); }
-void javap(String... args) { run("javap", args); }
-// ...
-
-// Run named tool with an array of arguments
-void run(String tool, String... args) { /* ... */ }
-
-// List available tools
-void tools() { /* ... */ }
-```
-
-Consult the API documentation of [ServiceLoader](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html) (since Java 6) and [ToolProvider](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/spi/ToolProvider.html) (since Java 9) for more details. 
-
-### Using TOOLING.jsh
+### JShell supports loading scripts
 
 The `jshell` tool supports loading predefined scripts via its `/open file` command.
 
@@ -93,16 +68,49 @@ Open it in a browser window first, check that it only contains non-malicious sni
 Follow any nested `/open file` command.
 Also, double-check the exact spelling when copying `/open https://...` commands.
 
+### Introducing TOOLING.jsh
+
+The source of `TOOLING.jsh` script is shared at: <https://github.com/sormuras/jdk-tools/blob/main/TOOLING.jsh>
+
+Take a moment to follow the link read it before proceeding with using `TOOLING.jsh`.
+
+tl;dr:
+
+```jshelllanguage
+// Dedicated tool running methods
+void jar(String... args) { run("jar", args); }
+void javac(String... args) { run("javac", args); }
+void javadoc(String... args) { run("javadoc", args); }
+void javap(String... args) { run("javap", args); }
+// ...
+
+// Run named tool with an array of arguments
+void run(String tool, String... args) { /* ... */ }
+
+// List available tools
+void tools() { /* ... */ }
+```
+
+Consult the API documentation of [ServiceLoader](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ServiceLoader.html) (since Java 6) and [ToolProvider](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/spi/ToolProvider.html) (since Java 9) for more details. 
+
+### Using TOOLING.jsh
+
+Now, let's make use of `jshell`'s support of loading predefined scripts via its `/open file` command.
+
 ---
-Open `TOOLING.jsh` in a fresh Java Shell session.
-List available tools by invoking the `tools()` method. 
+Open `TOOLING.jsh` from a [remote location](https://github.com/sormuras/jdk-tools/raw/main/TOOLING.jsh) in a fresh Java Shell session.
+
 ```text
 jshell
 |  Welcome to JShell -- Version 17.0.6
 |  For an introduction type: /help intro
 
 jshell> /open https://github.com/sormuras/jdk-tools/raw/main/TOOLING.jsh
+```
 
+---
+List available tools by invoking the `tools()` method.
+```text
 jshell> tools()
 jar
 javac
