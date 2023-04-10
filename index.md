@@ -5,9 +5,8 @@
 / 🐦 [@sormuras](https://twitter.com/sormuras)
 
 ## upcoming events
-
+- [2023-04-12](https://www.jug.ch/html/events/2023/meet_the_junit-team.html) JUG Switzerland - Meet the JUnit team
 - [2023-05-29](https://techcamp.hamburg) Techcamp Hamburg - JDK Tools and where to find them
-- [2023-03-21](https://www.javaland.eu/en/home) JavaLand 2023 - JDK Tools and where to find them
 
 ## blog
 
@@ -63,6 +62,7 @@
 
 ## past events
 
+- [2023-03-21](https://www.javaland.eu/en/home) JavaLand 2023 - JDK Tools and where to find them
 - ~~[2022-11-05](https://paris2022.hack-commit-pu.sh) hack.commit.push 2022 - Bach and JUnit 5~~
 - [2022-10-26](https://www.meetup.com/jug-bonn/events/288800528) JUG Bonn - JDK Tools and where to find them
 - [2022-09-22](https://www.jug-da.de/2022/09/JDK-Tools-Java-Next/) JUG Darmstadt - JDK Tools and where to find them
