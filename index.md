@@ -1,11 +1,11 @@
 # sormuras.github.io
 
 💖 [sponsor](https://github.com/sponsors/sormuras)
-/ <img src="https://github.githubassets.com/images/icons/emoji/octocat.png?v8" width="32">[github](https://github.com/sormuras)
-/ 🐦 [@sormuras](https://twitter.com/sormuras)
+/ 🐙 [github](https://github.com/sormuras)
+/ 🐘 [@sormuras](https://mastodon.cloud/@sormuras)
 
 ## upcoming events
-- [2023-06-01](https://techcamp.hamburg) Techcamp Hamburg - JDK Tools and where to find them
+_none as of today_
 
 ## blog
 
@@ -61,6 +61,7 @@
 
 ## past events
 
+- [2023-06-01](https://techcamp.hamburg) Techcamp Hamburg - JDK Tools and where to find them
 - [2023-04-12](https://www.jug.ch/html/events/2023/meet_the_junit-team.html) JUG Switzerland - Meet the JUnit team
 - [2023-03-21](https://www.javaland.eu/en/home) JavaLand 2023 - JDK Tools and where to find them
 - ~~[2022-11-05](https://paris2022.hack-commit-pu.sh) hack.commit.push 2022 - Bach and JUnit 5~~
