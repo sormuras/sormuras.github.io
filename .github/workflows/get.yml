@@ -7,11 +7,11 @@ jobs:
     name: Linux
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-java@v3
       with:
         distribution: 'oracle'
-        java-version: '17'
+        java-version: '21'
     - name: Print Java version
       run: java --version
     - name: Get JUnit 3.7 JAR from Maven Central
