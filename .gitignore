@@ -1,5 +1,6 @@
 .idea/
 .settings/
+out/
 target/
 
 .classpath

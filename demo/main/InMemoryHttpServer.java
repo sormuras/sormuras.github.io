@@ -8,10 +8,11 @@ import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.concurrent.Executors;
 
 record InMemoryHttpServer(Map<String, Asset> assets) implements HttpHandler {
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String... args) throws Exception {
     System.out.println("InMemoryHttpServer");
 
     var server = HttpServer.create(new InetSocketAddress("", 0), 0);
@@ -36,16 +37,11 @@ record InMemoryHttpServer(Map<String, Asset> assets) implements HttpHandler {
             Asset.of(new byte[] {0x4, 0x5, 0x6}),
             "/bin/789",
             Asset.of(new byte[] {0x7, 0x8, 0x9}),
-            "/bin/modules/b64",
-            Asset.ofBase64(
-                """
-                TW9kdWxlcywgbW9kdWxlcywgZXZlcnkgd2hlcmUsCkFuZCBjbGFzcy1wYXRoIGhlbGwgZGlkIHNo\
-                cmluazsKTW9kdWxlcywgbW9kdWxlcywgZXZlcnkgd2hlcmUsCkxldCBzdW4ubWlzYy5VbnNhZmUg\
-                c2luay4="""),
             "/favicon.ico",
             Asset.ofBase64(NANO_DUKE_BASE_64_ENCODED, "image/x-icon"));
 
     server.createContext("/", new InMemoryHttpServer(assets));
+    server.setExecutor(Executors.newVirtualThreadPerTaskExecutor());
     server.start();
 
     System.out.printf("http://%s:%d%n", address.getHostString(), address.getPort());
@@ -56,10 +52,6 @@ record InMemoryHttpServer(Map<String, Asset> assets) implements HttpHandler {
 
     public static Asset of(byte... bytes) {
       return new Asset(200, bytes, "application/octet-stream");
-    }
-
-    public static Asset ofBase64(String base64) {
-      return Asset.of(Base64.getDecoder().decode(base64));
     }
 
     public static Asset ofBase64(String base64, String type) {
@@ -83,6 +75,7 @@ record InMemoryHttpServer(Map<String, Asset> assets) implements HttpHandler {
   public void handle(HttpExchange exchange) throws IOException {
     var asset = lookupOrGenerateAsset(exchange.getRequestURI().getPath());
     exchange.getResponseHeaders().set("Content-Type", asset.type);
+    exchange.getResponseHeaders().set("Content-Length", String.valueOf(asset.data.length));
     if ("HEAD".equals(exchange.getRequestMethod())) {
       exchange.sendResponseHeaders(asset.code, -1);
       return;
@@ -140,7 +133,8 @@ record InMemoryHttpServer(Map<String, Asset> assets) implements HttpHandler {
         .map(name -> FILE.formatted(assets.get(path + name).data.length, name, name))
         .forEach(html::add);
 
-    html.add("""
+    html.add(
+        """
             </pre>
             <hr>
             <a href='https://inside.java'>#MovedByJava</a> %s
