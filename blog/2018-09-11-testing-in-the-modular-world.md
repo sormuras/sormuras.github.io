@@ -217,8 +217,6 @@ Here are the additional command line options needed to achieve the same modular 
 
 ```text
 --add-opens                                   | "open module com.xyz"
-  com.xyz/com.abc=org.junit.platform.commons  |
---add-opens                                   |
   com.xyz/com.xyz=org.junit.platform.commons  |
 
 --add-reads                                   | "requires org.junit.jupiter.api"
