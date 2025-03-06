@@ -216,15 +216,16 @@ Here are the additional command line options needed to achieve the same modular 
 - `module-info.test`
 
 ```text
---add-opens                                   | "open module com.xyz"
-  com.xyz/com.xyz=org.junit.platform.commons  |
-
---add-reads                                   | "requires org.junit.jupiter.api"
-  com.xyz=org.junit.jupiter.api               |
---add-reads                                   | "requires org.assertj.core"
-  com.xyz=org.assertj.core                    |
---add-reads                                   | "requires org.mockito"
-  com.xyz=org.mockito                         |
+--add-opens                                           | "open module com.xyz"
+  com.xyz/com.xyz=org.junit.platform.commons          |
+--add-opens                                           |
+  com.xyz/com.xyz.internal=org.junit.platform.commons |
+--add-reads                                           | "requires org.junit.jupiter.api"
+  com.xyz=org.junit.jupiter.api                       |
+--add-reads                                           | "requires org.assertj.core"
+  com.xyz=org.assertj.core                            |
+--add-reads                                           | "requires org.mockito"
+  com.xyz=org.mockito                                 |
 ```
 
 Before running any tests, your test classes first need to be compiled.
