@@ -11,12 +11,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 class ScatterE_Parameterized {
 
   @ParameterizedTest
-  @MethodSource
+  @MethodSource("arguments")
   void test(String caption, Executable executable) {
     assertDoesNotThrow(executable, caption);
   }
 
-  static Stream<Arguments> test() {
+  static Stream<Arguments> arguments() {
     var object = new Object();
     return Stream.of(
         Arguments.of("constructor", (Executable) () -> assertNotNull(object)),

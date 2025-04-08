@@ -85,12 +85,12 @@ Stream<DynamicTest> test() {
 
 ```java
 @ParameterizedTest
-@MethodSource
+@MethodSource("arguments")
 void test(String caption, Executable executable) {
   assertDoesNotThrow(executable, caption);
 }
 
-static Stream<Arguments> test() {
+static Stream<Arguments> arguments() {
   var object = new Object();
   return Stream.of(
       Arguments.of("constructor", (Executable) () -> assertNotNull(object)),
