@@ -100,3 +100,27 @@ static Stream<Arguments> test() {
 ```
 
 <https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests>
+
+## F. Single parameterized class
+
+```java
+@ParameterizedClass
+@MethodSource("arguments")
+record ScatterF_ParameterizedClass(String caption, Executable executable) {
+
+  @Test
+  void test() {
+      assertDoesNotThrow(executable, caption);
+  }
+
+  static Stream<Arguments> arguments() {
+      var object = new Object();
+      return Stream.of(
+          Arguments.of("constructor", (Executable) () -> assertNotNull(object)),
+          Arguments.of("equality", (Executable) () -> assertNotEquals(new Object(), object)),
+          Arguments.of("wait", (Executable) () -> assertThrows(Exception.class, object::wait)));
+  }
+}
+```
+
+<https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-class-templates>
