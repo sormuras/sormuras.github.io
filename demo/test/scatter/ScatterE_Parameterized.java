@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ScatterE_Parameterized {
 
-  @ParameterizedTest
+  @ParameterizedTest(name = "{0}")
   @MethodSource("arguments")
   void test(String caption, Executable executable) {
     assertDoesNotThrow(executable, caption);

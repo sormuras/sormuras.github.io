@@ -103,6 +103,8 @@ static Stream<Arguments> arguments() {
 
 ## F. Single parameterized class
 
+_Requires JUnit 5.13+!_
+
 ```java
 @ParameterizedClass
 @MethodSource("arguments")

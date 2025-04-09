@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ParameterizedClass
+@ParameterizedClass(name = "{0}")
 @MethodSource("arguments")
 record ScatterF_ParameterizedClass(String caption, Executable executable) {
 
