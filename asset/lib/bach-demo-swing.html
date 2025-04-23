@@ -9,7 +9,7 @@
 BEGIN
 <script>
     (async function () {
-      await cheerpjInit(11);
+      await cheerpjInit({version: 11});
       cheerpjCreateDisplay(512, 512);
       await cheerpjRunJar("/app/asset/lib/bach-demo-swing.jar");
     })();
