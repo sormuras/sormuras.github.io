@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>bach-demo-swing on CheerpJ</title>
+    <script src="https://cjrtnc.leaningtech.com/4.0/loader.js"></script>
+</head>
+<body>
+BEGIN
+<script>
+    (async function () {
+      await cheerpjInit();
+      cheerpjCreateDisplay(512, 512);
+      await cheerpjRunJar("/app/bach-demo-swing.jar");
+    })();
+</script>
+END.
+</body>
+</html>
